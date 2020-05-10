@@ -1,14 +1,12 @@
-var express = require('express');
-var router = express.Router();
-let {
-    viewSignin,
-    actionLogin,
-    actionLogout
-} = require("../controllers/user.controller")
-const auth = require("../middlewares/auth")
-router.get("/signin", viewSignin)
-router.post("/signin/action", actionLogin)
-router.get("/logout", auth.isLogin, actionLogout)
+let express = require('express');
+let router = express.Router();
 
+const {
+    actionLogin
+} = require("../controllers/user.controller")
+// const auth = require("../middlewares/auth")
+// router.get("/signin", viewSignin)
+router.post("/users/signin", actionLogin)
+// router.get("/logout", auth.isLogin, actionLogout)
 
 module.exports = router;

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     tanggal: DataTypes.DATE
   }, {})
   Proyek.associate = function (models) {
-    User.hasMany(sequelize.models.Proyek, {
+    Proyek.belongsTo(sequelize.models.User, {
       foreignKey: "id_user"
     })
   }

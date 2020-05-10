@@ -1,12 +1,18 @@
-const router = require('express').Router()
-router.get('/', function (request, response) {
-    response.send('Im Melon Lord')
-})
+var express = require('express');
+var router = express.Router();
+const auth = require('../middlewares/auth_admin')
 
-router.get('/profile', (req, res) => {
-    res.redirect('/login')
-})
-router.get('/login', (req, res) => {
-    res.send('silahkan Login terlebih dahulu')
-})
+router.get('/', auth.isLogin, function (req, res, next) {
+  res.redirect("/admin")
+});
+
+/* GET home page. */
+router.get('/admin', auth.isLogin, function (req, res, next) {
+  const userLogin = req.session.user
+
+  res.render('admin/dashboard/dashboard', {
+    title: "Dashboard",
+    user: userLogin
+  });
+});
 module.exports = router
