@@ -10,10 +10,11 @@ const session = require('express-session');
 const flash = require("connect-flash");
 
 var indexRouter = require('./routes/router');
-var usersRouter = require('./routes/user');
+const usersRouter = require('./routes/user');
+const pengembangRouter = require('./routes/pengembang')
 const adminRouter = require('./routes/admin');
 
-const app = express()
+var app = express()
 app.use(cors());
 // const router = require('./routes/router.js')
 
@@ -57,7 +58,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use('/api/v1', usersRouter)
-
+app.use('/api/v1', pengembangRouter)
 // cek url active
 app.use(function (req, res, next) {
     res.locals.stuff = {
@@ -87,7 +88,5 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500).json({ message: err.message });
     // "res.render('error');"
 });
-
-
 
 module.exports = app

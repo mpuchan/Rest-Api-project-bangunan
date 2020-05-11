@@ -1,5 +1,5 @@
 const { User } = require("../models")
-const bcrypt = require("bcryptjs")
+const sha1 = require("sha1")
 const Op = require("sequelize").Op
 const jwt = require("jsonwebtoken")
 const apiConfig = require("../config/api.json")
@@ -35,7 +35,7 @@ async function validateLogin(req) {
         message: "Username not found"
       })
     } else {
-      password = bcrypt.compare(password, user.password)
+      password = sha1(password + user.salt)
       if (password != user.password) {
         errors.push({
           field: "password",

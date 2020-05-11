@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     tanggal: DataTypes.DATE
   }, {})
   Proyek.associate = function (models) {
-    Proyek.belongsTo(sequelize.models.User, {
+    Proyek.belongsTo(sequelize.models.Pengembang, {
       foreignKey: "id_user"
     })
   }
