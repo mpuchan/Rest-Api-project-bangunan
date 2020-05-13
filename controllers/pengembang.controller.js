@@ -231,12 +231,23 @@ exports.actionLogin = async function (req, res) {
   try {
     let pengembang_ = pengembang.get({ plain: true });
     const accessToken = jwt.sign(pengembang_, apiConfig.key);
-    console.log("accessToken")
-    return res.json({
-      message: "Success Login pengembang",
-      accessToken,
-      pengembang
-    });
+    console.log(accessToken)
+    const Objsed = {
+      id: pengembang.id,
+      username: pengembang.username,
+      nama: pengembang.nama,
+      email: pengembang.email,
+      notelp: pengembang.notelp,
+      picture: pengembang.picture,
+      accessToken
+    }
+    res.send(JSON.stringify(Objsed))
+
+    // return res.json({
+    //   message: "Success Login pengembang",
+    //   accessToken,
+    //   pengembang
+    // });
   } catch (error) {
     return res.status(422).json([{ field: "jwt", message: error.message }]);
   }
