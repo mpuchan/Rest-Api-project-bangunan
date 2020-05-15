@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Proyek = sequelize.define('Proyek', {
-    id_user: DataTypes.INTEGER,
+    PengembangId: DataTypes.INTEGER,
     nama_proyek: DataTypes.STRING,
     lokasi: DataTypes.STRING,
-    tanggal: DataTypes.DATE
-  }, {})
+    tanggal: DataTypes.STRING
+  }, {});
   Proyek.associate = function (models) {
     Proyek.belongsTo(sequelize.models.Pengembang, {
-      foreignKey: "id_user"
-    })
-  }
-  return Proyek
-}
+      foreignKey: "PengembangId"
+    });
+  };
+  return Proyek;
+};

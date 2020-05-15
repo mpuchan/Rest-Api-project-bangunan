@@ -11,6 +11,7 @@ module.exports = {
       username: 'admin',
       role: '1',
       status: '1',
+      image: '',
       password: password,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -21,3 +22,4 @@ module.exports = {
     return queryInterface.bulkDelete('Users', null, {})
   }
 };
+

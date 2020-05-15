@@ -13,7 +13,7 @@ var indexRouter = require('./routes/router');
 const usersRouter = require('./routes/user');
 const pengembangRouter = require('./routes/pengembang')
 const adminRouter = require('./routes/admin');
-
+const proyekRouter = require('./routes/proyek')
 var app = express()
 app.use(cors());
 // const router = require('./routes/router.js')
@@ -59,6 +59,7 @@ app.get("/api/v1", (req, res) => {
 
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', pengembangRouter)
+app.use('/api/v1', proyekRouter)
 // cek url active
 app.use(function (req, res, next) {
     res.locals.stuff = {

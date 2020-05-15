@@ -2,20 +2,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Proyeks', {
-      id_proyek: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_user: {
-        type: Sequelize.INTEGER
+      PengembangId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: true,
+        references: {
+          model: "Pengembangs",
+          key: "id"
+        }
       },
       nama_proyek: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       lokasi: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       tanggal: {
         type: Sequelize.DATE

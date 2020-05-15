@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     salt: DataTypes.STRING,
-    picture: DataTypes.STRING,
-    status: DataTypes.INTEGER
+    picture: DataTypes.INTEGER,
+    status: DataTypes.STRING
   }, {});
   Pengembang.associate = function(models) {
     // associations can be defined here
