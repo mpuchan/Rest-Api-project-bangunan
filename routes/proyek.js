@@ -2,6 +2,7 @@ let express = require("express")
 let router = express.Router()
 const {
     actionReadAllSinglePengembang,
+    actionReadSingleproyek,
     // actionDelete,
     // actionUpdate,
     actionCreate,

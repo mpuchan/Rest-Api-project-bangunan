@@ -39,7 +39,7 @@ async function validateRegister(req) {
     errors.push({
       field: 'notelp',
       message: 'Phone Number is Required',
-    });
+    })
   } else {
     const pengembang = await Pengembang.findOne({
       where: {
@@ -84,7 +84,7 @@ async function validateRegister(req) {
     errors.push({
       field: 'password',
       message: 'Password must be more than 5 characters',
-    });
+    })
   }
 
   if (!retypePassword) {
@@ -118,7 +118,7 @@ exports.actionRegisterMobile = async function (req, res) {
   } = req.body
   let salt = sha1(uniqid())
 
-  let errors = await validateRegister(req);
+  let errors = await validateRegister(req)
   if (errors.length > 0) return res.status(422).json({ errors })
 
   password = sha1(password + salt)
@@ -131,12 +131,12 @@ exports.actionRegisterMobile = async function (req, res) {
     password,
     salt,
     status: 1
-  });
+  })
 
   if (pengembangCreate) {
 
-    errors = await validateLogin(req);
-    if (errors.length > 0) return res.status(422).json({ errors });
+    errors = await validateLogin(req)
+    if (errors.length > 0) return res.status(422).json({ errors })
 
     let pengembang = await Pengembang.findOne({
       where: {
@@ -146,16 +146,16 @@ exports.actionRegisterMobile = async function (req, res) {
     })
 
     try {
-      let pengembang_ = pengembang.get({ plain: true });
-      const accessToken = jwt.sign(pengembang_, apiConfig.key);
+      let pengembang_ = pengembang.get({ plain: true })
+      const accessToken = jwt.sign(pengembang_, apiConfig.key)
 
       return res.json({
         message: "Success Signup pengembang",
         accessToken,
         pengembangCreate
-      });
+      })
     } catch (error) {
-      return res.status(422).json([{ field: "jwt", message: error.message }]);
+      return res.status(422).json([{ field: "jwt", message: error.message }])
     }
   }
 }
@@ -191,20 +191,20 @@ async function validateLogin(req) {
         username: { [Op.eq]: username },
         status: 1
       }
-    });
+    })
 
     if (!peng) {
       errors.push({
         field: "username",
         message: "Username not found"
-      });
+      })
     } else {
       password = sha1(password + peng.salt);
       if (password != peng.password) {
         errors.push({
           field: "password",
           message: "Invalid Password"
-        });
+        })
       }
     }
   }
@@ -216,10 +216,10 @@ async function validateLogin(req) {
  * Verify data user to login
  */
 exports.actionLogin = async function (req, res) {
-  let { username } = req.body;
+  let { username } = req.body
 
-  let errors = await validateLogin(req);
-  if (errors.length > 0) return res.status(422).json({ errors });
+  let errors = await validateLogin(req)
+  if (errors.length > 0) return res.status(422).json({ errors })
 
   let pengembang = await Pengembang.findOne({
     where: {
@@ -229,8 +229,8 @@ exports.actionLogin = async function (req, res) {
   })
 
   try {
-    let pengembang_ = pengembang.get({ plain: true });
-    const accessToken = jwt.sign(pengembang_, apiConfig.key);
+    let pengembang_ = pengembang.get({ plain: true })
+    const accessToken = jwt.sign(pengembang_, apiConfig.key)
     console.log(accessToken)
     const Objsed = {
       id: pengembang.id,
@@ -242,14 +242,13 @@ exports.actionLogin = async function (req, res) {
       accessToken
     }
     res.send(JSON.stringify(Objsed))
-
     // return res.json({
     //   message: "Success Login pengembang",
     //   accessToken,
     //   pengembang
     // });
   } catch (error) {
-    return res.status(422).json([{ field: "jwt", message: error.message }]);
+    return res.status(422).json([{ field: "jwt", message: error.message }])
   }
 }
 
@@ -259,7 +258,7 @@ exports.actionRead = async (req, res) => {
     return res.json({
       message: "Success Read All Pengembang",
       pengembang
-    });
+    })
   } catch (err) {
     console.log(err)
   }

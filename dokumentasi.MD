@@ -1,4 +1,4 @@
-Running Project : node ./bin/www
+Running Project : nodemon ./bin/www
 
 create table sequelize : sequelize-cli model:generate --name User --attributes name:string,label:string,picture:string,email:string,phone:string,website:string,summary:string
 

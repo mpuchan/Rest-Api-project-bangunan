@@ -47,31 +47,21 @@ async function validateLogin(req) {
 
   return errors
 }
-// exports.viewSignin = async (req, res) => {
-//   const alertMessage = req.flash('alertMessage');
-//   const alertStatus = req.flash('alertStatus');
-//   const alert = { message: alertMessage, status: alertStatus };
-//   if (req.session.user == null || req.session.user == undefined) {
-//     res.render("login", { alert: alert })
-//   } else {
-//     res.redirect('/admin')
-//   }
-// }
 
 exports.actionLogin = async (req, res) => {
 
-  let { username, password } = req.body;
-  let errors = await validateLogin(req);
+  let { username, password } = req.body
+  let errors = await validateLogin(req)
   if (errors.length > 0) {
     console.log(errors)
-    return res.status(422).json({ message: errors });
+    return res.status(422).json({ message: errors })
   }
 
   let user = await User.findOne({ where: { username: { [Op.eq]: username } } })
 
   try {
-    let user_ = user.get({ plain: true });
-    const accessToken = jwt.sign(user_, apiConfig.key);
+    let user_ = user.get({ plain: true })
+    const accessToken = jwt.sign(user_, apiConfig.key)
 
     return res.status(200).json({
       message: "Success Login User",
@@ -80,7 +70,7 @@ exports.actionLogin = async (req, res) => {
     })
   } catch (error) {
     console.log(error)
-    return res.status(422).json({ field: "jwt", message: error.message });
+    return res.status(422).json({ field: "jwt", message: error.message })
   }
 
 }

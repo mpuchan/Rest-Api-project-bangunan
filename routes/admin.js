@@ -1,22 +1,16 @@
 let express = require("express")
 let router = express.Router()
 const {
-  // viewDashboard,
-  // login
   viewSignin,
   actionLogin,
   actionLogout
-} = require("../controllers/admin.controller");
 
-/* 
-  *dashboard
-*/
-// router.get("/admin/dashboard", viewDashboard);
+} = require("../controllers/admin.controller")
+const auth = require('../middlewares/auth_admin')
 
-// router login dan logout
-router.get("/signin", viewSignin);
-router.post("/signin/action", actionLogin);
-router.get("/logout", actionLogout);
+router.get("/signin", viewSignin)
+router.post("/signin/action", actionLogin)
+router.get("/logout", actionLogout)
 
 
 module.exports = router

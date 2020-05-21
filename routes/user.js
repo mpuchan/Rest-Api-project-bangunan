@@ -1,5 +1,5 @@
-let express = require('express');
-let router = express.Router();
+let express = require('express')
+let router = express.Router()
 
 const {
     actionLogin
@@ -9,4 +9,4 @@ const {
 router.post("/users/signin", actionLogin)
 // router.get("/logout", auth.isLogin, actionLogout)
 
-module.exports = router;
+module.exports = router

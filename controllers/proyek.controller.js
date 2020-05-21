@@ -1,5 +1,8 @@
 const {
-  Proyek, Pengembang
+  Proyek
+} = require("../models")
+const {
+  Pengembang
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -9,9 +12,6 @@ const Op = require("sequelize").Op
 let include = {
   include: [
     { model: Pengembang },
-    // { model: Province },
-    // { model: City },
-    // { model: District },
   ]
 }
 
@@ -28,7 +28,7 @@ async function validatePengembangId(req) {
       if (proyek === null || proyek === "") {
         errors.push({
           field: 'PengembangId',
-          message: 'CustomerId Not Found',
+          message: 'PengembangId Not Found',
         })
       }
     } catch (err) {
@@ -39,7 +39,7 @@ async function validatePengembangId(req) {
 }
 
 /**
- * read data proyek by CustomerId
+ * read data proyek by PengembangId
  * 
  * @param object req
  * @param object res 
@@ -47,12 +47,9 @@ async function validatePengembangId(req) {
  */
 exports.actionReadAllSinglePengembang = async (req, res) => {
   const { PengembangId } = req.params
-  // let error = await validateCustomerId(req)
-  // if (error.length > 0) return res.status(422).json({ error })
 
   try {
     const proyek = await Proyek.findAll({
-      ...include,
       where: {
         PengembangId: { [Op.eq]: PengembangId }
       }
@@ -68,7 +65,7 @@ exports.actionReadAllSinglePengembang = async (req, res) => {
     // res.send(JSON.stringify(Obj))
 
     return res.status(200).json({
-      message: "Success Read Proyek",
+      message: "Success Create Proyek",
       proyek
     })
   } catch (err) {
@@ -142,7 +139,7 @@ exports.actionCreate = async (req, res) => {
   } = req.body
 
   let errors = await validate(req)
-  if (errors.length > 0) return res.status(422).json({ errors });
+  if (errors.length > 0) return res.status(422).json({ errors })
 
   try {
     const proyek = await Proyek.create({
@@ -199,7 +196,7 @@ exports.actionReadSingleproyek = async (req, res) => {
 
     return res.status(201).json({
       message: "Success Read Single Proyek",
-      proyek
+      Pengembang
     })
   } catch (err) {
     console.log(err)
@@ -208,20 +205,20 @@ exports.actionReadSingleproyek = async (req, res) => {
 }
 
 exports.actionDelete = async function (req, res) {
-  const { id } = req.params;
+  const { id } = req.params
 
   let error = await validateRead(req)
   if (error.length > 0) return res.status(422).json({ error })
 
   Proyek.findOne({ where: { id: { [Op.eq]: id } } })
     .then((proyek) => {
-      return proyek.destroy();
+      return proyek.destroy()
     })
     .then((proyek) => {
-      res.status(200).json({ message: "Success Delete", proyek });
+      res.status(200).json({ message: "Success Delete", proyek })
     })
     .catch((err) => {
-      res.status(500).json({ message: "Internal server error" });
-    });
+      res.status(500).json({ message: "Internal server error" })
+    })
 
-};
+}

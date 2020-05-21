@@ -1,0 +1,134 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Satuan
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Satuan</li>
+    </ol>
+    <% if(alert.message != '') { %>
+    <br>
+    <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+      <strong><%= alert.message %></strong>
+    </div>
+    <% } %>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <h3 class="box-title">Data Satuan</h3>
+          </div>
+
+          <div class="box-body">
+            <div style="margin: 0 20px 20px 20px;">
+              <!-- <button class="btn btn-success">Tambah</button> -->
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-modal">
+                Tambah
+              </button>
+            </div>
+            <table id="satuan" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Satuan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < satuan.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= satuan[i].nama_satuan %></td>
+                  <td>
+                    <a href="javascript:void(0);" type="button" class="btn btn-success btn-sm edit"
+                      data-id="<%= satuan[i].id %>" data-nama_satuan="<%= satuan[i].nama_satuan %>">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                      Edit
+                    </a>
+                    <button class="btn btn-danger btn-sm" onclick="delete_satuan(`<%= satuan[i].id %>`)"
+                      data-id="<%= satuan[i].id %>">
+                      <span class="glyphicon glyphicon-remove"></span>
+                      Hapus
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<%- include ../../partials/admin_layout/footer.ejs %>
+<!-- iclude modal edit -->
+<%- include edit_modal.ejs %>
+
+<!-- iclude modal add -->
+<%- include add_modal.ejs %>
+
+
+
+
+
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#satuan').DataTable()
+    $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
+    // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
+    setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
+
+    // redirect halaman catalogs
+    function successTambah() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/satuan')
+    }
+  })
+
+  //showing data to e edit modal 
+  $('#satuan').on('click', '.edit', function () {
+    var id = $(this).data('id');
+    var nama_satuan = $(this).data('nama_satuan');
+
+    $('#edit-modal').modal('show');
+    $('.id').val(id);
+    $('.nama_satuan').val(nama_satuan);
+  });
+
+  function delete_satuan(id) {
+    let SatuanId = id;
+    console.log(SatuanId)
+    swal({
+      title: "Yakin Ingin Menghapus Data Satuan ini?",
+      text: "Data yang dihapus, tidak bisa kembali lagi.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        window.location.assign(`/admin/satuan/delete/${SatuanId}`);
+      }
+    });
+  }
+
+</script>
