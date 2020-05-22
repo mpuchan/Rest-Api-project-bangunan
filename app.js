@@ -17,6 +17,7 @@ const pengembangRouter = require('./routes/pengembang')
 const adminRouter = require('./routes/admin');
 const proyekRouter = require('./routes/proyek')
 const satuanRouter = require('./routes/satuan');
+const jenisRouter = require('./routes/jenis');
 var app = express()
 app.use(cors());
 // const router = require('./routes/router.js')
@@ -76,6 +77,7 @@ app.use(function (req, res, next) {
 // router admin
 app.use('/', adminRouter)
 app.use('/', satuanRouter)
+app.use('/', jenisRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

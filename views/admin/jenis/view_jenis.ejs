@@ -5,11 +5,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Satuan
+      Jenis
     </h1>
     <ol class="breadcrumb">
       <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li class="active">Satuan</li>
+      <li class="active">Jenis</li>
     </ol>
     <% if(alert.message != '') { %>
     <br>
@@ -28,7 +28,7 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <h3 class="box-title">Data Satuan</h3>
+            <h3 class="box-title">Data Jenis</h3>
           </div>
 
           <div class="box-body">
@@ -38,27 +38,27 @@
                 Tambah
               </button>
             </div>
-            <table id="satuan" class="table table-bordered table-striped">
+            <table id="jenis" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Satuan</th>
+                  <th>Jenis</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                <% for (let i = 0; i < satuan.length; i++ ) { %>
+                <% for (let i = 0; i < jenis.length; i++ ) { %>
                 <tr>
                   <td><%= i + 1 %></td>
-                  <td><%= satuan[i].nama_satuan %></td>
+                  <td><%= jenis[i].nama_jenis %></td>
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
-                      data-id="<%= satuan[i].id %>" data-nama_satuan="<%= satuan[i].nama_satuan %>">
+                      data-id="<%= jenis[i].id %>" data-nama_jenis="<%= jenis[i].nama_jenis %>">
                       <span class="glyphicon glyphicon-pencil"></span>
                       Edit
                     </a>
-                    <button class="btn btn-danger btn-sm" onclick="delete_satuan(`<%= satuan[i].id %>`)"
-                      data-id="<%= satuan[i].id %>">
+                    <button class="btn btn-danger btn-sm" onclick="delete_satuan(`<%= jenis[i].id %>`)"
+                      data-id="<%= jenis[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
                       Hapus
                     </button>
@@ -87,39 +87,39 @@
 <script>
   $(document).ready(function () {
     // datatable
-    $('#satuan').DataTable()
+    $('#jenis').DataTable()
     $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
     // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
     setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
 
     // redirect halaman catalogs
     function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/satuan')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/jenis')
     }
   })
 
   //showing data to e edit modal 
-  $('#satuan').on('click', '.edit', function () {
+  $('#jenis').on('click', '.edit', function () {
     var id = $(this).data('id');
-    var nama_satuan = $(this).data('nama_satuan');
+    var nama_jenis = $(this).data('nama_jenis');
 
     $('#edit-modal').modal('show');
     $('.id').val(id);
-    $('.nama_satuan').val(nama_satuan);
+    $('.nama_jenis').val(nama_jenis);
   });
 
   function delete_satuan(id) {
-    let SatuanId = id;
-    console.log(SatuanId)
+    let JenisId = id;
+    console.log(JenisId)
     swal({
-      title: "Yakin Ingin Menghapus Data Satuan ini?",
+      title: "Yakin Ingin Menghapus Data Jenis ini?",
       text: "Data yang dihapus, tidak bisa kembali lagi.",
       icon: "warning",
       buttons: true,
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        window.location.assign(`/admin/satuan/delete/${SatuanId}`);
+        window.location.assign(`/admin/jenis/delete/${JenisId}`);
       }
     });
   }
