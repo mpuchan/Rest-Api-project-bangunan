@@ -5,11 +5,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Satuan
+      Batu Bata/Batako
     </h1>
     <ol class="breadcrumb">
       <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li class="active">Satuan</li>
+      <li class="active">Batu Bata/Batako</li>
     </ol>
     <% if(alert.message != '') { %>
     <br>
@@ -28,7 +28,7 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <th style="width: 50%;">Data Satuan</th>
+            <th style="width: 50%;">Data Batu Bata/Batako</th>
             <th class="box-title" style="margin-left: 80%;">
               <!-- <button class="btn btn-success">Tambah</button> -->
               <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#add-modal">
@@ -40,29 +40,35 @@
           <div class="box-body" style="height: 370px; overflow-y: scroll; overflow-x: scroll;">
 
             <div class="table-wrapper content">
-              <table id="satuan" class="table table-bordered table-striped">
+              <table id="batako" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Nama</th>
                     <th>Satuan</th>
+                    <th>Harga</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
             </div>
             <div class="table-body-wrapper" style="position: relative; overflow: visible;">
               <tbody class="ss">
-                <% for (let i = 0; i < satuan.length; i++ ) { %>
+                <% for (let i = 0; i < batako.length; i++ ) { %>
                 <tr>
                   <td><%= i + 1 %></td>
-                  <td><%= satuan[i].nama_satuan %></td>
+                  <td><%= batako[i].nama %></td>
+                  <td><%= batako[i].SatuanId %></td>
+                  <td><%= batako[i].harga %></td>
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
-                      data-id="<%= satuan[i].id %>" data-nama_satuan="<%= satuan[i].nama_satuan %>">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                      Edit
+                      data-id="<%= batako[i].id %>" data-nama="<%= batako[i].nama %>"
+                      data-satuan="<%= batako[i].SatuanId %>" data-harga="<%= batako[i].harga %>"> <span
+                        class="glyphicon glyphicon-pencil"></span>
+                      Edit</a>
+
                     </a>
-                    <button class="btn btn-danger btn-sm" onclick="delete_satuan(`<%= satuan[i].id %>`)"
-                      data-id="<%= satuan[i].id %>">
+                    <button class="btn btn-danger btn-sm" onclick="delete_batako(`<%= batako[i].id %>`)"
+                      data-id="<%= batako[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
                       Hapus
                     </button>
@@ -89,41 +95,52 @@
 
 <!-- page script -->
 <script>
+
   $(document).ready(function () {
     // datatable
-    $('#satuan').DataTable()
+    $('#batako').DataTable()
     $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
     // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
     setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
 
     // redirect halaman catalogs
     function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/satuan')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/batako')
     }
   })
 
   //showing data to e edit modal 
-  $('#satuan').on('click', '.edit', function () {
+  $('#batako').on('click', '.edit', function () {
     var id = $(this).data('id');
-    var nama_satuan = $(this).data('nama_satuan');
+    var nama = $(this).data('nama');
+    var panjang = $(this).data('panjang');
+    var lebar = $(this).data('lebar');
+    var tinggi = $(this).data('tinggi');
+    var satuan = $(this).data('satuan');
+    var harga = $(this).data('harga');
 
     $('#edit-modal').modal('show');
     $('.id').val(id);
-    $('.nama_satuan').val(nama_satuan);
+    $('.nama').val(nama);
+    $('.panjang').val(panjang);
+    $('.lebar').val(lebar);
+    $('.tinggi').val(tinggi);
+    $('.satuan').val(satuan);
+    $('.harga').val(harga);
   });
 
-  function delete_satuan(id) {
-    let SatuanId = id;
-    console.log(SatuanId)
+  function delete_batako(id) {
+    let BatakoId = id;
+    console.log(BatakoId)
     swal({
-      title: "Yakin Ingin Menghapus Data Satuan ini?",
+      title: "Yakin Ingin Menghapus Data Batako ini?",
       text: "Data yang dihapus, tidak bisa kembali lagi.",
       icon: "warning",
       buttons: true,
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        window.location.assign(`/admin/satuan/delete/${SatuanId}`);
+        window.location.assign(`/admin/batako/delete/${BatakoId}`);
       }
     });
   }

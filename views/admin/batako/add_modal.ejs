@@ -1,0 +1,65 @@
+<!-- Modal Update Product-->
+<form action="/admin/batako/create" method="POST">
+  <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <div class="modal-header"
+          style="background-color:#00c851 ; border-top-left-radius: 10px; border-top-right-radius: 10px; color: #ffffff;">
+          <heading class="modal-title" id="exampleModalLabel">Tambah Batako</heading>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama :</label>
+            <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama Batako" required>
+          </div>
+          <div class="form-group">
+            <label>Panjang :</label>
+            <input type="number" id="panjang" name="panjang" class="form-control" placeholder="Masukan Panjang Batako"
+              required>
+          </div>
+          <div class="form-group">
+            <label>Lebar :</label>
+            <input type="number" id="lebar" name="lebar" class="form-control" placeholder="Masukan Lebar Batako"
+              required>
+          </div>
+          <div class="form-group">
+            <label>Tinggi :</label>
+            <input type="number" id="tinggi" name="tinggi" class="form-control" placeholder="Masukan Tinggi Batako"
+              required>
+          </div>
+          <div class="form-group">
+            <label>Satuan</label>
+            <select required id="SatuanId" name="SatuanId" class="form-control">
+              <option value="">--- Pilih Satuan Barang ---</option>
+              <option value="1">m3</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Harga :</label>
+            <input type="number" id="harga" name="harga" class="form-control" placeholder="Masukan Harga Batako"
+              required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</form>
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#satuan').DataTable()
+  })
+
+</script>

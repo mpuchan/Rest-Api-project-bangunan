@@ -20,6 +20,7 @@ exports.viewSatuan = async (req, res) => {
         alert: alert
 
       })
+
     } else {
       req.session.destroy()
       res.redirect('/signin')

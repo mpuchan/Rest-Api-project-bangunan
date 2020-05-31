@@ -8,3 +8,13 @@ migration Database : sequelize-cli db:migrate
 
 create seed : sequelize-cli seed:generate --name proyek-seed
 running seed : sequelize-cli db:seed:all
+
+<!-- <div class="form-group">
+            <label>Satuan</label>
+            <select required id="satuan" name="satuan" class="form-control">
+              <option value="">--- Pilih Satuan Barang ---</option>
+              <% for (let i = 0; i < satuan.length; i++ ) { %>
+              <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
+              <% } %>
+            </select>
+          </div> -->

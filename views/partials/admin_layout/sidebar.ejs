@@ -30,13 +30,23 @@
       <li class="<% if ( stuff.url == "/admin/jenis" ) { %> active <% } %>">
         <a href="/admin/jenis"><i class="fa fa-picture-o"></i> <span>Jenis Barang</span></a>
       </li>
-      <li class="<% if ( stuff.url == "/admin/satuan" ) { %> active <% } %>">
-        <a href="/admin/satuan"><i class="fa fa-picture-o"></i> <span>Satuan Barang</span></a>
+      <li class="treeview active">
+        <a href="#">
+          <i class="fa fa-home"></i>
+          <span>Material</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="<% if ( stuff.url == "/admin/batako" ) { %> active <% } %>">
+            <a href="/admin/batako"><i class="fa fa-circle-o"></i> <span>Batako</span></a>
+          </li>
+          <li class="<% if ( stuff.url == "/admin/satuan2" ) { %> active <% } %>">
+            <a href="/admin/satuan2"><i class="fa fa-circle-o"></i> <span>Pasir</span></a>
+          </li>
+        </ul>
       </li>
-      <li class="<% if ( stuff.url == "/admin/satuan" ) { %> active <% } %>">
-        <a href="/admin/satuan"><i class="fa fa-picture-o"></i> <span>Satuan Barang</span></a>
-      </li>
-
     </ul>
     <!-- /.sidebar-menu -->
   </section>
