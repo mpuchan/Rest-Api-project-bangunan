@@ -35,8 +35,9 @@
             <label>Satuan</label>
             <select required id="SatuanId" name="SatuanId" class="form-control">
               <option value="">--- Pilih Satuan Barang ---</option>
-              <option value="1">m3</option>
-
+              <% for (let i = 0; i < satuan.length; i++ ) { %>
+              <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
+              <% } %>
             </select>
           </div>
 

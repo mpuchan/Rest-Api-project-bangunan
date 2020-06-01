@@ -24,29 +24,89 @@
       <li class="<% if ( stuff.url == "/admin/dashboard" ) { %> active <% } %>">
         <a href="/admin/dashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
       </li>
-      <li class="<% if ( stuff.url == "/admin/satuan" ) { %> active <% } %>">
-        <a href="/admin/satuan"><i class="fa fa-picture-o"></i> <span>Satuan Barang</span></a>
-      </li>
-      <li class="<% if ( stuff.url == "/admin/jenis" ) { %> active <% } %>">
-        <a href="/admin/jenis"><i class="fa fa-picture-o"></i> <span>Jenis Barang</span></a>
-      </li>
       <li class="treeview active">
         <a href="#">
-          <i class="fa fa-home"></i>
-          <span>Material</span>
+          <i class="fa fa-user-circle"></i>
+          <span>Management User</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="<% if ( stuff.url == "/admin/batako" ) { %> active <% } %>">
-            <a href="/admin/batako"><i class="fa fa-circle-o"></i> <span>Batako</span></a>
+          <li class="<% if ( stuff.url == "/admin/user" ) { %> active <% } %>">
+            <a href="/admin/user"><i class="fa fa-user"></i> <span>Super User</span></a>
           </li>
-          <li class="<% if ( stuff.url == "/admin/satuan2" ) { %> active <% } %>">
-            <a href="/admin/satuan2"><i class="fa fa-circle-o"></i> <span>Pasir</span></a>
+          <li class="<% if ( stuff.url == "/admin/user" ) { %> active <% } %>">
+            <a href="/admin/user"><i class="fa fa-users"></i> <span>User</span></a>
           </li>
         </ul>
+      <li class="treeview active">
+        <a href="#">
+          <i class="fa fa-home"></i>
+          <span>Keterangan</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="<% if ( stuff.url == "/admin/satuan" ) { %> active <% } %>">
+            <a href="/admin/satuan"><i class="fa fa-picture-o"></i> <span>Satuan Barang</span></a>
+          </li>
+          <li class="<% if ( stuff.url == "/admin/jenis" ) { %> active <% } %>">
+            <a href="/admin/jenis"><i class="fa fa-picture-o"></i> <span>Jenis Barang</span></a>
+          </li>
       </li>
+    </ul>
+    <li class="treeview active">
+      <a href="#">
+        <i class="fa fa-home"></i>
+        <span>Material</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li class="<% if ( stuff.url == "/admin/batako" ) { %> active <% } %>">
+          <a href="/admin/batako"><i class="fa fa-circle-o"></i> <span>Batako</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/pasir" ) { %> active <% } %>">
+          <a href="/admin/pasir"><i class="fa fa-circle-o"></i> <span>Pasir</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/semen" ) { %> active <% } %>">
+          <a href="/admin/semen"><i class="fa fa-circle-o"></i> <span>Semen</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/genteng" ) { %> active <% } %>">
+          <a href="/admin/genteng"><i class="fa fa-circle-o"></i> <span>Genteng</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/kayu" ) { %> active <% } %>">
+          <a href="/admin/kayu"><i class="fa fa-circle-o"></i> <span>Kayu</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/papan" ) { %> active <% } %>">
+          <a href="/admin/papan"><i class="fa fa-circle-o"></i> <span>Papan</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/besiulir" ) { %> active <% } %>">
+          <a href="/admin/besiulir"><i class="fa fa-circle-o"></i> <span>Besi Ulir</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/bajaringan" ) { %> active <% } %>">
+          <a href="/admin/bajaringan"><i class="fa fa-circle-o"></i> <span>Baja Ringan</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/triplek" ) { %> active <% } %>">
+          <a href="/admin/triplek"><i class="fa fa-circle-o"></i> <span>Triplek</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/gypsum" ) { %> active <% } %>">
+          <a href="/admin/gypsum"><i class="fa fa-circle-o"></i> <span>Gypsum</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/keramik" ) { %> active <% } %>">
+          <a href="/admin/keramik"><i class="fa fa-circle-o"></i> <span>Keramik</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/batukali" ) { %> active <% } %>">
+          <a href="/admin/batukali"><i class="fa fa-circle-o"></i> <span>Batu Kali/Urugan</span></a>
+        </li>
+        <li class="<% if ( stuff.url == "/admin/cat" ) { %> active <% } %>">
+          <a href="/admin/cat"><i class="fa fa-circle-o"></i> <span>Cat</span></a>
+        </li>
+      </ul>
+    </li>
     </ul>
     <!-- /.sidebar-menu -->
   </section>

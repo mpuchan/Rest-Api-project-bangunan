@@ -81,13 +81,13 @@ exports.actionJenisUpdate = async (req, res) => {
 // /* action delete jenis */
 exports.actionJenisDelete = (req, res) => {
   const { id } = req.params
-  Satuan.findOne({
+  Jenis.findOne({
     where: {
       id: { [Op.eq]: id }
     }
   }).then(jenis => {
     return jenis.destroy().then(() => {
-      req.flash('alertMessage', `Sukses Menghapus Data Satuan dengan nama : ${jenis.nama_jenis}`)
+      req.flash('alertMessage', `Sukses Menghapus Data Jenis dengan nama : ${jenis.nama_jenis}`)
       req.flash('alertStatus', 'danger')
       res.redirect("/admin/jenis")
     });

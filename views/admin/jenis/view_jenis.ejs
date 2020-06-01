@@ -57,7 +57,7 @@
                       <span class="glyphicon glyphicon-pencil"></span>
                       Edit
                     </a>
-                    <button class="btn btn-danger btn-sm" onclick="delete_satuan(`<%= jenis[i].id %>`)"
+                    <button class="btn btn-danger btn-sm" onclick="delete_jenis(`<%= jenis[i].id %>`)"
                       data-id="<%= jenis[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
                       Hapus
@@ -108,7 +108,7 @@
     $('.nama_jenis').val(nama_jenis);
   });
 
-  function delete_satuan(id) {
+  function delete_jenis(id) {
     let JenisId = id;
     console.log(JenisId)
     swal({

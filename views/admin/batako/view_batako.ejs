@@ -52,18 +52,20 @@
                 </thead>
             </div>
             <div class="table-body-wrapper" style="position: relative; overflow: visible;">
-              <tbody class="ss">
+              <tbody>
                 <% for (let i = 0; i < batako.length; i++ ) { %>
                 <tr>
                   <td><%= i + 1 %></td>
                   <td><%= batako[i].nama %></td>
-                  <td><%= batako[i].SatuanId %></td>
+                  <td>
+                    <%= batako[i].Satuan.nama_satuan %></td>
                   <td><%= batako[i].harga %></td>
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
                       data-id="<%= batako[i].id %>" data-nama="<%= batako[i].nama %>"
-                      data-satuan="<%= batako[i].SatuanId %>" data-harga="<%= batako[i].harga %>"> <span
-                        class="glyphicon glyphicon-pencil"></span>
+                      data-panjang="<%= batako[i].panjang %>" data-lebar="<%= batako[i].lebar %>"
+                      data-tinggi="<%= batako[i].tinggi %>" data-SatuanId="<%= batako[i].SatuanId %>"
+                      data-harga="<%= batako[i].harga %>"> <span class="glyphicon glyphicon-pencil"></span>
                       Edit</a>
 
                     </a>
@@ -116,7 +118,7 @@
     var panjang = $(this).data('panjang');
     var lebar = $(this).data('lebar');
     var tinggi = $(this).data('tinggi');
-    var satuan = $(this).data('satuan');
+    var SatuanId = $(this).data('SatuanId');
     var harga = $(this).data('harga');
 
     $('#edit-modal').modal('show');
@@ -125,7 +127,7 @@
     $('.panjang').val(panjang);
     $('.lebar').val(lebar);
     $('.tinggi').val(tinggi);
-    $('.satuan').val(satuan);
+    $('.SatuanId').val(SatuanId);
     $('.harga').val(harga);
   });
 

@@ -1,11 +1,7 @@
 const { Batako, Satuan } = require("../models")
 const Op = require("sequelize").Op
 
-let include = {
-  include: [
-    { model: Satuan },
-  ]
-}
+
 // /* action view batako */
 exports.viewBatako = async (req, res) => {
   try {
@@ -17,12 +13,18 @@ exports.viewBatako = async (req, res) => {
     console.log(userLogin.role)
 
     if (userLogin.role === 1) {
-      const batakos = await Batako.findAll()
+      const satuans = await Satuan.findAll()
+      const batakos = await Batako.findAll({
+        include: [{
+          model: Satuan
+        }]
+      })
       res.render("admin/batako/view_batako", {
 
         title: "Data Batako",
         user: userLogin,
         batako: batakos,
+        satuan: satuans,
         alert: alert
       })
     } else {
@@ -43,6 +45,7 @@ exports.viewSatuancombo = async (req, res) => {
 
 
     })
+    console.log(satuans)
   } catch (err) {
     throw err
   }
@@ -89,7 +92,7 @@ exports.actionBatakoUpdate = async (req, res) => {
     panjang,
     lebar,
     tinggi,
-    satuan,
+    SatuanId,
     harga } = req.body
   try {
     const updateBatako = await Batako.findOne({
@@ -102,7 +105,7 @@ exports.actionBatakoUpdate = async (req, res) => {
       panjang: panjang,
       lebar: lebar,
       tinggi: tinggi,
-      satuan: satuan,
+      SatuanId: SatuanId,
       harga: harga
     }).then(() => {
       req.flash('alertMessage', `Sukses Ubah Data Batako/Bata dengan nama : ${nama}`)
@@ -126,7 +129,7 @@ exports.actionBatakoDelete = (req, res) => {
       id: { [Op.eq]: id }
     }
   }).then(batako => {
-    return satuan.destroy().then(() => {
+    return batako.destroy().then(() => {
       req.flash('alertMessage', `Sukses Menghapus Data Batako/Bata dengan nama : ${batako.nama}`)
       req.flash('alertStatus', 'danger')
       res.redirect("/admin/batako")
