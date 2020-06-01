@@ -1,9 +1,9 @@
-const { Batako, Satuan } = require("../models")
+const { Semen, Satuan } = require("../models")
 const Op = require("sequelize").Op
 
 
-// /* action view batako */
-exports.viewBatako = async (req, res) => {
+// /* action view semen */
+exports.viewSemen = async (req, res) => {
   try {
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
@@ -14,16 +14,16 @@ exports.viewBatako = async (req, res) => {
 
     if (userLogin.role === 1) {
       const satuans = await Satuan.findAll()
-      const batakos = await Batako.findAll({
+      const semens = await Semen.findAll({
         include: [{
           model: Satuan
         }]
       })
-      res.render("admin/batako/view_batako", {
+      res.render("admin/semen/view_semen", {
 
-        title: "Data Batako",
+        title: "Data Semen",
         user: userLogin,
-        batako: batakos,
+        semen: semens,
         satuan: satuans,
         alert: alert
       })
@@ -36,33 +36,30 @@ exports.viewBatako = async (req, res) => {
   }
 }
 
-
-// /* action create batako */
-exports.actionBatakoCreate = async (req, res) => {
+// /* action create semen */
+exports.actionSemenCreate = async (req, res) => {
   const {
     nama,
     SatuanId,
-    panjang,
-    lebar,
-    tinggi,
+    berat,
+    jumlah,
     harga
   } = req.body
   console.log(nama)
   try {
-    Batako.create({
+    Semen.create({
       nama,
       SatuanId,
-      panjang,
-      lebar,
-      tinggi,
+      berat,
+      jumlah,
       harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Menambahkan Data Batako/Bata Baru dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Menambahkan Data Semen Baru dengan nama : ${nama}`)
       req.flash('alertStatus', 'success')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/semen")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/batako")
+      res.redirect("/admin/semen")
     })
 
   } catch (error) {
@@ -70,35 +67,33 @@ exports.actionBatakoCreate = async (req, res) => {
   }
 }
 
-// /* action edit batako */
-exports.actionBatakoUpdate = async (req, res) => {
+// /* action edit semen */
+exports.actionSemenUpdate = async (req, res) => {
   const { id,
     nama,
-    panjang,
-    lebar,
-    tinggi,
     SatuanId,
+    berat,
+    jumlah,
     harga } = req.body
   try {
-    const updateBatako = await Batako.findOne({
+    const updateSemen = await Semen.findOne({
       where: {
         id: { [Op.eq]: id }
       }
     })
-    return updateBatako.update({
+    return updateSemen.update({
       nama: nama,
-      panjang: panjang,
-      lebar: lebar,
-      tinggi: tinggi,
       SatuanId: SatuanId,
+      berat: berat,
+      jumlah: jumlah,
       harga: harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Ubah Data Batako/Bata dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Ubah Data Semen dengan nama : ${nama}`)
       req.flash('alertStatus', 'warning')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/semen")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/batako")
+      res.redirect("/admin/semen")
     })
   }
   catch (error) {
@@ -106,23 +101,23 @@ exports.actionBatakoUpdate = async (req, res) => {
   }
 }
 
-// /* action delete batako */
-exports.actionBatakoDelete = (req, res) => {
+// /* action delete semen */
+exports.actionSemenDelete = (req, res) => {
   const { id } = req.params
-  Batako.findOne({
+  Semen.findOne({
     where: {
       id: { [Op.eq]: id }
     }
-  }).then(batako => {
-    return batako.destroy().then(() => {
-      req.flash('alertMessage', `Sukses Menghapus Data Batako/Bata dengan nama : ${batako.nama}`)
+  }).then(semen => {
+    return semen.destroy().then(() => {
+      req.flash('alertMessage', `Sukses Menghapus Data Semen dengan nama : ${semen.nama}`)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/semen")
     });
   })
     .catch(err => {
       req.flash('alertMessage', err.message)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/batako/view")
+      res.redirect("/admin/semen/view")
     });
 }

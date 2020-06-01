@@ -18,3 +18,10 @@ running seed : sequelize-cli db:seed:all
               <% } %>
             </select>
           </div> -->
+
+sequelize-cli model:generate --name Pasir --attributes nama:string,jumlah:integer,SatuanId:integer,harga:double
+
+sequelize-cli model:generate --name Semen --attributes nama:string,berat:integer,jumlah:integer,SatuanId:integer,harga:double
+
+sequelize-cli model:generate --name Kayu --attributes nama:string,berat:integer,jumlah:integer,SatuanId:integer,harga:double
+

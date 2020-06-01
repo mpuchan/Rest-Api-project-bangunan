@@ -1,9 +1,9 @@
-const { Batako, Satuan } = require("../models")
+const { Pasir, Satuan } = require("../models")
 const Op = require("sequelize").Op
 
 
-// /* action view batako */
-exports.viewBatako = async (req, res) => {
+// /* action view pasir */
+exports.viewPasir = async (req, res) => {
   try {
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
@@ -14,16 +14,16 @@ exports.viewBatako = async (req, res) => {
 
     if (userLogin.role === 1) {
       const satuans = await Satuan.findAll()
-      const batakos = await Batako.findAll({
+      const pasirs = await Pasir.findAll({
         include: [{
           model: Satuan
         }]
       })
-      res.render("admin/batako/view_batako", {
+      res.render("admin/pasir/view_pasir", {
 
-        title: "Data Batako",
+        title: "Data Pasir",
         user: userLogin,
-        batako: batakos,
+        pasir: pasirs,
         satuan: satuans,
         alert: alert
       })
@@ -36,33 +36,28 @@ exports.viewBatako = async (req, res) => {
   }
 }
 
-
-// /* action create batako */
-exports.actionBatakoCreate = async (req, res) => {
+// /* action create pasir */
+exports.actionPasirCreate = async (req, res) => {
   const {
     nama,
     SatuanId,
-    panjang,
-    lebar,
-    tinggi,
+    jumlah,
     harga
   } = req.body
   console.log(nama)
   try {
-    Batako.create({
+    Pasir.create({
       nama,
       SatuanId,
-      panjang,
-      lebar,
-      tinggi,
+      jumlah,
       harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Menambahkan Data Batako/Bata Baru dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Menambahkan Data Pasir Baru dengan nama : ${nama}`)
       req.flash('alertStatus', 'success')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/pasir")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/batako")
+      res.redirect("/admin/pasir")
     })
 
   } catch (error) {
@@ -70,35 +65,31 @@ exports.actionBatakoCreate = async (req, res) => {
   }
 }
 
-// /* action edit batako */
-exports.actionBatakoUpdate = async (req, res) => {
+// /* action edit pasir */
+exports.actionPasirUpdate = async (req, res) => {
   const { id,
     nama,
-    panjang,
-    lebar,
-    tinggi,
     SatuanId,
+    jumlah,
     harga } = req.body
   try {
-    const updateBatako = await Batako.findOne({
+    const updatePasir = await Pasir.findOne({
       where: {
         id: { [Op.eq]: id }
       }
     })
-    return updateBatako.update({
+    return updatePasir.update({
       nama: nama,
-      panjang: panjang,
-      lebar: lebar,
-      tinggi: tinggi,
       SatuanId: SatuanId,
+      jumlah: jumlah,
       harga: harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Ubah Data Batako/Bata dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Ubah Data Pasir dengan nama : ${nama}`)
       req.flash('alertStatus', 'warning')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/pasir")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/batako")
+      res.redirect("/admin/pasir")
     })
   }
   catch (error) {
@@ -106,23 +97,23 @@ exports.actionBatakoUpdate = async (req, res) => {
   }
 }
 
-// /* action delete batako */
-exports.actionBatakoDelete = (req, res) => {
+// /* action delete pasir */
+exports.actionPasirDelete = (req, res) => {
   const { id } = req.params
-  Batako.findOne({
+  Pasir.findOne({
     where: {
       id: { [Op.eq]: id }
     }
-  }).then(batako => {
-    return batako.destroy().then(() => {
-      req.flash('alertMessage', `Sukses Menghapus Data Batako/Bata dengan nama : ${batako.nama}`)
+  }).then(pasir => {
+    return pasir.destroy().then(() => {
+      req.flash('alertMessage', `Sukses Menghapus Data Pasir dengan nama : ${pasir.nama}`)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/batako")
+      res.redirect("/admin/pasir")
     });
   })
     .catch(err => {
       req.flash('alertMessage', err.message)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/batako/view")
+      res.redirect("/admin/pasir/view")
     });
 }
