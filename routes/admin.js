@@ -5,8 +5,10 @@ const {
   actionLogin,
   actionLogout
 
+
 } = require("../controllers/admin.controller")
 const auth = require('../middlewares/auth_admin')
+
 
 router.get("/signin", viewSignin)
 router.post("/signin/action", actionLogin)

@@ -49,7 +49,7 @@ exports.actionPasirCreate = async (req, res) => {
     Pasir.create({
       nama,
       SatuanId,
-      jumlah,
+      jumlah: 1,
       harga
     }).then(() => {
       req.flash('alertMessage', `Sukses Menambahkan Data Pasir Baru dengan nama : ${nama}`)
@@ -81,7 +81,7 @@ exports.actionPasirUpdate = async (req, res) => {
     return updatePasir.update({
       nama: nama,
       SatuanId: SatuanId,
-      jumlah: jumlah,
+      jumlah: 1,
       harga: harga
     }).then(() => {
       req.flash('alertMessage', `Sukses Ubah Data Pasir dengan nama : ${nama}`)

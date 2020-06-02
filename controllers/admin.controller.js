@@ -30,6 +30,7 @@ exports.actionLogin = async (req, res) => {
         id: user.id,
         username: user.username,
         name: user.name,
+        image: user.image,
         status: user.status,
         role: user.role,
       }
@@ -55,6 +56,3 @@ exports.actionLogout = async (req, res) => {
   req.session.destroy()
   res.redirect('/signin')
 }
-
-
-

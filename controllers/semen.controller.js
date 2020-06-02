@@ -51,7 +51,7 @@ exports.actionSemenCreate = async (req, res) => {
       nama,
       SatuanId,
       berat,
-      jumlah,
+      jumlah: 1,
       harga
     }).then(() => {
       req.flash('alertMessage', `Sukses Menambahkan Data Semen Baru dengan nama : ${nama}`)
@@ -85,7 +85,7 @@ exports.actionSemenUpdate = async (req, res) => {
       nama: nama,
       SatuanId: SatuanId,
       berat: berat,
-      jumlah: jumlah,
+      jumlah: 1,
       harga: harga
     }).then(() => {
       req.flash('alertMessage', `Sukses Ubah Data Semen dengan nama : ${nama}`)

@@ -1,0 +1,68 @@
+<!-- Modal Update Product-->
+<form action="/admin/superuser/create" method="post" enctype="multipart/form-data">
+  <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Superuser</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Masukan nama" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Masukan email" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="notelp" class="form-control" placeholder="Masukan no-telp" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Masukan username" required>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="password" class="form-control" placeholder="Masukan Password" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="role" class="form-control" placeholder="Masukan Role" required>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="status" class="form-control" placeholder="Masukan Status" required>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-12">
+              <div class="form-group">
+                <input type="file" id="inputFoto" onchange="return validasiFile()" name="foto" class="form-control"
+                  required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

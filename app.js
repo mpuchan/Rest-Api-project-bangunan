@@ -8,6 +8,7 @@ const cors = require("cors");
 const fs = require("fs")
 
 const session = require('express-session');
+const fileUpload = require("express-fileupload");
 const flash = require("connect-flash");
 
 var indexRouter = require('./routes/router');
@@ -21,6 +22,7 @@ const jenisRouter = require('./routes/jenis');
 const batakoRouter = require('./routes/batako');
 const pasirRouter = require('./routes/pasir');
 const semenRouter = require('./routes/semen');
+const superuserRouter = require('./routes/superuser');
 var app = express()
 app.use(cors());
 // const router = require('./routes/router.js')
@@ -39,8 +41,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', cookie: {} }));
+app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
+
 
 // app.use(function (req, res, next) {
 //     res.locals.stuff = {
@@ -84,6 +88,7 @@ app.use('/', jenisRouter)
 app.use('/', batakoRouter)
 app.use('/', pasirRouter)
 app.use('/', semenRouter)
+app.use('/', superuserRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

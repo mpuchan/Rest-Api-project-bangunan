@@ -1,0 +1,107 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Super User
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Superuser</li>
+    </ol>
+    <% if(alert.message != '') { %>
+    <br>
+    <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+      <strong><%= alert.message %></strong>
+    </div>
+    <% } %>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <th style="width: 50%;">Data SuperUser</th>
+            <th class="box-title" style="margin-left: 80%;">
+              <!-- <button class="btn btn-success">Tambah</button> -->
+              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#add-modal">
+                Tambah
+              </button>
+            </th>
+          </div>
+
+          <div class="box-body" style="height: 370px; overflow-y: scroll; overflow-x: scroll;">
+
+            <div class="table-wrapper content">
+              <table id="user" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Image</th>
+                    <th>Nama</th>
+                    <th>email</th>
+                    <th>notelp</th>
+                  </tr>
+                </thead>
+            </div>
+            <div class="table-body-wrapper" style="position: relative; overflow: visible;">
+              <tbody>
+                <% for (let i = 0; i < user.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td>
+                    <% if (user[i].image) { %>
+                    <img src="/images/adminprofile/<%= user[i].image %>" height="40" width="40" alt="foto" />
+                    <% } else { %>
+                    Tidak Ada
+                    <% } %>
+                  </td>
+                  <td><%= user[i].name %></td>
+                  <td><%= user[i].email %></td>
+                  <td>
+                    <%= user[i].notelp %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </div>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<%- include ../../partials/admin_layout/footer.ejs %>
+<%- include add_modal.ejs %>
+
+
+<!-- page script -->
+<script>
+
+  $(document).ready(function () {
+    // datatable
+    $('#user').DataTable()
+    $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
+    // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
+    setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
+
+    // redirect halaman catalogs
+    function successTambah() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/superuser')
+    }
+  })
+
+
+</script>
