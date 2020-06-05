@@ -65,7 +65,7 @@ exports.actionReadAllSinglePengembang = async (req, res) => {
     // res.send(JSON.stringify(Obj))
 
     return res.status(200).json({
-      message: "Success Create Proyek",
+      message: "Success Read Proyek",
       proyek
     })
   } catch (err) {
@@ -76,7 +76,6 @@ exports.actionReadAllSinglePengembang = async (req, res) => {
 
 async function validate(req) {
   let {
-    PengembangId,
     nama_proyek,
     lokasi,
     tanggal
@@ -84,29 +83,6 @@ async function validate(req) {
 
   let errors = []
 
-  if (!PengembangId) {
-    errors.push({
-      field: 'PengembangId',
-      message: 'ID Pengembang is Required',
-    })
-  } else {
-    try {
-      const pengembang = await Pengembang.findOne({
-        where: {
-          id: { [Op.eq]: PengembangId }
-        }
-      })
-      if (!pengembang) {
-        errors.push({
-          field: "PengembangId",
-          message: "ID Pengembang Not Found"
-        });
-      }
-    } catch (err) {
-      console.log(err)
-      throw err
-    }
-  }
 
   if (!nama_proyek) {
     errors.push({
@@ -201,6 +177,38 @@ exports.actionReadSingleproyek = async (req, res) => {
   } catch (err) {
     console.log(err)
     throw err
+  }
+}
+
+exports.actionUpdate = async function (req, res) {
+  const { id } = req.params
+  let {
+    nama_proyek,
+    lokasi,
+    tanggal
+  } = req.body
+
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
+
+  try {
+    const proyek = await Proyek.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
+
+    if (proyek) {
+      proyek.nama_proyek = nama_proyek
+      proyek.lokasi = lokasi
+      proyek.tanggal = tanggal
+      await proyek.save()
+    }
+
+    return res.status(201).json({
+      message: "Success Update Proyek",
+      proyek
+    })
+  } catch (err) {
+    console.log(err)
   }
 }
 

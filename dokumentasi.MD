@@ -25,3 +25,5 @@ sequelize-cli model:generate --name Semen --attributes nama:string,berat:integer
 
 sequelize-cli model:generate --name Kayu --attributes nama:string,berat:integer,jumlah:integer,SatuanId:integer,harga:double
 
+sequelize-cli model:generate --name Keramik --attributes nama:string,panjang:integer,lebar:integer,jumlah:integer,SatuanId:integer,harga:double
+

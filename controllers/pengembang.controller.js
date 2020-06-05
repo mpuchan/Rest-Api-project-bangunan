@@ -311,3 +311,35 @@ exports.actionReadSinglePengembang = async (req, res) => {
   }
 
 }
+
+// exports.actionUpdateProfile = async function (req, res) {
+//   const { id } = req.params
+//   let {
+//     nama_proyek,
+//     lokasi,
+//     tanggal
+//   } = req.body
+
+//   let errors = await validateRegister(req)
+//   if (errors.length > 0) return res.status(422).json({ errors })
+
+//   try {
+//     const proyek = await Proyek.findOne({
+//       where: { id: { [Op.eq]: id } }
+//     })
+
+//     if (proyek) {
+//       proyek.nama_proyek = nama_proyek
+//       proyek.lokasi = lokasi
+//       proyek.tanggal = tanggal
+//       await proyek.save()
+//     }
+
+//     return res.status(201).json({
+//       message: "Success Update Proyek",
+//       proyek
+//     })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
