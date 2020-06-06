@@ -6,13 +6,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
 const fs = require("fs")
+var passport = require("passport");
 
+/* Declare Express package */
 const session = require('express-session');
 const fileUpload = require("express-fileupload");
 const flash = require("connect-flash");
 
+/* Declare Router package */
 var indexRouter = require('./routes/router');
-
 const usersRouter = require('./routes/user');
 const pengembangRouter = require('./routes/pengembang')
 const adminRouter = require('./routes/admin');
@@ -23,6 +25,9 @@ const batakoRouter = require('./routes/batako');
 const pasirRouter = require('./routes/pasir');
 const semenRouter = require('./routes/semen');
 const superuserRouter = require('./routes/superuser');
+const authRouter = require("./routes/auth");
+const keramikRouter = require("./routes/keramik");
+
 var app = express()
 app.use(cors());
 // const router = require('./routes/router.js')
@@ -52,6 +57,17 @@ app.use(flash());
 //     }
 //     next();
 // });
+// Passport configuration
+// For Passport
+app.use(
+    session({
+        secret: "keyboard cat",
+        resave: true,
+        saveUninitialized: true
+    })
+); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 app.use('/', indexRouter);
 
@@ -67,10 +83,11 @@ app.get("/api/v1", (req, res) => {
         res.json(docs);
     });
 });
-
+/* API Router */
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', pengembangRouter)
 app.use('/api/v1', proyekRouter)
+app.use("/api/v1/auth", authRouter);
 // cek url active
 app.use(function (req, res, next) {
     res.locals.stuff = {
@@ -89,6 +106,7 @@ app.use('/', batakoRouter)
 app.use('/', pasirRouter)
 app.use('/', semenRouter)
 app.use('/', superuserRouter)
+app.use('/', keramikRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

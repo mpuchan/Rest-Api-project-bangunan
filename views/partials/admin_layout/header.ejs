@@ -69,7 +69,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="/images/adminprofile/<%= user.image %>" height="18" width="18" class="img-circle"
                   alt="User Image">
-                <span class="hidden-xs"><%= user.name %></span>
+                <span class="hidden-xs"><% if (user.name != null) { %>
+                  <%= user.name %>
+                  <% }else{ %>
+                  <%= "Admin" %>
+                  <% } %></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -77,8 +81,11 @@
                   <img src="/images/adminprofile/<%= user.image %>" height="160" width="160" class="img-circle"
                     alt="User Image">
 
-                  <p>
+                  <p> <% if (user.name != null) { %>
                     <%= user.name %>
+                    <% }else{ %>
+                    <%= "Admin" %>
+                    <% } %>
                     <% if (user.role == 1) { %>
                     <small><%= "Admin" %></small>
                     <% } %>

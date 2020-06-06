@@ -106,7 +106,7 @@ exports.actionKeramikUpdate = async (req, res) => {
   }
 }
 
-// /* action delete batako */
+// /* action delete Keramik */
 exports.actionKeramikDelete = (req, res) => {
   const { id } = req.params
   Keramik.findOne({

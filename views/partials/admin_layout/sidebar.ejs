@@ -11,7 +11,11 @@
         <img src="/images/adminprofile/<%= user.image %>" height="160" width="160" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p><%= user.name %></p>
+        <p><% if (user.name != null) { %>
+          <%= user.name %>
+          <% }else{ %>
+          <%= "Admin" %>
+          <% } %></p>
         <!-- Status -->
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
