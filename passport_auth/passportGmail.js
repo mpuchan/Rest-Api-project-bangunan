@@ -22,6 +22,7 @@ passport.use(
             return done(null, pengembang);
           } else {
             Pengembang.create({
+              id: profile.id,
               nama: profile.name.givenName,
               email: profile.emails[0].value
             }).then((pengembang) => {

@@ -27,3 +27,11 @@ sequelize-cli model:generate --name Kayu --attributes nama:string,berat:integer,
 
 sequelize-cli model:generate --name Keramik --attributes nama:string,panjang:integer,lebar:integer,jumlah:integer,SatuanId:integer,harga:double
 
+sequelize-cli model:generate --name Triplek --attributes nama:string,panjang:integer,lebar:integer,tebal:integer,SatuanId:integer,harga:double
+
+
+sequelize-cli model:generate --name Perhitungan Bidang Bangunan --attributes ProyekId:integer,BatakoId:integer,SemenId:integer,PasirId:integer,luas_bidang:float,jumlahkeperluanbatako:integer,jumlahkeperluanpasir:float,Jumlahkeperluansemen:float,metode:string,hargabatako:double,hargapasir:double,hargasemen:double,hargatotal:double
+
+lebar:integer,tebal:integer,SatuanId:integer,harga:double
+
+

@@ -27,6 +27,9 @@ const semenRouter = require('./routes/semen');
 const superuserRouter = require('./routes/superuser');
 const authRouter = require("./routes/auth");
 const keramikRouter = require("./routes/keramik");
+const triplekRouter = require("./routes/triplek");
+const perhitunganbidangRouter = require("./routes/perhitunganbidang");
+
 
 var app = express()
 app.use(cors());
@@ -88,6 +91,8 @@ app.use('/api/v1', usersRouter)
 app.use('/api/v1', pengembangRouter)
 app.use('/api/v1', proyekRouter)
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1", perhitunganbidangRouter);
+
 // cek url active
 app.use(function (req, res, next) {
     res.locals.stuff = {
@@ -107,6 +112,7 @@ app.use('/', pasirRouter)
 app.use('/', semenRouter)
 app.use('/', superuserRouter)
 app.use('/', keramikRouter)
+app.use('/', triplekRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

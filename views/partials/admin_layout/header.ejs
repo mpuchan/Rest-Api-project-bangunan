@@ -67,8 +67,12 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <% if (user.image != null) { %>
                 <img src="/images/adminprofile/<%= user.image %>" height="18" width="18" class="img-circle"
                   alt="User Image">
+                <% }else{ %>
+                <img src="/images/adminprofile/usernull.png" height="18" width="18" class="img-circle" alt="User Image">
+                <% } %>
                 <span class="hidden-xs"><% if (user.name != null) { %>
                   <%= user.name %>
                   <% }else{ %>
@@ -78,8 +82,13 @@
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="/images/adminprofile/<%= user.image %>" height="160" width="160" class="img-circle"
+                  <% if (user.image != null) { %>
+                  <img src="/images/adminprofile/<%= user.image %>" height="18" width="18" class="img-circle"
                     alt="User Image">
+                  <% }else{ %>
+                  <img src="/images/adminprofile/usernull.png" height="18" width="18" class="img-circle"
+                    alt="User Image">
+                  <% } %>
 
                   <p> <% if (user.name != null) { %>
                     <%= user.name %>
