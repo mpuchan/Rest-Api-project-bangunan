@@ -29,6 +29,9 @@ const authRouter = require("./routes/auth");
 const keramikRouter = require("./routes/keramik");
 const triplekRouter = require("./routes/triplek");
 const perhitunganbidangRouter = require("./routes/perhitunganbidang");
+const perhitunganacianRouter = require("./routes/perhitunganacian");
+const perhitunganplesteranRouter = require("./routes/perhitunganplesteran");
+const perhitunganlantaiRouter = require("./routes/perhitunganlantai");
 
 
 var app = express()
@@ -92,6 +95,9 @@ app.use('/api/v1', pengembangRouter)
 app.use('/api/v1', proyekRouter)
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", perhitunganbidangRouter);
+app.use("/api/v1", perhitunganlantaiRouter);
+app.use("/api/v1", perhitunganacianRouter);
+app.use("/api/v1", perhitunganplesteranRouter);
 
 // cek url active
 app.use(function (req, res, next) {

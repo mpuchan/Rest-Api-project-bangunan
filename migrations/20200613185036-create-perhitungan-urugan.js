@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('PerhitunganBidangBangunans', {
+    return queryInterface.createTable('PerhitunganUrugans', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,24 +17,6 @@ module.exports = {
           key: "id"
         }
       },
-      BatakoId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Batakos",
-          key: "id"
-        }
-      },
-      SemenId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Semens",
-          key: "id"
-        }
-      },
       PasirId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
@@ -44,28 +26,28 @@ module.exports = {
           key: "id"
         }
       },
-      luas_bidang: {
+      panjang: {
         type: Sequelize.FLOAT
       },
-      jumlahkeperluanbatako: {
-        type: Sequelize.INTEGER
-      },
-      jumlahkeperluanpasir: {
+      lebar: {
         type: Sequelize.FLOAT
       },
-      Jumlahkeperluansemen: {
+      tinggi: {
         type: Sequelize.FLOAT
       },
-      metode: {
-        type: Sequelize.STRING(50)
+      luas: {
+        type: Sequelize.FLOAT
       },
-      hargabatako: {
-        type: Sequelize.DOUBLE
+      luasjadi: {
+        type: Sequelize.FLOAT
+      },
+      Jumlahkeperluanpasir: {
+        type: Sequelize.FLOAT
+      },
+      jumlahdalamtruk: {
+        type: Sequelize.FLOAT
       },
       hargapasir: {
-        type: Sequelize.DOUBLE
-      },
-      hargasemen: {
         type: Sequelize.DOUBLE
       },
       hargatotal: {
@@ -82,6 +64,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('PerhitunganBidangBangunans');
+    return queryInterface.dropTable('PerhitunganUrugans');
   }
 };

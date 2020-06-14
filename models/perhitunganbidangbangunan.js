@@ -5,10 +5,17 @@ module.exports = (sequelize, DataTypes) => {
     BatakoId: DataTypes.INTEGER,
     SemenId: DataTypes.INTEGER,
     PasirId: DataTypes.INTEGER,
+    panjangbid: DataTypes.FLOAT,
+    tinggibid: DataTypes.FLOAT,
+    panjangpin: DataTypes.FLOAT,
+    tinggipin: DataTypes.FLOAT,
+    panjangjen: DataTypes.FLOAT,
+    tinggijen: DataTypes.FLOAT,
     luas_bidang: DataTypes.FLOAT,
     jumlahkeperluanbatako: DataTypes.INTEGER,
     jumlahkeperluanpasir: DataTypes.FLOAT,
     Jumlahkeperluansemen: DataTypes.FLOAT,
+    jumlahdalamsak: DataTypes.FLOAT,
     metode: DataTypes.STRING,
     hargabatako: DataTypes.DOUBLE,
     hargapasir: DataTypes.DOUBLE,
@@ -32,7 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     PerhitunganBidangBangunan.belongsTo(sequelize.models.Pasir, {
       foreignKey: "PasirId"
     });
-
   };
   return PerhitunganBidangBangunan;
 };

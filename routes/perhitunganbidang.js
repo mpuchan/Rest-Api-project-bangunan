@@ -1,8 +1,8 @@
 let express = require("express")
 let router = express.Router()
 const {
-    actionReadAllSingleData,
-    actionCreate, viewBatako, viewPasir, viewSemen
+  actionReadAllSingleData,
+  actionCreate, viewBatako, viewPasir, viewSemen
 } = require("../controllers/perhitunganbidang.controller")
 
 const auth = require("../middlewares/auth")

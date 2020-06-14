@@ -98,16 +98,6 @@ exports.actionReadAllSingleData = async (req, res) => {
         ProyekId: { [Op.eq]: ProyekId }
       }
     })
-
-    // const Obj = {
-    //   id: proyek.id,
-    //   PengembangId: proyek.PengembangId,
-    //   nama_proyek: proyek.nama_proyek,
-    //   lokasi: proyek.lokasi,
-    //   tanggal: proyek.tanggal
-    // }
-    // res.send(JSON.stringify(Obj))
-
     return res.status(200).json({
       message: "Success Read Perhitungan",
       perhitunganbidang
@@ -123,10 +113,17 @@ async function validate(req) {
     BatakoId,
     SemenId,
     PasirId,
+    panjangbid,
+    tinggibid,
+    panjangpin,
+    tinggipin,
+    panjangjen,
+    tinggijen,
     luas_bidang,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
+    jumlahdalamsak,
     metode,
     hargabatako,
     hargapasir,
@@ -212,14 +209,20 @@ async function validate(req) {
 exports.actionCreate = async (req, res) => {
 
   let {
-    ProyekId,
     BatakoId,
     SemenId,
     PasirId,
+    panjangbid,
+    tinggibid,
+    panjangpin,
+    tinggipin,
+    panjangjen,
+    tinggijen,
     luas_bidang,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
+    jumlahdalamsak,
     metode,
     hargabatako,
     hargapasir,
@@ -235,14 +238,20 @@ exports.actionCreate = async (req, res) => {
 
   try {
     const perhitunganbidang = await PerhitunganBidangBangunan.create({
-      ProyekId,
       BatakoId,
       SemenId,
       PasirId,
+      panjangbid,
+      tinggibid,
+      panjangpin,
+      tinggipin,
+      panjangjen,
+      tinggijen,
       luas_bidang,
       jumlahkeperluanbatako,
       jumlahkeperluanpasir,
       jumlahkeperluansemen,
+      jumlahdalamsak,
       metode,
       hargabatako,
       hargapasir,
@@ -337,21 +346,21 @@ exports.actionCreate = async (req, res) => {
 //   }
 // }
 
-// exports.actionDelete = async function (req, res) {
-//   const { id } = req.params
+exports.actionDelete = async function (req, res) {
+  const { id } = req.params
 
-//   let error = await validateRead(req)
-//   if (error.length > 0) return res.status(422).json({ error })
+  let error = await validateRead(req)
+  if (error.length > 0) return res.status(422).json({ error })
 
-//   Proyek.findOne({ where: { id: { [Op.eq]: id } } })
-//     .then((proyek) => {
-//       return proyek.destroy()
-//     })
-//     .then((proyek) => {
-//       res.status(200).json({ message: "Success Delete", proyek })
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ message: "Internal server error" })
-//     })
+  PerhitunganBidangBangunan.findOne({ where: { id: { [Op.eq]: id } } })
+    .then((PerhitunganBidangBangunan) => {
+      return PerhitunganBidangBangunan.destroy()
+    })
+    .then((PerhitunganBidangBangunan) => {
+      res.status(200).json({ message: "Success Delete", PerhitunganBidangBangunan })
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal server error" })
+    })
 
-// }
+}
