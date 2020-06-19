@@ -50,6 +50,7 @@ exports.actionReadAllSingleData = async (req, res) => {
 
 async function validate(req) {
   let {
+    ProyekId,
     PasirId,
     panjang,
     lebar,
@@ -99,6 +100,7 @@ async function validate(req) {
 exports.actionCreate = async (req, res) => {
 
   let {
+    ProyekId,
     PasirId,
     panjang,
     lebar,
@@ -116,6 +118,7 @@ exports.actionCreate = async (req, res) => {
 
   try {
     const perhitunganurugan = await PerhitunganUrugan.create({
+      ProyekId,
       PasirId,
       panjang,
       lebar,

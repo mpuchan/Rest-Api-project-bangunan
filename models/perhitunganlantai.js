@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     hargapasir: DataTypes.DOUBLE,
     hargasemen: DataTypes.DOUBLE,
     harganat: DataTypes.DOUBLE,
-    hargatotal: DataTypes.DOUBLE
+    hargatotal: DataTypes.DOUBLE,
+    jenis: DataTypes.STRING
   }, {});
   PerhitunganLantai.associate = function (models) {
     // associations can be defined here

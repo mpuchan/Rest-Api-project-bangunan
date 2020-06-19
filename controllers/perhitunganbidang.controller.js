@@ -128,7 +128,9 @@ async function validate(req) {
     hargabatako,
     hargapasir,
     hargasemen,
-    hargatotal
+    hargatotal,
+    name,
+    jenis
   } = req.body
 
   let errors = []
@@ -209,6 +211,7 @@ async function validate(req) {
 exports.actionCreate = async (req, res) => {
 
   let {
+    ProyekId,
     BatakoId,
     SemenId,
     PasirId,
@@ -226,7 +229,9 @@ exports.actionCreate = async (req, res) => {
     metode,
     hargabatako,
     hargapasir,
-    hargasemen
+    hargasemen,
+    name,
+    jenis
   } = req.body
 
   var total = parseFloat(hargabatako) + parseFloat(hargapasir) + parseFloat(hargasemen)
@@ -238,6 +243,7 @@ exports.actionCreate = async (req, res) => {
 
   try {
     const perhitunganbidang = await PerhitunganBidangBangunan.create({
+      ProyekId,
       BatakoId,
       SemenId,
       PasirId,
@@ -256,7 +262,9 @@ exports.actionCreate = async (req, res) => {
       hargabatako,
       hargapasir,
       hargasemen,
-      hargatotal
+      hargatotal,
+      name,
+      jenis
     })
 
     return res.status(200).json({

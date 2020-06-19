@@ -50,6 +50,7 @@ exports.actionReadAllSingleData = async (req, res) => {
 
 async function validate(req) {
   let {
+    ProyekId,
     SemenId,
     PasirId,
     panjangdin,
@@ -63,7 +64,8 @@ async function validate(req) {
     metode,
     hargapasir,
     hargasemen,
-    hargatotal
+    hargatotal,
+    jenis
   } = req.body
 
   let errors = []
@@ -127,6 +129,7 @@ async function validate(req) {
 exports.actionCreate = async (req, res) => {
 
   let {
+    ProyekId,
     SemenId,
     PasirId,
     panjangdin,
@@ -139,7 +142,8 @@ exports.actionCreate = async (req, res) => {
     jumlahdalamtruk,
     metode,
     hargapasir,
-    hargasemen
+    hargasemen,
+    jenis
   } = req.body
 
   var total = parseFloat(hargapasir) + parseFloat(hargasemen)
@@ -151,6 +155,7 @@ exports.actionCreate = async (req, res) => {
 
   try {
     const perhitunganplesteran = await PerhitunganPlesteran.create({
+      ProyekId,
       SemenId,
       PasirId,
       panjangdin,
@@ -164,7 +169,8 @@ exports.actionCreate = async (req, res) => {
       metode,
       hargapasir,
       hargasemen,
-      hargatotal
+      hargatotal,
+      jenis
     })
 
     return res.status(200).json({
