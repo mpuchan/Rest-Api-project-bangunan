@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Pasirs', {
+    return queryInterface.createTable('Materials', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,7 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nama: {
-        type: Sequelize.STRING(150)
+        type: Sequelize.STRING
+      },
+      panjang: {
+        type: Sequelize.INTEGER
+      },
+      lebar: {
+        type: Sequelize.INTEGER
+      },
+      tinggi: {
+        type: Sequelize.INTEGER
+      },
+      tebal: {
+        type: Sequelize.INTEGER
+      },
+      berat: {
+        type: Sequelize.INTEGER
       },
       jumlah: {
         type: Sequelize.INTEGER
@@ -20,6 +35,15 @@ module.exports = {
         allowNull: false,
         references: {
           model: "Satuans",
+          key: "id"
+        }
+      },
+      JenisId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        allowNull: false,
+        references: {
+          model: "Jenis",
           key: "id"
         }
       },
@@ -37,6 +61,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Pasirs');
+    return queryInterface.dropTable('Materials');
   }
 };

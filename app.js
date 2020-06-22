@@ -21,13 +21,9 @@ const adminRouter = require('./routes/admin');
 const proyekRouter = require('./routes/proyek')
 const satuanRouter = require('./routes/satuan');
 const jenisRouter = require('./routes/jenis');
-const batakoRouter = require('./routes/batako');
-const pasirRouter = require('./routes/pasir');
-const semenRouter = require('./routes/semen');
+const materialRouter = require('./routes/material');
 const superuserRouter = require('./routes/superuser');
 const authRouter = require("./routes/auth");
-const keramikRouter = require("./routes/keramik");
-const triplekRouter = require("./routes/triplek");
 const perhitunganbidangRouter = require("./routes/perhitunganbidang");
 const perhitunganacianRouter = require("./routes/perhitunganacian");
 const perhitunganplesteranRouter = require("./routes/perhitunganplesteran");
@@ -113,12 +109,8 @@ app.use(function (req, res, next) {
 app.use('/', adminRouter)
 app.use('/', satuanRouter)
 app.use('/', jenisRouter)
-app.use('/', batakoRouter)
-app.use('/', pasirRouter)
-app.use('/', semenRouter)
 app.use('/', superuserRouter)
-app.use('/', keramikRouter)
-app.use('/', triplekRouter)
+app.use('/', materialRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

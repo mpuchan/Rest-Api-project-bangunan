@@ -50,16 +50,18 @@ exports.actionReadAllSingleData = async (req, res) => {
 async function validate(req) {
   let {
     ProyekId,
-    SemenId,
+    nama,
+    jenis_pengerjaan,
     panjangdin,
     tinggidin,
+    sisi,
     luas,
+    nama_semen,
     jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargasemen,
-    hargatotal,
-    jenis
+    hargatotal
   } = req.body
 
   let errors = []
@@ -103,16 +105,18 @@ exports.actionCreate = async (req, res) => {
 
   let {
     ProyekId,
-    SemenId,
+    nama,
+    jenis_pengerjaan,
     panjangdin,
     tinggidin,
+    sisi,
     luas,
+    nama_semen,
     jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargasemen,
-    hargatotal,
-    jenis
+    hargatotal
   } = req.body
 
 
@@ -122,16 +126,18 @@ exports.actionCreate = async (req, res) => {
   try {
     const perhitunganacian = await PerhitunganAcian.create({
       ProyekId,
-      SemenId,
+      nama,
+      jenis_pengerjaan,
       panjangdin,
       tinggidin,
+      sisi,
       luas,
+      nama_semen,
       jumlahkeperluansemen,
       jumlahdalamsak,
       metode,
       hargasemen,
-      hargatotal,
-      jenis
+      hargatotal
     })
 
     return res.status(200).json({

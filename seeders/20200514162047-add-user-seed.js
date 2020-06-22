@@ -11,7 +11,7 @@ module.exports = {
       username: 'admin',
       role: '1',
       status: '1',
-      image: '',
+      image: 'megums.png',
       password: password,
       createdAt: new Date(),
       updatedAt: new Date(),

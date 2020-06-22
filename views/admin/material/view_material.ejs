@@ -5,11 +5,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Pasir
+      Batu Bata/Material
     </h1>
     <ol class="breadcrumb">
       <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li class="active">Pasir</li>
+      <li class="active">Batu Bata/Material</li>
     </ol>
     <% if(alert.message != '') { %>
     <br>
@@ -19,7 +19,6 @@
     <% } %>
   </section>
 
-
   <!-- Main content -->
   <section class="content">
 
@@ -28,7 +27,7 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <th style="width: 50%;">Data Pasir</th>
+            <th style="width: 50%;">Data Batu Bata/Material</th>
             <th class="box-title" style="margin-left: 80%;">
               <!-- <button class="btn btn-success">Tambah</button> -->
               <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#add-modal">
@@ -40,12 +39,11 @@
           <div class="box-body" style="height: 370px; overflow-y: scroll; overflow-x: scroll;">
 
             <div class="table-wrapper content">
-              <table id="pasir" class="table table-bordered table-striped">
+              <table id="material" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Jumlah</th>
                     <th>Satuan</th>
                     <th>Harga</th>
                     <th>Aksi</th>
@@ -54,24 +52,24 @@
             </div>
             <div class="table-body-wrapper" style="position: relative; overflow: visible;">
               <tbody>
-                <% for (let i = 0; i < pasir.length; i++ ) { %>
+                <% for (let i = 0; i < material.length; i++ ) { %>
                 <tr>
                   <td><%= i + 1 %></td>
-                  <td><%= pasir[i].nama %></td>
-                  <td><%= pasir[i].jumlah %></td>
+                  <td><%= material[i].nama %></td>
                   <td>
-                    <%= pasir[i].Satuan.nama_satuan %></td>
-                  <td><%= pasir[i].harga %></td>
+                    <%= material[i].Satuan.nama_satuan %></td>
+                  <td><%= material[i].harga %></td>
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
-                      data-id="<%= pasir[i].id %>" data-nama="<%= pasir[i].nama %>" data-jumlah="<%= pasir[i].jumlah %>"
-                      data-SatuanId="<%= pasir[i].SatuanId %>" data-harga="<%= pasir[i].harga %>"> <span
-                        class="glyphicon glyphicon-pencil"></span>
+                      data-id="<%= material[i].id %>" data-nama="<%= material[i].nama %>"
+                      data-panjang="<%= material[i].panjang %>" data-lebar="<%= material[i].lebar %>"
+                      data-tinggi="<%= material[i].tinggi %>" data-SatuanId="<%= material[i].SatuanId %>"
+                      data-harga="<%= material[i].harga %>"> <span class="glyphicon glyphicon-pencil"></span>
                       Edit</a>
 
                     </a>
-                    <button class="btn btn-danger btn-sm" onclick="delete_pasir(`<%= pasir[i].id %>`)"
-                      data-id="<%= pasir[i].id %>">
+                    <button class="btn btn-danger btn-sm" onclick="delete_material(`<%= material[i].id %>`)"
+                      data-id="<%= material[i].id %>">
                       <span class="glyphicon glyphicon-remove"></span>
                       Hapus
                     </button>
@@ -101,45 +99,49 @@
 
   $(document).ready(function () {
     // datatable
-    $('#pasir').DataTable()
+    $('#material').DataTable()
     $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
     // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
     setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
 
     // redirect halaman catalogs
     function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/pasir')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/material')
     }
   })
 
   //showing data to e edit modal 
-  $('#pasir').on('click', '.edit', function () {
+  $('#material').on('click', '.edit', function () {
     var id = $(this).data('id');
     var nama = $(this).data('nama');
-    var jumlah = $(this).data('jumlah');
+    var panjang = $(this).data('panjang');
+    var lebar = $(this).data('lebar');
+    var tinggi = $(this).data('tinggi');
     var SatuanId = $(this).data('SatuanId');
     var harga = $(this).data('harga');
 
     $('#edit-modal').modal('show');
     $('.id').val(id);
     $('.nama').val(nama);
-    $('.jumlah').val(jumlah);
+    $('.panjang').val(panjang);
+    $('.lebar').val(lebar);
+    $('.tinggi').val(tinggi);
     $('.SatuanId').val(SatuanId);
     $('.harga').val(harga);
   });
 
-  function delete_pasir(id) {
-    let PasirId = id;
-    console.log(PasirId)
+  function delete_material(id) {
+    let MaterialId = id;
+    console.log(MaterialId)
     swal({
-      title: "Yakin Ingin Menghapus Data Pasir ini?",
+      title: "Yakin Ingin Menghapus Data Material ini?",
       text: "Data yang dihapus, tidak bisa kembali lagi.",
       icon: "warning",
       buttons: true,
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        window.location.assign(`/admin/pasir/delete/${PasirId}`);
+        window.location.assign(`/admin/material/delete/${MaterialId}`);
       }
     });
   }

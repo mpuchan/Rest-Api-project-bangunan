@@ -2,9 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const PerhitunganBidangBangunan = sequelize.define('PerhitunganBidangBangunan', {
     ProyekId: DataTypes.INTEGER,
-    BatakoId: DataTypes.INTEGER,
-    SemenId: DataTypes.INTEGER,
-    PasirId: DataTypes.INTEGER,
+    nama: DataTypes.STRING,
+    jenis_pengerjaan: DataTypes.STRING,
     panjangbid: DataTypes.FLOAT,
     tinggibid: DataTypes.FLOAT,
     panjangpin: DataTypes.FLOAT,
@@ -12,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     panjangjen: DataTypes.FLOAT,
     tinggijen: DataTypes.FLOAT,
     luas_bidang: DataTypes.FLOAT,
+    nama_batako: DataTypes.STRING,
+    nama_semen: DataTypes.STRING,
+    nama_pasir: DataTypes.STRING,
     jumlahkeperluanbatako: DataTypes.INTEGER,
     jumlahkeperluanpasir: DataTypes.FLOAT,
     Jumlahkeperluansemen: DataTypes.FLOAT,
@@ -20,26 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     hargabatako: DataTypes.DOUBLE,
     hargapasir: DataTypes.DOUBLE,
     hargasemen: DataTypes.DOUBLE,
-    hargatotal: DataTypes.DOUBLE,
-    name: DataTypes.STRING,
-    jenis: DataTypes.STRING
+    hargatotal: DataTypes.DOUBLE
   }, {});
   PerhitunganBidangBangunan.associate = function (models) {
     // associations can be defined here
     PerhitunganBidangBangunan.belongsTo(sequelize.models.Proyek, {
       foreignKey: "ProyekId"
-    });
-
-    PerhitunganBidangBangunan.belongsTo(sequelize.models.Batako, {
-      foreignKey: "BatakoId"
-    });
-
-    PerhitunganBidangBangunan.belongsTo(sequelize.models.Semen, {
-      foreignKey: "SemenId"
-    });
-
-    PerhitunganBidangBangunan.belongsTo(sequelize.models.Pasir, {
-      foreignKey: "PasirId"
     });
   };
   return PerhitunganBidangBangunan;

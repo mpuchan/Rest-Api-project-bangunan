@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('PerhitunganUrugans', {
+    return queryInterface.createTable('PerhitunganLantais', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,37 +17,64 @@ module.exports = {
           key: "id"
         }
       },
-      PasirId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Pasirs",
-          key: "id"
-        }
+      nama: {
+        type: Sequelize.STRING(100)
       },
-      panjang: {
+      jenis_pengerjaan: {
+        type: Sequelize.STRING(100)
+      },
+      panjanglan: {
         type: Sequelize.FLOAT
       },
-      lebar: {
+      lebarlan: {
         type: Sequelize.FLOAT
       },
-      tinggi: {
+      luas_lantai: {
         type: Sequelize.FLOAT
       },
-      luas: {
+      toleransi: {
         type: Sequelize.FLOAT
       },
-      luasjadi: {
+      nama_keramik: {
+        type: Sequelize.STRING
+      },
+      nama_semen: {
+        type: Sequelize.STRING
+      },
+      nama_pasir: {
+        type: Sequelize.STRING
+      },
+      nama_semennat: {
+        type: Sequelize.STRING
+      },
+      jumlahkeperluankeramik: {
+        type: Sequelize.INTEGER
+      },
+      jumlahkeperluanpasir: {
         type: Sequelize.FLOAT
       },
-      Jumlahkeperluanpasir: {
+      Jumlahkeperluansemen: {
         type: Sequelize.FLOAT
       },
-      jumlahdalamtruk: {
+      jumlahkeperluannat: {
         type: Sequelize.FLOAT
+      },
+      jumlahdalamsak: {
+        type: Sequelize.FLOAT
+      },
+      metode: {
+        type: Sequelize.STRING
+      },
+      hargakeramik: {
+        type: Sequelize.DOUBLE
       },
       hargapasir: {
+        type: Sequelize.DOUBLE
+      },
+      hargasemen: {
+        type: Sequelize.DOUBLE
+      },
+      harganat: {
         type: Sequelize.DOUBLE
       },
       hargatotal: {
@@ -64,6 +91,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('PerhitunganUrugans');
+    return queryInterface.dropTable('PerhitunganLantais');
   }
 };

@@ -53,14 +53,16 @@ exports.actionReadAllSingleData = async (req, res) => {
 async function validate(req) {
   let {
     ProyekId,
-    KeramikId,
-    SemenId,
-    PasirId,
-    SemeNatId,
+    nama,
+    jenis_pengerjaan,
     panjanglan,
-    tinggilan,
+    lebarlan,
     luas_lantai,
     toleransi,
+    nama_keramik,
+    nama_semen,
+    nama_pasir,
+    nama_semennat,
     jumlahkeperluankeramik,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
@@ -71,8 +73,7 @@ async function validate(req) {
     hargapasir,
     hargasemen,
     harganat,
-    hargatotal,
-    jenis
+    hargatotal
   } = req.body
 
   let errors = []
@@ -172,14 +173,16 @@ exports.actionCreate = async (req, res) => {
 
   let {
     ProyekId,
-    KeramikId,
-    SemenId,
-    PasirId,
-    SemeNatId,
+    nama,
+    jenis_pengerjaan,
     panjanglan,
-    tinggilan,
+    lebarlan,
     luas_lantai,
     toleransi,
+    nama_keramik,
+    nama_semen,
+    nama_pasir,
+    nama_semennat,
     jumlahkeperluankeramik,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
@@ -189,8 +192,7 @@ exports.actionCreate = async (req, res) => {
     hargakeramik,
     hargapasir,
     hargasemen,
-    harganat,
-    jenis
+    harganat
   } = req.body
 
   var total = parseFloat(hargakeramik) + parseFloat(hargapasir) + parseFloat(hargasemen) + parseFloat(harganat)
@@ -203,14 +205,16 @@ exports.actionCreate = async (req, res) => {
   try {
     const perhitunganlantai = await PerhitunganLantai.create({
       ProyekId,
-      KeramikId,
-      SemenId,
-      PasirId,
-      SemeNatId,
+      nama,
+      jenis_pengerjaan,
       panjanglan,
-      tinggilan,
+      lebarlan,
       luas_lantai,
       toleransi,
+      nama_keramik,
+      nama_semen,
+      nama_pasir,
+      nama_semennat,
       jumlahkeperluankeramik,
       jumlahkeperluanpasir,
       jumlahkeperluansemen,
@@ -221,8 +225,7 @@ exports.actionCreate = async (req, res) => {
       hargapasir,
       hargasemen,
       harganat,
-      hargatotal,
-      jenis
+      hargatotal
     })
 
     return res.status(200).json({

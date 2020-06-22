@@ -1,9 +1,8 @@
-const { Triplek, Satuan } = require("../models")
+const { Material, Satuan, Jenis } = require("../models")
 const Op = require("sequelize").Op
 
-
-// /* action view triplek */
-exports.viewTriplek = async (req, res) => {
+// /* action view material */
+exports.viewMaterial = async (req, res) => {
   try {
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
@@ -14,17 +13,19 @@ exports.viewTriplek = async (req, res) => {
 
     if (userLogin.role === 1) {
       const satuans = await Satuan.findAll()
-      const tripleks = await Triplek.findAll({
+      const jeniss = await Jenis.findAll()
+      const materials = await Material.findAll({
         include: [{
           model: Satuan
         }]
       })
-      res.render("admin/triplek/view_triplek", {
+      res.render("admin/material/view_material", {
 
-        title: "Data Batako",
+        title: "Data Material",
         user: userLogin,
-        triplek: tripleks,
+        material: materials,
         satuan: satuans,
+        jenis: jeniss,
         alert: alert
       })
     } else {
@@ -36,33 +37,40 @@ exports.viewTriplek = async (req, res) => {
   }
 }
 
-
-// /* action create batako */
-exports.actionTriplekCreate = async (req, res) => {
+// /* action create material */
+exports.actionMaterialCreate = async (req, res) => {
   const {
     nama,
     SatuanId,
+    JenisId,
     panjang,
     lebar,
+    tinggi,
     tebal,
+    berat,
+    jumlah,
     harga
   } = req.body
   console.log(nama)
   try {
-    Triplek.create({
+    Material.create({
       nama,
       SatuanId,
+      JenisId,
       panjang,
       lebar,
+      tinggi,
       tebal,
+      berat,
+      jumlah,
       harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Menambahkan Data Triplek Baru dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Menambahkan Data Material/Bata Baru dengan nama : ${nama}`)
       req.flash('alertStatus', 'success')
-      res.redirect("/admin/triplek")
+      res.redirect("/admin/material")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/triplek")
+      res.redirect("/admin/material")
     })
 
   } catch (error) {
@@ -70,35 +78,43 @@ exports.actionTriplekCreate = async (req, res) => {
   }
 }
 
-// /* action edit batako */
-exports.actionTriplekUpdate = async (req, res) => {
+// /* action edit material */
+exports.actionMaterialUpdate = async (req, res) => {
   const { id,
     nama,
+    SatuanId,
+    JenisId,
     panjang,
     lebar,
+    tinggi,
     tebal,
-    SatuanId,
+    berat,
+    jumlah,
     harga } = req.body
   try {
-    const updateTriplek = await Triplek.findOne({
+    const updateMaterial = await Material.findOne({
       where: {
         id: { [Op.eq]: id }
       }
     })
-    return updateTriplek.update({
+    return updateMaterial.update({
       nama: nama,
       panjang: panjang,
       lebar: lebar,
-      tebal: tebal,
+      tinggi: tinggi,
       SatuanId: SatuanId,
+      JenisId: JenisId,
+      tebal: tebal,
+      berat: berat,
+      jumlah: jumlah,
       harga: harga
     }).then(() => {
-      req.flash('alertMessage', `Sukses Ubah Data Triplek Baru dengan nama : ${nama}`)
+      req.flash('alertMessage', `Sukses Ubah Data Material/Bata dengan nama : ${nama}`)
       req.flash('alertStatus', 'warning')
-      res.redirect("/admin/triplek")
+      res.redirect("/admin/material")
     }).catch((err) => {
       // tambah notifi error
-      res.redirect("/admin/triplek")
+      res.redirect("/admin/material")
     })
   }
   catch (error) {
@@ -106,23 +122,23 @@ exports.actionTriplekUpdate = async (req, res) => {
   }
 }
 
-// /* action delete batako */
-exports.actionTriplekDelete = (req, res) => {
+// /* action delete material */
+exports.actionMaterialDelete = (req, res) => {
   const { id } = req.params
-  Triplek.findOne({
+  Material.findOne({
     where: {
       id: { [Op.eq]: id }
     }
-  }).then(triplek => {
-    return triplek.destroy().then(() => {
-      req.flash('alertMessage', `Sukses Menghapus Data Triplek dengan nama : ${triplek.nama}`)
+  }).then(material => {
+    return material.destroy().then(() => {
+      req.flash('alertMessage', `Sukses Menghapus Data Material/Bata dengan nama : ${material.nama}`)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/triplek")
+      res.redirect("/admin/material")
     });
   })
     .catch(err => {
       req.flash('alertMessage', err.message)
       req.flash('alertStatus', 'danger')
-      res.redirect("/admin/triplek/view")
+      res.redirect("/admin/material/view")
     });
 }

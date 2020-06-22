@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('PerhitunganLantais', {
+    return queryInterface.createTable('PerhitunganBidangBangunans', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,55 +17,43 @@ module.exports = {
           key: "id"
         }
       },
-      KeramikId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Keramiks",
-          key: "id"
-        }
+      nama: {
+        type: Sequelize.STRING(100)
       },
-      SemenId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Semens",
-          key: "id"
-        }
+      jenis_pengerjaan: {
+        type: Sequelize.STRING(100)
       },
-      PasirId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Pasirs",
-          key: "id"
-        }
-      },
-      SemeNatId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Semennats",
-          key: "id"
-        }
-      },
-      panjanglan: {
+      panjangbid: {
         type: Sequelize.FLOAT
       },
-      lebarlan: {
+      tinggibid: {
         type: Sequelize.FLOAT
       },
-      luas_lantai: {
+      panjangpin: {
         type: Sequelize.FLOAT
       },
-      toleransi: {
+      tinggipin: {
         type: Sequelize.FLOAT
       },
-      jumlahkeperluankeramik: {
+      panjangjen: {
+        type: Sequelize.FLOAT
+      },
+      tinggijen: {
+        type: Sequelize.FLOAT
+      },
+      luas_bidang: {
+        type: Sequelize.FLOAT
+      },
+      nama_batako: {
+        type: Sequelize.STRING
+      },
+      nama_semen: {
+        type: Sequelize.STRING
+      },
+      nama_pasir: {
+        type: Sequelize.STRING
+      },
+      jumlahkeperluanbatako: {
         type: Sequelize.INTEGER
       },
       jumlahkeperluanpasir: {
@@ -77,22 +65,16 @@ module.exports = {
       jumlahdalamsak: {
         type: Sequelize.FLOAT
       },
-      jumlahkeperluannat: {
-        type: Sequelize.FLOAT
-      },
       metode: {
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING
       },
-      hargakeramik: {
+      hargabatako: {
         type: Sequelize.DOUBLE
       },
       hargapasir: {
         type: Sequelize.DOUBLE
       },
       hargasemen: {
-        type: Sequelize.DOUBLE
-      },
-      harganat: {
         type: Sequelize.DOUBLE
       },
       hargatotal: {
@@ -109,6 +91,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('PerhitunganLantais');
+    return queryInterface.dropTable('PerhitunganBidangBangunans');
   }
 };

@@ -1,9 +1,7 @@
 const {
   PerhitunganBidangBangunan,
   Proyek,
-  Batako,
-  Semen,
-  Pasir
+  Material,
 } = require("../models")
 
 const Op = require("sequelize").Op
@@ -12,16 +10,11 @@ const Op = require("sequelize").Op
  * include relasi
  */
 let include = {
-  include: [
-    { model: Batako },
-  ]
+
 }
 
 async function validateId(req) {
   const { ProyekId } = req.params
-  // const { BatakoId } = req.params
-  // const { SemenId } = req.params
-  // const { PasirId } = req.params
 
   let errors = []
   if (ProyekId) {
@@ -46,10 +39,12 @@ async function validateId(req) {
 
 exports.viewBatako = async (req, res) => {
   try {
-    const batakos = await Batako.findAll()
+    const materials = await Material.findAll({
+      where: { JenisId: 2 }
+    })
     return res.status(200).json({
       message: "Success Read batako",
-      batakos
+      materials
     })
   } catch (err) {
     console.log(err)
@@ -58,10 +53,12 @@ exports.viewBatako = async (req, res) => {
 }
 exports.viewSemen = async (req, res) => {
   try {
-    const semens = await Semen.findAll()
+    const materials = await Material.findAll(
+      { where: { JenisId: 3 } }
+    )
     return res.status(200).json({
       message: "Success Read Semen",
-      semens
+      materials
     })
   } catch (err) {
     console.log(err)
@@ -70,10 +67,12 @@ exports.viewSemen = async (req, res) => {
 }
 exports.viewPasir = async (req, res) => {
   try {
-    const pasirs = await Pasir.findAll()
+    const materials = await Material.findAll(
+      { where: { JenisId: 12 } }
+    )
     return res.status(200).json({
       message: "Success Read Pasir",
-      pasirs
+      materials
     })
   } catch (err) {
     console.log(err)
@@ -110,9 +109,9 @@ exports.actionReadAllSingleData = async (req, res) => {
 
 async function validate(req) {
   let {
-    BatakoId,
-    SemenId,
-    PasirId,
+    ProyekId,
+    nama,
+    jenis_pengerjaan,
     panjangbid,
     tinggibid,
     panjangpin,
@@ -120,6 +119,9 @@ async function validate(req) {
     panjangjen,
     tinggijen,
     luas_bidang,
+    nama_batako,
+    nama_semen,
+    naama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
@@ -128,9 +130,7 @@ async function validate(req) {
     hargabatako,
     hargapasir,
     hargasemen,
-    hargatotal,
-    name,
-    jenis
+    hargatotal
   } = req.body
 
   let errors = []
@@ -212,9 +212,8 @@ exports.actionCreate = async (req, res) => {
 
   let {
     ProyekId,
-    BatakoId,
-    SemenId,
-    PasirId,
+    nama,
+    jenis_pengerjaan,
     panjangbid,
     tinggibid,
     panjangpin,
@@ -222,6 +221,9 @@ exports.actionCreate = async (req, res) => {
     panjangjen,
     tinggijen,
     luas_bidang,
+    nama_batako,
+    nama_semen,
+    naama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     jumlahkeperluansemen,
@@ -229,9 +231,7 @@ exports.actionCreate = async (req, res) => {
     metode,
     hargabatako,
     hargapasir,
-    hargasemen,
-    name,
-    jenis
+    hargasemen
   } = req.body
 
   var total = parseFloat(hargabatako) + parseFloat(hargapasir) + parseFloat(hargasemen)
@@ -244,9 +244,8 @@ exports.actionCreate = async (req, res) => {
   try {
     const perhitunganbidang = await PerhitunganBidangBangunan.create({
       ProyekId,
-      BatakoId,
-      SemenId,
-      PasirId,
+      nama,
+      jenis_pengerjaan,
       panjangbid,
       tinggibid,
       panjangpin,
@@ -254,6 +253,9 @@ exports.actionCreate = async (req, res) => {
       panjangjen,
       tinggijen,
       luas_bidang,
+      nama_batako,
+      nama_semen,
+      naama_pasir,
       jumlahkeperluanbatako,
       jumlahkeperluanpasir,
       jumlahkeperluansemen,
@@ -262,9 +264,7 @@ exports.actionCreate = async (req, res) => {
       hargabatako,
       hargapasir,
       hargasemen,
-      hargatotal,
-      name,
-      jenis
+      hargatotal
     })
 
     return res.status(200).json({

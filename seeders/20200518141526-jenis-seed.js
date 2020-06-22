@@ -9,7 +9,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        nama_jenis: 'batu kali/batu alam',
+        nama_jenis: 'batu bata/Batako',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -57,7 +57,39 @@ module.exports = {
         nama_jenis: 'plafound/triplek',
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
+      {
+        nama_jenis: 'Pasir alam',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_jenis: 'Paku',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_jenis: 'Baut/mur',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_jenis: 'Semen Nat',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_jenis: 'Genteng',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_jenis: 'Kaso',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+
+
     ])
   },
 

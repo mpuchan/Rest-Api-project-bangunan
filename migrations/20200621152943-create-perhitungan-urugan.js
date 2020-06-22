@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('PerhitunganAcians', {
+    return queryInterface.createTable('PerhitunganUrugans', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,34 +17,37 @@ module.exports = {
           key: "id"
         }
       },
-      SemenId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: "Semens",
-          key: "id"
-        }
+      nama: {
+        type: Sequelize.STRING(100)
       },
-      panjangdin: {
+      jenis_pengerjaan: {
+        type: Sequelize.STRING(100)
+      },
+      panjang: {
         type: Sequelize.FLOAT
       },
-      tinggidin: {
+      lebar: {
         type: Sequelize.FLOAT
       },
-      luas: {
+      tinggi: {
         type: Sequelize.FLOAT
       },
-      Jumlahkeperluansemen: {
+      volume: {
         type: Sequelize.FLOAT
       },
-      jumlahdalamsak: {
+      volumejadi: {
         type: Sequelize.FLOAT
       },
-      metode: {
-        type: Sequelize.STRING(50)
+      nama_pasir: {
+        type: Sequelize.STRING
       },
-      hargasemen: {
+      Jumlahkeperluanpasir: {
+        type: Sequelize.FLOAT
+      },
+      jumlahdalamtruk: {
+        type: Sequelize.FLOAT
+      },
+      hargapasir: {
         type: Sequelize.DOUBLE
       },
       hargatotal: {
@@ -61,6 +64,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('PerhitunganAcians');
+    return queryInterface.dropTable('PerhitunganUrugans');
   }
 };
