@@ -5,7 +5,7 @@ create table sequelize : sequelize-cli model:generate --name User --attributes n
 migration Database : sequelize-cli db:migrate
 
  "db_reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
-
+sequelize db:drop && sequelize db:create && sequelize db:migrate 
 create seed : sequelize-cli seed:generate --name proyek-seed
 running seed : sequelize-cli db:seed:all
 
@@ -18,6 +18,7 @@ running seed : sequelize-cli db:seed:all
               <% } %>
             </select>
           </div> -->
+sequelize-cli model:generate --name Pengelola_wisata --attributes id_pengelola:string,NamaPengelola:string,email:string,password:string
 
 sequelize-cli model:generate --name Pasir --attributes nama:string,jumlah:integer,SatuanId:integer,harga:double
 
@@ -55,5 +56,8 @@ sequelize migration:create --name add_column_panjang
 
 sequelize-cli model:generate --name Material --attributes nama:string,panjang:integer,lebar:integer,tinggi:integer,tebal:integer,berat:integer,jumlah:integer,SatuanId:integer,JenisId:integer,harga:double
 
+Perhitungan (SUM)
+SELECT SUM(hargatotal),SUM(jumlahkeperluanbatako) FROM perhitunganbidangbangunans WHERE ProyekId="3" 
 
+Perhitungan sum antar tabel
 

@@ -124,7 +124,7 @@ async function validate(req) {
     naama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargabatako,
@@ -136,73 +136,55 @@ async function validate(req) {
   let errors = []
 
 
-  if (!BatakoId) {
-    errors.push({
-      field: 'BatakoId',
-      message: 'BatakoId is required',
-    })
-  }
-  if (!SemenId) {
-    errors.push({
-      field: 'SemenId',
-      message: 'SemenId is required',
-    })
-  }
-  if (!PasirId) {
-    errors.push({
-      field: 'PasirId',
-      message: 'PasirId is required',
-    })
-  }
-  if (!luas_bidang) {
-    errors.push({
-      field: 'luas_bidang',
-      message: 'luas_bidang is required',
-    })
-  }
+  // if (!luas_bidang) {
+  //   errors.push({
+  //     field: 'luas_bidang',
+  //     message: 'luas_bidang is required',
+  //   })
+  // }
 
-  if (!jumlahkeperluanbatako) {
-    errors.push({
-      field: 'jumlahkeperluanbatako',
-      message: 'jumlahkeperluanbatako is required',
-    })
-  }
-  if (!jumlahkeperluanpasir) {
-    errors.push({
-      field: 'jumlahkeperluanpasir',
-      message: 'jumlahkeperluanpasir is required',
-    })
-  }
-  if (!jumlahkeperluansemen) {
-    errors.push({
-      field: 'jumlahkeperluansemen',
-      message: 'jumlahkeperluansemen is required',
-    })
-  }
-  if (!metode) {
-    errors.push({
-      field: 'metode',
-      message: 'metode is required',
-    })
-  }
-  if (!hargabatako) {
-    errors.push({
-      field: 'hargabatako',
-      message: 'hargabatako is required',
-    })
-  }
-  if (!hargapasir) {
-    errors.push({
-      field: 'hargapasir',
-      message: 'hargapasir is required',
-    })
-  }
-  if (!hargasemen) {
-    errors.push({
-      field: 'hargasemen',
-      message: 'hargasemen is required',
-    })
-  }
+  // if (!jumlahkeperluanbatako) {
+  //   errors.push({
+  //     field: 'jumlahkeperluanbatako',
+  //     message: 'jumlahkeperluanbatako is required',
+  //   })
+  // }
+  // if (!jumlahkeperluanpasir) {
+  //   errors.push({
+  //     field: 'jumlahkeperluanpasir',
+  //     message: 'jumlahkeperluanpasir is required',
+  //   })
+  // }
+  // if (!jumlahkeperluansemen) {
+  //   errors.push({
+  //     field: 'jumlahkeperluansemen',
+  //     message: 'jumlahkeperluansemen is required',
+  //   })
+  // }
+  // if (!metode) {
+  //   errors.push({
+  //     field: 'metode',
+  //     message: 'metode is required',
+  //   })
+  // }
+  // if (!hargabatako) {
+  //   errors.push({
+  //     field: 'hargabatako',
+  //     message: 'hargabatako is required',
+  //   })
+  // }
+  // if (!hargapasir) {
+  //   errors.push({
+  //     field: 'hargapasir',
+  //     message: 'hargapasir is required',
+  //   })
+  // }
+  // if (!hargasemen) {
+  //   errors.push({
+  //     field: 'hargasemen',
+  //     message: 'hargasemen is required',
+  //   })
+  // }
 
 
   return errors
@@ -226,7 +208,7 @@ exports.actionCreate = async (req, res) => {
     naama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargabatako,
@@ -258,7 +240,7 @@ exports.actionCreate = async (req, res) => {
       naama_pasir,
       jumlahkeperluanbatako,
       jumlahkeperluanpasir,
-      jumlahkeperluansemen,
+      Jumlahkeperluansemen,
       jumlahdalamsak,
       metode,
       hargabatako,

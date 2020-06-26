@@ -71,20 +71,8 @@ async function validate(req) {
 
   let errors = []
 
-  if (!SemenId) {
-    errors.push({
-      field: 'SemenId',
-      message: 'SemenId is required',
-    })
-  }
-  if (!PasirId) {
-    errors.push({
-      field: 'PasirId',
-      message: 'PasirId is required',
-    })
-  }
 
-  if (!voloume) {
+  if (!volume) {
     errors.push({
       field: 'volume',
       message: 'volume is required',
@@ -97,12 +85,7 @@ async function validate(req) {
       message: 'jumlahkeperluanpasir is required',
     })
   }
-  if (!jumlahkeperluansemen) {
-    errors.push({
-      field: 'jumlahkeperluansemen',
-      message: 'jumlahkeperluansemen is required',
-    })
-  }
+
   if (!metode) {
     errors.push({
       field: 'metode',

@@ -67,33 +67,6 @@ async function validate(req) {
 
   let errors = []
 
-  if (!PasirId) {
-    errors.push({
-      field: 'PasirId',
-      message: 'PasirId is required',
-    })
-  }
-
-  if (!luasjadi) {
-    errors.push({
-      field: 'luasjadi',
-      message: 'luasjadi is required',
-    })
-  }
-
-  if (!jumlahkeperluanpasir) {
-    errors.push({
-      field: 'jumlahkeperluanpasir',
-      message: 'jumlahkeperluanpasir is required',
-    })
-  }
-
-  if (!hargapasir) {
-    errors.push({
-      field: 'hargapasir',
-      message: 'hargapasir is required',
-    })
-  }
 
 
   return errors

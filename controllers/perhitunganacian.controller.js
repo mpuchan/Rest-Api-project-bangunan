@@ -66,12 +66,6 @@ async function validate(req) {
 
   let errors = []
 
-  if (!SemenId) {
-    errors.push({
-      field: 'SemenId',
-      message: 'SemenId is required',
-    })
-  }
   if (!luas) {
     errors.push({
       field: 'luas_lantai',
@@ -79,12 +73,6 @@ async function validate(req) {
     })
   }
 
-  if (!jumlahkeperluansemen) {
-    errors.push({
-      field: 'jumlahkeperluansemen',
-      message: 'jumlahkeperluansemen is required',
-    })
-  }
   if (!metode) {
     errors.push({
       field: 'metode',

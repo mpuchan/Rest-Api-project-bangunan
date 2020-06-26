@@ -28,6 +28,7 @@ const perhitunganbidangRouter = require("./routes/perhitunganbidang");
 const perhitunganacianRouter = require("./routes/perhitunganacian");
 const perhitunganplesteranRouter = require("./routes/perhitunganplesteran");
 const perhitunganlantaiRouter = require("./routes/perhitunganlantai");
+const perhitunganuruganRouter = require("./routes/perhitunganurugan");
 
 
 var app = express()
@@ -94,6 +95,7 @@ app.use("/api/v1", perhitunganbidangRouter);
 app.use("/api/v1", perhitunganlantaiRouter);
 app.use("/api/v1", perhitunganacianRouter);
 app.use("/api/v1", perhitunganplesteranRouter);
+app.use("/api/v1", perhitunganuruganRouter);
 
 // cek url active
 app.use(function (req, res, next) {
