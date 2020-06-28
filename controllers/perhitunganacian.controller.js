@@ -137,6 +137,54 @@ exports.actionCreate = async (req, res) => {
     console.log(err)
   }
 }
+exports.actionUpdate = async function (req, res) {
+  const { id } = req.params
+  let {
+    nama,
+    jenis_pengerjaan,
+    panjangdin,
+    tinggidin,
+    sisi,
+    luas,
+    nama_semen,
+    jumlahkeperluansemen,
+    jumlahdalamsak,
+    metode,
+    hargasemen,
+    hargatotal
+  } = req.body
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
+
+  try {
+    const perhitunganacian = await PerhitunganAcian.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
+
+    if (perhitunganacian) {
+      perhitunganacian.nama = nama
+      perhitunganacian.jenis_pengerjaan = jenis_pengerjaan
+      perhitunganacian.panjangdin = panjangdin
+      perhitunganacian.tinggidin = tinggidin
+      perhitunganacian.sisi = sisi
+      perhitunganacian.luas = luas
+      perhitunganacian.nama_semen = nama_semen
+      perhitunganacian.jumlahkeperluansemen = jumlahkeperluansemen
+      perhitunganacian.jumlahdalamsak = jumlahdalamsak
+      perhitunganacian.metode = metode
+      perhitunganacian.hargasemen = hargasemen
+      perhitunganacian.hargatotal = hargatotal
+      await perhitunganacian.save()
+    }
+
+    return res.status(201).json({
+      message: "Success Update perhitunganacian",
+      perhitunganacian
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
 exports.actionDelete = async function (req, res) {
   const { id } = req.params
 

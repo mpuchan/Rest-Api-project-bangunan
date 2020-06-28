@@ -2,7 +2,7 @@ let express = require("express")
 let router = express.Router()
 const {
   actionReadAllSingleData,
-  actionCreate
+  actionCreate, actionUpdate, actionDelete
 } = require("../controllers/perhitunganplesteran.controller")
 
 const auth = require("../middlewares/auth")
@@ -11,7 +11,8 @@ router.use("/perhitunganplesteran", auth)
 router.post("/perhitunganplesteran", actionCreate)
 
 router.get("/perhitunganplesteran/:ProyekId", actionReadAllSingleData)
-// router.put("/proyek/:id", actionUpdate)
+router.put("/perhitunganplesteran/:ProyekId", actionUpdate)
+router.delete("/perhitunganplesteran/:id", actionDelete)
 // router.delete("/proyek/pengembang/:PengembangId", actionDelete)
 // router.delete("/proyek/:id", actionDelete)
 

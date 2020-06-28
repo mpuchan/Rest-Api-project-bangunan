@@ -37,6 +37,27 @@ async function validateId(req) {
   return errors
 }
 
+exports.sumtotal = async (req, res) => {
+  try {
+    const { ProyekId } = req.params
+    const perhitunganbidangsum = await PerhitunganBidangBangunan.findAll({
+      attributes: [
+        ProyekId,
+        [sequelize.fn('sum', sequelize.col('hargatotal')), 'harga_total'],
+      ],
+      group: ['ProyekId'],
+    })
+    return res.status(200).json({
+      message: "Success Read sum",
+      perhitunganbidangsum
+    })
+
+  } catch (error) {
+    console.log(err)
+    throw err
+  }
+}
+
 exports.viewBatako = async (req, res) => {
   try {
     const materials = await Material.findAll({
@@ -304,37 +325,71 @@ exports.actionCreate = async (req, res) => {
 //   }
 // }
 
-// exports.actionUpdate = async function (req, res) {
-//   const { id } = req.params
-//   let {
-//     nama_proyek,
-//     lokasi,
-//     tanggal
-//   } = req.body
+exports.actionUpdate = async function (req, res) {
+  const { id } = req.params
+  let {
+    nama,
+    jenis_pengerjaan,
+    panjangbid,
+    tinggibid,
+    panjangpin,
+    tinggipin,
+    panjangjen,
+    tinggijen,
+    luas_bidang,
+    nama_batako,
+    nama_semen,
+    naama_pasir,
+    jumlahkeperluanbatako,
+    jumlahkeperluanpasir,
+    Jumlahkeperluansemen,
+    jumlahdalamsak,
+    metode,
+    hargabatako,
+    hargapasir,
+    hargasemen
+  } = req.body
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
 
-//   let errors = await validate(req)
-//   if (errors.length > 0) return res.status(422).json({ errors });
+  try {
+    const perhitunganbidang = await PerhitunganBidangBangunan.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
 
-//   try {
-//     const proyek = await Proyek.findOne({
-//       where: { id: { [Op.eq]: id } }
-//     })
+    if (perhitunganbidang) {
+      perhitunganbidang.nama = nama
+      perhitunganbidang.jenis_pengerjaan = jenis_pengerjaan
+      perhitunganbidang.panjangbid = panjangbid
+      perhitunganbidang.tinggibid = panjangjen
+      perhitunganbidang.panjangpin = panjangpin
+      perhitunganbidang.tinggipin = tinggipin
+      perhitunganbidang.panjangjen = panjangjen
+      perhitunganbidang.tinggijen = tinggijen
+      perhitunganbidang.luas_bidang = luas_bidang
+      perhitunganbidang.nama_batako = nama_batako
+      perhitunganbidang.nama_semen = nama_semen
+      perhitunganbidang.naama_pasir = naama_pasir
+      perhitunganbidang.jumlahkeperluanbatako = jumlahkeperluanbatako
+      perhitunganbidang.jumlahkeperluanpasir = jumlahkeperluanpasir
+      perhitunganbidang.Jumlahkeperluansemen = Jumlahkeperluansemen
+      perhitunganbidang.jumlahdalamsak = jumlahdalamsak
+      perhitunganbidang.metode = metode
+      perhitunganbidang.hargabatako = hargabatako
+      perhitunganbidang.hargapasir = hargapasir
+      perhitunganbidang.hargasemen = hargasemen
+      perhitunganbidang.hargatotal = hargatotal
+      await perhitunganbidang.save()
+    }
 
-//     if (proyek) {
-//       proyek.nama_proyek = nama_proyek
-//       proyek.lokasi = lokasi
-//       proyek.tanggal = tanggal
-//       await proyek.save()
-//     }
-
-//     return res.status(201).json({
-//       message: "Success Update Proyek",
-//       proyek
-//     })
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+    return res.status(201).json({
+      message: "Success Update Perhitunganbidang",
+      perhitunganbidang
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 exports.actionDelete = async function (req, res) {
   const { id } = req.params

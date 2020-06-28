@@ -237,6 +237,71 @@ exports.actionCreate = async (req, res) => {
     console.log(err)
   }
 }
+exports.actionUpdate = async function (req, res) {
+  const { id } = req.params
+  let {
+    nama,
+    jenis_pengerjaan,
+    panjanglan,
+    lebarlan,
+    luas_lantai,
+    toleransi,
+    nama_keramik,
+    nama_semen,
+    nama_pasir,
+    nama_semennat,
+    jumlahkeperluankeramik,
+    jumlahkeperluanpasir,
+    jumlahkeperluansemen,
+    jumlahdalamsak,
+    jumlahkeperluannat,
+    metode,
+    hargakeramik,
+    hargapasir,
+    hargasemen,
+    harganat,
+    hargatotal
+  } = req.body
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
+
+  try {
+    const perhitunganlantai = await PerhitunganLantai.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
+
+    if (perhitunganlantai) {
+      perhitunganlantai.nama = nama
+      perhitunganlantai.jenis_pengerjaan = jenis_pengerjaan
+      perhitunganlantai.panjanglan = panjanglan
+      perhitunganlantai.lebarlan = lebarlan
+      perhitunganlantai.toleransi = toleransi
+      perhitunganlantai.luas_lantai = luas_lantai
+      perhitunganlantai.nama_keramik = nama_keramik
+      perhitunganlantai.nama_semen = nama_semen
+      perhitunganlantai.nama_pasir = nama_pasir
+      perhitunganlantai.nama_semennat = nama_semennat
+      perhitunganlantai.jumlahkeperluanpasir = jumlahkeperluanpasir
+      perhitunganlantai.jumlahkeperluankeramik = jumlahkeperluankeramik
+      perhitunganlantai.jumlahkeperluansemen = jumlahkeperluansemen
+      perhitunganlantai.jumlahkeperluannat = jumlahkeperluannat
+      perhitunganlantai.jumlahdalamsak = jumlahdalamsak
+      perhitunganlantai.metode = metode
+      perhitunganlantai.hargasemen = hargasemen
+      perhitunganlantai.hargakeramik = hargakeramik
+      perhitunganlantai.hargapasir = hargapasir
+      perhitunganlantai.hargatotal = hargatotal
+      await perhitunganlantai.save()
+    }
+
+    return res.status(201).json({
+      message: "Success Update perhitunganlantai",
+      perhitunganlantai
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
 exports.actionDelete = async function (req, res) {
   const { id } = req.params
 
