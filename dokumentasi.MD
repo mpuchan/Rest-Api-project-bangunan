@@ -61,3 +61,5 @@ SELECT SUM(hargatotal),SUM(jumlahkeperluanbatako) FROM perhitunganbidangbangunan
 
 Perhitungan sum antar tabel
 
+sequelize-cli model:generate --name PerhitunganPengecatan --attributes ProyekId:integer,nama:string,jenis_pengerjaan:string,panjangdin:float,tinggidin:float,sisi:float,luas_pengecatan:float,nama_cat:string,nama_plamur:string,jumlahkeperluancat:float,jumlahkeperluanplamur:float,hargacat:double,hargaplamur:double,hargatotal:double
+

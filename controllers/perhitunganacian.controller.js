@@ -1,7 +1,6 @@
 const {
   PerhitunganAcian,
-  Proyek,
-  Semen
+  Proyek
 } = require("../models")
 const Op = require("sequelize").Op
 
