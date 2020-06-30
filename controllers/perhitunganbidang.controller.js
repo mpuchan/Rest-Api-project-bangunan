@@ -1,6 +1,5 @@
 const {
   PerhitunganBidangBangunan,
-  Proyek,
   Material,
 } = require("../models")
 
@@ -149,8 +148,11 @@ async function validate(req) {
     jumlahdalamsak,
     metode,
     hargabatako,
+    hargabatakototal,
     hargapasir,
+    hargapasirtotal,
     hargasemen,
+    hargasementotal,
     hargatotal
   } = req.body
 
@@ -233,11 +235,14 @@ exports.actionCreate = async (req, res) => {
     jumlahdalamsak,
     metode,
     hargabatako,
+    hargabatakototal,
     hargapasir,
-    hargasemen
+    hargapasirtotal,
+    hargasemen,
+    hargasementotal
   } = req.body
 
-  var total = parseFloat(hargabatako) + parseFloat(hargapasir) + parseFloat(hargasemen)
+  var total = parseFloat(hargabatakototal) + parseFloat(hargapasirtotal) + parseFloat(hargasementotal)
   const hargatotal = total
 
 
@@ -265,8 +270,11 @@ exports.actionCreate = async (req, res) => {
       jumlahdalamsak,
       metode,
       hargabatako,
+      hargabatakototal,
       hargapasir,
+      hargapasirtotal,
       hargasemen,
+      hargasementotal,
       hargatotal
     })
 
@@ -280,28 +288,28 @@ exports.actionCreate = async (req, res) => {
   }
 }
 
-// async function validateRead(req) {
-//   const { id } = req.params
-//   let errors = []
-//   if (id) {
-//     try {
-//       const proyek = await Proyek.findOne({
-//         where: {
-//           id: { [Op.eq]: id },
-//         }
-//       })
-//       if (proyek === null || proyek === "") {
-//         errors.push({
-//           field: 'id',
-//           message: 'Id Not Found',
-//         })
-//       }
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-//   return errors
-// }
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganbidang = await PerhitunganBidangBangunan.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganbidang === null || perhitunganbidang === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
+}
 
 // exports.actionReadSingleproyek = async (req, res) => {
 //   const { id } = req.params
@@ -346,8 +354,11 @@ exports.actionUpdate = async function (req, res) {
     jumlahdalamsak,
     metode,
     hargabatako,
+    hargabatakototal,
     hargapasir,
-    hargasemen
+    hargapasirtotal,
+    hargasemen,
+    hargasementotal
   } = req.body
   let errors = await validate(req)
   if (errors.length > 0) return res.status(422).json({ errors });
@@ -378,7 +389,11 @@ exports.actionUpdate = async function (req, res) {
       perhitunganbidang.hargabatako = hargabatako
       perhitunganbidang.hargapasir = hargapasir
       perhitunganbidang.hargasemen = hargasemen
+      perhitunganbidang.hargabatakototal = hargabatakototal
+      perhitunganbidang.hargapasirtotal = hargapasirtotal
+      perhitunganbidang.hargasementotal = hargasementotal
       perhitunganbidang.hargatotal = hargatotal
+
       await perhitunganbidang.save()
     }
 

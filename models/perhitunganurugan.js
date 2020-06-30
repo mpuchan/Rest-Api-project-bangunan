@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     Jumlahkeperluanpasir: DataTypes.FLOAT,
     jumlahdalamtruk: DataTypes.FLOAT,
     hargapasir: DataTypes.DOUBLE,
+    hargapasirtotal: DataTypes.DOUBLE,
     hargatotal: DataTypes.DOUBLE
   }, {});
   PerhitunganUrugan.associate = function (models) {

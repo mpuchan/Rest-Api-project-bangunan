@@ -38,14 +38,26 @@ module.exports = {
       nama_keramik: {
         type: Sequelize.STRING
       },
+      hargakeramik: {
+        type: Sequelize.DOUBLE
+      },
       nama_semen: {
         type: Sequelize.STRING
+      },
+      hargasemen: {
+        type: Sequelize.DOUBLE
       },
       nama_pasir: {
         type: Sequelize.STRING
       },
+      hargapasir: {
+        type: Sequelize.DOUBLE
+      },
       nama_semennat: {
         type: Sequelize.STRING
+      },
+      harganat: {
+        type: Sequelize.DOUBLE
       },
       jumlahkeperluankeramik: {
         type: Sequelize.INTEGER
@@ -65,16 +77,16 @@ module.exports = {
       metode: {
         type: Sequelize.STRING
       },
-      hargakeramik: {
+      hargakeramiktotal: {
         type: Sequelize.DOUBLE
       },
-      hargapasir: {
+      hargasementotal: {
         type: Sequelize.DOUBLE
       },
-      hargasemen: {
+      hargapasirtotal: {
         type: Sequelize.DOUBLE
       },
-      harganat: {
+      harganattotal: {
         type: Sequelize.DOUBLE
       },
       hargatotal: {

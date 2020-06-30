@@ -1,10 +1,5 @@
 const {
-  PerhitunganLantai,
-  Proyek,
-  Keramik,
-  Semen,
-  Pasir,
-  Semenat
+  PerhitunganLantai
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -73,6 +68,10 @@ async function validate(req) {
     hargapasir,
     hargasemen,
     harganat,
+    hargakeramiktotal,
+    hargapasirtotal,
+    hargasementotal,
+    harganattotal,
     hargatotal
   } = req.body
 
@@ -192,10 +191,14 @@ exports.actionCreate = async (req, res) => {
     hargakeramik,
     hargapasir,
     hargasemen,
-    harganat
+    harganat,
+    hargakeramiktotal,
+    hargapasirtotal,
+    hargasementotal,
+    harganattotal,
   } = req.body
 
-  var total = parseFloat(hargakeramik) + parseFloat(hargapasir) + parseFloat(hargasemen) + parseFloat(harganat)
+  var total = parseFloat(hargakeramiktotal) + parseFloat(hargapasirtotal) + parseFloat(hargasementotal) + parseFloat(harganattotal)
   const hargatotal = total
 
 
@@ -225,6 +228,10 @@ exports.actionCreate = async (req, res) => {
       hargapasir,
       hargasemen,
       harganat,
+      hargakeramiktotal,
+      hargapasirtotal,
+      hargasementotal,
+      harganattotal,
       hargatotal
     })
 
@@ -236,6 +243,28 @@ exports.actionCreate = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+}
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganlantai = await PerhitunganLantai.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganlantai === null || perhitunganlantai === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
 }
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
@@ -260,6 +289,10 @@ exports.actionUpdate = async function (req, res) {
     hargapasir,
     hargasemen,
     harganat,
+    hargakeramiktotal,
+    hargapasirtotal,
+    hargasementotal,
+    harganattotal,
     hargatotal
   } = req.body
   let errors = await validate(req)
@@ -290,6 +323,10 @@ exports.actionUpdate = async function (req, res) {
       perhitunganlantai.hargasemen = hargasemen
       perhitunganlantai.hargakeramik = hargakeramik
       perhitunganlantai.hargapasir = hargapasir
+      perhitunganlantai.hargakeramiktotal = hargakeramiktotal
+      perhitunganlantai.hargapasirtotal = hargapasirtotal
+      perhitunganlantai.hargasementotal = hargasementotal
+      perhitunganlantai.harganattotal = harganattotal
       perhitunganlantai.hargatotal = hargatotal
       await perhitunganlantai.save()
     }

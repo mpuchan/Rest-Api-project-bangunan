@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     metode: DataTypes.STRING,
     hargapasir: DataTypes.DOUBLE,
     hargasemen: DataTypes.DOUBLE,
+    hargapasirtotal: DataTypes.DOUBLE,
+    hargasementotal: DataTypes.DOUBLE,
     hargatotal: DataTypes.DOUBLE
   }, {});
   PerhitunganPlesteran.associate = function (models) {

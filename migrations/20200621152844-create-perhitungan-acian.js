@@ -50,6 +50,9 @@ module.exports = {
       hargasemen: {
         type: Sequelize.DOUBLE
       },
+      hargasementotal: {
+        type: Sequelize.DOUBLE
+      },
       hargatotal: {
         type: Sequelize.DOUBLE
       },

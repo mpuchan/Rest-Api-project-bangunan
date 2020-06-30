@@ -19,9 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     jumlahdalamsak: DataTypes.FLOAT,
     metode: DataTypes.STRING,
     hargakeramik: DataTypes.DOUBLE,
+    hargakeramiktotal: DataTypes.DOUBLE,
     hargapasir: DataTypes.DOUBLE,
+    hargapasirtotal: DataTypes.DOUBLE,
     hargasemen: DataTypes.DOUBLE,
+    hargasementotal: DataTypes.DOUBLE,
     harganat: DataTypes.DOUBLE,
+    harganattotal: DataTypes.DOUBLE,
     hargatotal: DataTypes.DOUBLE
   }, {});
   PerhitunganLantai.associate = function (models) {

@@ -1,8 +1,5 @@
 const {
-  PerhitunganPlesteran,
-  Proyek,
-  Semen,
-  Pasir
+  PerhitunganPlesteran
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -66,6 +63,8 @@ async function validate(req) {
     metode,
     hargapasir,
     hargasemen,
+    hargapasirtotal,
+    hargasementotal,
     hargatotal
   } = req.body
 
@@ -128,10 +127,12 @@ exports.actionCreate = async (req, res) => {
     jumlahdalamsak,
     metode,
     hargapasir,
-    hargasemen
+    hargasemen,
+    hargapasirtotal,
+    hargasementotal
   } = req.body
 
-  var total = parseFloat(hargapasir) + parseFloat(hargasemen)
+  var total = parseFloat(hargapasirtotal) + parseFloat(hargasementotal)
   const hargatotal = total
 
 
@@ -156,6 +157,8 @@ exports.actionCreate = async (req, res) => {
       metode,
       hargapasir,
       hargasemen,
+      hargapasirtotal,
+      hargasementotal,
       hargatotal
     })
 
@@ -167,6 +170,28 @@ exports.actionCreate = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+}
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganplesteran = await PerhitunganPlesteran.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganplesteran === null || perhitunganplesteran === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
 }
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
@@ -187,6 +212,8 @@ exports.actionUpdate = async function (req, res) {
     metode,
     hargapasir,
     hargasemen,
+    hargapasirtotal,
+    hargasementotal,
     hargatotal
   } = req.body
 
@@ -214,6 +241,8 @@ exports.actionUpdate = async function (req, res) {
       perhitunganplesteran.metode = metode
       perhitunganplesteran.hargapasir = hargapasir
       perhitunganplesteran.hargasemen = hargasemen
+      perhitunganplesteran.hargapasirtotal = hargapasirtotal
+      perhitunganplesteran.hargasementotal = hargasementotal
       perhitunganplesteran.hargatotal = hargatotal
       await perhitunganplesteran.save()
     }

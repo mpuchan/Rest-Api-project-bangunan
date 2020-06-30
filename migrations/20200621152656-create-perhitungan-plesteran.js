@@ -41,11 +41,20 @@ module.exports = {
       nama_semen: {
         type: Sequelize.STRING
       },
+      hargasemen: {
+        type: Sequelize.DOUBLE
+      },
       nama_pasir: {
         type: Sequelize.STRING
       },
+      hargapasir: {
+        type: Sequelize.DOUBLE
+      },
       jumlahkeperluanpasir: {
         type: Sequelize.FLOAT
+      },
+      hargapasirtotal: {
+        type: Sequelize.DOUBLE
       },
       Jumlahkeperluansemen: {
         type: Sequelize.FLOAT
@@ -53,14 +62,11 @@ module.exports = {
       jumlahdalamsak: {
         type: Sequelize.FLOAT
       },
+      hargasementotal: {
+        type: Sequelize.DOUBLE
+      },
       metode: {
         type: Sequelize.STRING
-      },
-      hargapasir: {
-        type: Sequelize.DOUBLE
-      },
-      hargasemen: {
-        type: Sequelize.DOUBLE
       },
       hargatotal: {
         type: Sequelize.DOUBLE

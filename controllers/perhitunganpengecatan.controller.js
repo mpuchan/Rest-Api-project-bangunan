@@ -1,6 +1,5 @@
 const {
-  PerhitunganPengecatan,
-  Proyek
+  PerhitunganPengecatan
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -61,6 +60,8 @@ async function validate(req) {
     jumlahkeperluanplamur,
     hargacat,
     hargaplamur,
+    hargacattotal,
+    hargaplamurtotal,
     hargatotal
   } = req.body
 
@@ -98,9 +99,11 @@ exports.actionCreate = async (req, res) => {
     jumlahkeperluancat,
     jumlahkeperluanplamur,
     hargacat,
-    hargaplamur
+    hargaplamur,
+    hargacattotal,
+    hargaplamurtotal
   } = req.body
-  var total = parseFloat(hargaplamur) + parseFloat(hargacat)
+  var total = parseFloat(hargaplamurtotal) + parseFloat(hargacattotal)
   const hargatotal = total
 
   let errors = await validate(req)
@@ -121,6 +124,8 @@ exports.actionCreate = async (req, res) => {
       jumlahkeperluanplamur,
       hargacat,
       hargaplamur,
+      hargacattotal,
+      hargaplamurtotal,
       hargatotal
     })
 
@@ -132,6 +137,28 @@ exports.actionCreate = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+}
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganpengecatan = await PerhitunganPengecatan.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganpengecatan === null || perhitunganpengecatan === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
 }
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
@@ -148,6 +175,8 @@ exports.actionUpdate = async function (req, res) {
     jumlahkeperluanplamur,
     hargacat,
     hargaplamur,
+    hargacattotal,
+    hargaplamurtotal,
     hargatotal
   } = req.body
   let errors = await validate(req)
@@ -171,6 +200,8 @@ exports.actionUpdate = async function (req, res) {
       perhitunganpengecatan.jumlahkeperluanplamur = jumlahkeperluanplamur
       perhitunganpengecatan.hargacat = hargacat
       perhitunganpengecatan.hargaplamur = hargaplamur
+      perhitunganpengecatan.hargacattotal = hargacattotal
+      perhitunganpengecatan.hargaplamurtotal = hargaplamurtotal
       perhitunganpengecatan.hargatotal = hargatotal
       await perhitunganacian.save()
     }

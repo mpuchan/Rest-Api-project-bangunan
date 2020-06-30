@@ -1,7 +1,5 @@
 const {
-  PerhitunganUrugan,
-  Proyek,
-  Pasir
+  PerhitunganUrugan
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -62,6 +60,7 @@ async function validate(req) {
     jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
+    hargapasirtotal,
     hargatotal
   } = req.body
 
@@ -87,6 +86,7 @@ exports.actionCreate = async (req, res) => {
     jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
+    hargapasirtotal,
     hargatotal
   } = req.body
 
@@ -107,6 +107,7 @@ exports.actionCreate = async (req, res) => {
       jumlahkeperluanpasir,
       jumlahdalamtruk,
       hargapasir,
+      hargapasirtotal,
       hargatotal
     })
 
@@ -118,6 +119,28 @@ exports.actionCreate = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+}
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganurugan = await PerhitunganUrugan.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganurugan === null || perhitunganurugan === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
 }
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
@@ -133,6 +156,7 @@ exports.actionUpdate = async function (req, res) {
     jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
+    hargapasirtotal,
     hargatotal
   } = req.body
   let errors = await validate(req)
@@ -155,6 +179,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganurugan.jumlahkeperluanpasir = jumlahkeperluanpasir
       perhitunganurugan.jumlahdalamtruk = jumlahdalamtruk
       perhitunganurugan.hargapasir = hargapasir
+      perhitunganurugan.hargapasirtotal = hargapasirtotal
       perhitunganurugan.hargatotal = hargatotal
       await perhitunganurugan.save()
     }

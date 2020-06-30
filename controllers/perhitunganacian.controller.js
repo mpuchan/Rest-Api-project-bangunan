@@ -1,6 +1,5 @@
 const {
-  PerhitunganAcian,
-  Proyek
+  PerhitunganAcian
 } = require("../models")
 const Op = require("sequelize").Op
 
@@ -60,6 +59,7 @@ async function validate(req) {
     jumlahdalamsak,
     metode,
     hargasemen,
+    hargasementotal,
     hargatotal
   } = req.body
 
@@ -103,6 +103,7 @@ exports.actionCreate = async (req, res) => {
     jumlahdalamsak,
     metode,
     hargasemen,
+    hargasementotal,
     hargatotal
   } = req.body
 
@@ -124,6 +125,7 @@ exports.actionCreate = async (req, res) => {
       jumlahdalamsak,
       metode,
       hargasemen,
+      hargasementotal,
       hargatotal
     })
 
@@ -136,6 +138,30 @@ exports.actionCreate = async (req, res) => {
     console.log(err)
   }
 }
+
+async function validateRead(req) {
+  const { id } = req.params
+  let errors = []
+  if (id) {
+    try {
+      const perhitunganacian = await PerhitunganAcian.findOne({
+        where: {
+          id: { [Op.eq]: id },
+        }
+      })
+      if (perhitunganacian === null || perhitunganacian === "") {
+        errors.push({
+          field: 'id',
+          message: 'Id Not Found',
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return errors
+}
+
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
   let {
@@ -150,6 +176,7 @@ exports.actionUpdate = async function (req, res) {
     jumlahdalamsak,
     metode,
     hargasemen,
+    hargasementotal,
     hargatotal
   } = req.body
   let errors = await validate(req)
@@ -172,6 +199,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganacian.jumlahdalamsak = jumlahdalamsak
       perhitunganacian.metode = metode
       perhitunganacian.hargasemen = hargasemen
+      perhitunganacian.hargasementotal = hargasementotal
       perhitunganacian.hargatotal = hargatotal
       await perhitunganacian.save()
     }
