@@ -55,7 +55,7 @@ async function validate(req) {
     sisi,
     luas,
     nama_semen,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargasemen,
@@ -99,7 +99,7 @@ exports.actionCreate = async (req, res) => {
     sisi,
     luas,
     nama_semen,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargasemen,
@@ -121,7 +121,7 @@ exports.actionCreate = async (req, res) => {
       sisi,
       luas,
       nama_semen,
-      jumlahkeperluansemen,
+      Jumlahkeperluansemen,
       jumlahdalamsak,
       metode,
       hargasemen,
@@ -172,7 +172,7 @@ exports.actionUpdate = async function (req, res) {
     sisi,
     luas,
     nama_semen,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargasemen,
@@ -195,7 +195,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganacian.sisi = sisi
       perhitunganacian.luas = luas
       perhitunganacian.nama_semen = nama_semen
-      perhitunganacian.jumlahkeperluansemen = jumlahkeperluansemen
+      perhitunganacian.Jumlahkeperluansemen = Jumlahkeperluansemen
       perhitunganacian.jumlahdalamsak = jumlahdalamsak
       perhitunganacian.metode = metode
       perhitunganacian.hargasemen = hargasemen

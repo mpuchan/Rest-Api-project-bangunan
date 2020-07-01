@@ -84,24 +84,24 @@ async function validate(req) {
   let errors = []
 
 
-  if (!nama_proyek) {
-    errors.push({
-      field: 'nama_proyek',
-      message: 'nama proyek is required',
-    })
-  }
-  if (!lokasi) {
-    errors.push({
-      field: 'lokasi',
-      message: 'lokasi is required',
-    })
-  }
-  if (!tanggal) {
-    errors.push({
-      field: 'tanggal',
-      message: 'tanggal is required',
-    })
-  }
+  // if (!nama_proyek) {
+  //   errors.push({
+  //     field: 'nama_proyek',
+  //     message: 'nama proyek is required',
+  //   })
+  // }
+  // if (!lokasi) {
+  //   errors.push({
+  //     field: 'lokasi',
+  //     message: 'lokasi is required',
+  //   })
+  // }
+  // if (!tanggal) {
+  //   errors.push({
+  //     field: 'tanggal',
+  //     message: 'tanggal is required',
+  //   })
+  // }
 
   return errors
 }

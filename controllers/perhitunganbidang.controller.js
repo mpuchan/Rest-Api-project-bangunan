@@ -141,7 +141,7 @@ async function validate(req) {
     luas_bidang,
     nama_batako,
     nama_semen,
-    naama_pasir,
+    nama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     Jumlahkeperluansemen,
@@ -228,7 +228,7 @@ exports.actionCreate = async (req, res) => {
     luas_bidang,
     nama_batako,
     nama_semen,
-    naama_pasir,
+    nama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     Jumlahkeperluansemen,
@@ -263,7 +263,7 @@ exports.actionCreate = async (req, res) => {
       luas_bidang,
       nama_batako,
       nama_semen,
-      naama_pasir,
+      nama_pasir,
       jumlahkeperluanbatako,
       jumlahkeperluanpasir,
       Jumlahkeperluansemen,
@@ -311,28 +311,27 @@ async function validateRead(req) {
   return errors
 }
 
-// exports.actionReadSingleproyek = async (req, res) => {
-//   const { id } = req.params
+exports.actionReadSingleperhitunganbidang = async (req, res) => {
+  const { id } = req.params
 
-//   let error = await validateRead(req)
-//   if (error.length > 0) return res.status(422).json({ error })
+  let error = await validateRead(req)
+  if (error.length > 0) return res.status(422).json({ error })
 
-//   try {
-//     const proyek = await Proyek.findOne({
-//       ...include,
-//       where: { id: { [Op.eq]: id } }
-//     })
+  try {
+    const perhitunganbidang = await PerhitunganBidangBangunan.findOne({
+      ...include,
+      where: { id: { [Op.eq]: id } }
+    })
 
-//     return res.status(201).json({
-//       message: "Success Read Single Proyek",
-//       Pengembang
-//     })
-//   } catch (err) {
-//     console.log(err)
-//     throw err
-//   }
-// }
-
+    return res.status(201).json({
+      message: "Success Read Single Proyek",
+      perhitunganbidang
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params
   let {
@@ -347,7 +346,7 @@ exports.actionUpdate = async function (req, res) {
     luas_bidang,
     nama_batako,
     nama_semen,
-    naama_pasir,
+    nama_pasir,
     jumlahkeperluanbatako,
     jumlahkeperluanpasir,
     Jumlahkeperluansemen,
@@ -358,7 +357,8 @@ exports.actionUpdate = async function (req, res) {
     hargapasir,
     hargapasirtotal,
     hargasemen,
-    hargasementotal
+    hargasementotal,
+    hargatotal
   } = req.body
   let errors = await validate(req)
   if (errors.length > 0) return res.status(422).json({ errors });
@@ -372,7 +372,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganbidang.nama = nama
       perhitunganbidang.jenis_pengerjaan = jenis_pengerjaan
       perhitunganbidang.panjangbid = panjangbid
-      perhitunganbidang.tinggibid = panjangjen
+      perhitunganbidang.tinggibid = tinggibid
       perhitunganbidang.panjangpin = panjangpin
       perhitunganbidang.tinggipin = tinggipin
       perhitunganbidang.panjangjen = panjangjen
@@ -380,7 +380,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganbidang.luas_bidang = luas_bidang
       perhitunganbidang.nama_batako = nama_batako
       perhitunganbidang.nama_semen = nama_semen
-      perhitunganbidang.naama_pasir = naama_pasir
+      perhitunganbidang.nama_pasir = nama_pasir
       perhitunganbidang.jumlahkeperluanbatako = jumlahkeperluanbatako
       perhitunganbidang.jumlahkeperluanpasir = jumlahkeperluanpasir
       perhitunganbidang.Jumlahkeperluansemen = Jumlahkeperluansemen
