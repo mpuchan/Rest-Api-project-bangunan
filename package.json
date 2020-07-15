@@ -4,7 +4,15 @@
   "description": "Backend Bangunan Kita",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "db_reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "db_reset_no_seeder": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
+    "tb_reset": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "db_start": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "db_start_no_seeder": "sequelize db:create && sequelize db:migrate",
+    "tb_start": "sequelize db:migrate && sequelize db:seed:all",
+    "seed": "sequelize db:seed:all"
   },
   "author": "Mpuchan",
   "license": "ISC",
