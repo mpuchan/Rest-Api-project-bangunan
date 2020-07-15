@@ -1,9 +1,9 @@
 const { Pengembang } = require('../models')
 const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
-const mailgun = require("mailgun-js");
-const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
-const mg = mailgun({ apiKey: apikeysConfig.keys, domain: DOMAIN });
+// const mailgun = require("mailgun-js");
+// const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
+// const mg = mailgun({ apiKey: apikeysConfig.keys, domain: DOMAIN });
 
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
@@ -126,19 +126,19 @@ exports.actionRegisterMobile = async function (req, res) {
   if (errors.length > 0) return res.status(422).json({ errors })
   // const jwtapi = "yourtokenactivate"
   // const tokensign = jwt.sign({ email }, jwtapi, { expiresIn: '30y' })
-  const data = {
-    from: 'noreply@gmail.com',
-    to: email,
-    subject: 'Hello',
-    html: `
-    <p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
-    <h1 align="center">Aplikasi Bangunan Kita</h1>
-    <h2>To verified your account please click the button below !</h2>
-    <button color="red"><a href="http://192.168.43.163:3000/activate/activate/status/${email}">Click to verify</a></button>`
-  };
-  mg.messages().send(data, function (error, body) {
-    console.log(data);
-  });
+  // const data = {
+  //   from: 'noreply@gmail.com',
+  //   to: email,
+  //   subject: 'Hello',
+  //   html: `
+  //   <p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
+  //   <h1 align="center">Aplikasi Bangunan Kita</h1>
+  //   <h2>To verified your account please click the button below !</h2>
+  //   <button color="red"><a href="http://192.168.43.163:3000/activate/activate/status/${email}">Click to verify</a></button>`
+  // };
+  // mg.messages().send(data, function (error, body) {
+  //   console.log(data);
+  // });
   password = sha1(password + salt)
 
   let pengembangCreate = await Pengembang.create({
