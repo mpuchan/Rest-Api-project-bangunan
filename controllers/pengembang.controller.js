@@ -3,7 +3,7 @@ const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
 const mailgun = require("mailgun-js");
 const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
-const apis = '28b64d174d64444db04db9f4b3c6e376-a83a87a9-bc62c8de'
+const apis = ''
 const mg = mailgun({ apiKey: apis, domain: DOMAIN });
 
 const Op = require("sequelize").Op
