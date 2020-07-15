@@ -1,9 +1,9 @@
 const { Pengembang } = require('../models')
 const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
-// const mailgun = require("mailgun-js");
-// const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
-// const mg = mailgun({ apiKey: apikeysConfig.keys, domain: DOMAIN });
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
+const mg = mailgun({ apiKey: process.env.MAIL_API, domain: DOMAIN });
 
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
