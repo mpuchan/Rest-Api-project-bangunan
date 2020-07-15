@@ -37,6 +37,134 @@ exports.viewMaterial = async (req, res) => {
   }
 }
 
+exports.viewPasir = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 12 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Pasir",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewBatako = async (req, res) => {
+  try {
+    const materials = await Material.findAll({
+      where: { JenisId: 2 }
+    })
+    return res.status(200).json({
+      message: "Success Read batako",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewSemen = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 3 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Semen",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewKeramik = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 1 } }
+    )
+    return res.status(200).json({
+      message: "Success Read keramik",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewCat = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 8 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Cat",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewPlamur = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 18 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Plamur",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewSemennat = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 15 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Semen-Nat",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+exports.viewBatu = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 14 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Batuurugan",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+exports.viewGenteng = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 16 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Semen-Nat",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
 // /* action create material */
 exports.actionMaterialCreate = async (req, res) => {
   const {

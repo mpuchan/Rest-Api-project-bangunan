@@ -12,6 +12,7 @@ const auth = require("../middlewares/auth")
 
 router.post("/pengembang/register", actionRegisterMobile)
 router.post("/pengembang/signin", actionLogin)
+// router.post("/pengembang/activate/", activateAccount)
 
 router.use("/pengembang", auth)
 router.get("/pengembang", actionRead)

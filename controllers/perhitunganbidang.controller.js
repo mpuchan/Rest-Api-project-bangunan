@@ -57,50 +57,6 @@ exports.sumtotal = async (req, res) => {
   }
 }
 
-exports.viewBatako = async (req, res) => {
-  try {
-    const materials = await Material.findAll({
-      where: { JenisId: 2 }
-    })
-    return res.status(200).json({
-      message: "Success Read batako",
-      materials
-    })
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
-}
-exports.viewSemen = async (req, res) => {
-  try {
-    const materials = await Material.findAll(
-      { where: { JenisId: 3 } }
-    )
-    return res.status(200).json({
-      message: "Success Read Semen",
-      materials
-    })
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
-}
-exports.viewPasir = async (req, res) => {
-  try {
-    const materials = await Material.findAll(
-      { where: { JenisId: 12 } }
-    )
-    return res.status(200).json({
-      message: "Success Read Pasir",
-      materials
-    })
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
-}
-
-
 /**
  * read data proyek by PengembangId
  * 

@@ -1,6 +1,6 @@
 [
   {
-    "/api/v1": "Welcome Fabric Store"
+    "/api/v1": "Bangunan Kita "
   },
   {
     "pengembangs": {
@@ -42,6 +42,18 @@
         "hasil test": "ok",
         "middleware": "ya"
       }
+    },
+    "Proyek by": {
+      "method": "GET",
+      "url": "/api/v1/pengembang/{id}?apiKey=example&accessToken=example",
+      "params": {
+        "id": "id",
+        "apiKey": "example",
+        "accessToken": "example"
+      },
+      "body": "",
+      "hasil test": "ok",
+      "middleware": "ya"
     }
   }
 ]

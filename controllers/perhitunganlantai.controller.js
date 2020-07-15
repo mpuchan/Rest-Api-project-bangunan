@@ -53,14 +53,14 @@ async function validate(req) {
     panjanglan,
     lebarlan,
     luas_lantai,
-    toleransi,
     nama_keramik,
     nama_semen,
     nama_pasir,
     nama_semennat,
     jumlahkeperluankeramik,
+    jumlahkeperluankeramikdus,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     jumlahkeperluannat,
     metode,
@@ -78,91 +78,91 @@ async function validate(req) {
   let errors = []
 
 
-  if (!KeramikId) {
-    errors.push({
-      field: 'KeramikId',
-      message: 'KeramikId is required',
-    })
-  }
-  if (!SemenId) {
-    errors.push({
-      field: 'SemenId',
-      message: 'SemenId is required',
-    })
-  }
-  if (!PasirId) {
-    errors.push({
-      field: 'PasirId',
-      message: 'PasirId is required',
-    })
-  }
-  if (!SemeNatId) {
-    errors.push({
-      field: 'SemeNatId',
-      message: 'SemeNatId is required',
-    })
-  }
-  if (!luas_lantai) {
-    errors.push({
-      field: 'luas_lantai',
-      message: 'luas_lantai is required',
-    })
-  }
+  // if (!KeramikId) {
+  //   errors.push({
+  //     field: 'KeramikId',
+  //     message: 'KeramikId is required',
+  //   })
+  // }
+  // if (!SemenId) {
+  //   errors.push({
+  //     field: 'SemenId',
+  //     message: 'SemenId is required',
+  //   })
+  // }
+  // if (!PasirId) {
+  //   errors.push({
+  //     field: 'PasirId',
+  //     message: 'PasirId is required',
+  //   })
+  // }
+  // if (!SemeNatId) {
+  //   errors.push({
+  //     field: 'SemeNatId',
+  //     message: 'SemeNatId is required',
+  //   })
+  // }
+  // if (!luas_lantai) {
+  //   errors.push({
+  //     field: 'luas_lantai',
+  //     message: 'luas_lantai is required',
+  //   })
+  // }
 
-  if (!jumlahkeperluankeramik) {
-    errors.push({
-      field: 'jumlahkeperluankeramik',
-      message: 'jumlahkeperluankeramik is required',
-    })
-  }
-  if (!jumlahkeperluanpasir) {
-    errors.push({
-      field: 'jumlahkeperluanpasir',
-      message: 'jumlahkeperluanpasir is required',
-    })
-  }
-  if (!jumlahkeperluansemen) {
-    errors.push({
-      field: 'jumlahkeperluansemen',
-      message: 'jumlahkeperluansemen is required',
-    })
-  }
-  if (!jumlahkeperluannat) {
-    errors.push({
-      field: 'jumlahkeperluannat',
-      message: 'jumlahkeperluannat is required',
-    })
-  }
-  if (!metode) {
-    errors.push({
-      field: 'metode',
-      message: 'metode is required',
-    })
-  }
-  if (!hargakeramik) {
-    errors.push({
-      field: 'hargakeramik',
-      message: 'hargakeramik is required',
-    })
-  }
-  if (!hargapasir) {
-    errors.push({
-      field: 'hargapasir',
-      message: 'hargapasir is required',
-    })
-  }
-  if (!hargasemen) {
-    errors.push({
-      field: 'hargasemen',
-      message: 'hargasemen is required',
-    })
-  }
-  if (!harganat) {
-    errors.push({
-      field: 'harganat',
-      message: 'harganat is required',
-    })
-  }
+  // if (!jumlahkeperluankeramik) {
+  //   errors.push({
+  //     field: 'jumlahkeperluankeramik',
+  //     message: 'jumlahkeperluankeramik is required',
+  //   })
+  // }
+  // if (!jumlahkeperluanpasir) {
+  //   errors.push({
+  //     field: 'jumlahkeperluanpasir',
+  //     message: 'jumlahkeperluanpasir is required',
+  //   })
+  // }
+  // if (!jumlahkeperluansemen) {
+  //   errors.push({
+  //     field: 'jumlahkeperluansemen',
+  //     message: 'jumlahkeperluansemen is required',
+  //   })
+  // }
+  // if (!jumlahkeperluannat) {
+  //   errors.push({
+  //     field: 'jumlahkeperluannat',
+  //     message: 'jumlahkeperluannat is required',
+  //   })
+  // }
+  // if (!metode) {
+  //   errors.push({
+  //     field: 'metode',
+  //     message: 'metode is required',
+  //   })
+  // }
+  // if (!hargakeramik) {
+  //   errors.push({
+  //     field: 'hargakeramik',
+  //     message: 'hargakeramik is required',
+  //   })
+  // }
+  // if (!hargapasir) {
+  //   errors.push({
+  //     field: 'hargapasir',
+  //     message: 'hargapasir is required',
+  //   })
+  // }
+  // if (!hargasemen) {
+  //   errors.push({
+  //     field: 'hargasemen',
+  //     message: 'hargasemen is required',
+  //   })
+  // }
+  // if (!harganat) {
+  //   errors.push({
+  //     field: 'harganat',
+  //     message: 'harganat is required',
+  //   })
+  // }
 
 
   return errors
@@ -177,14 +177,14 @@ exports.actionCreate = async (req, res) => {
     panjanglan,
     lebarlan,
     luas_lantai,
-    toleransi,
+    jumlahkeperluankeramikdus,
     nama_keramik,
     nama_semen,
     nama_pasir,
     nama_semennat,
     jumlahkeperluankeramik,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     jumlahkeperluannat,
     metode,
@@ -213,14 +213,14 @@ exports.actionCreate = async (req, res) => {
       panjanglan,
       lebarlan,
       luas_lantai,
-      toleransi,
       nama_keramik,
       nama_semen,
       nama_pasir,
       nama_semennat,
       jumlahkeperluankeramik,
+      jumlahkeperluankeramikdus,
       jumlahkeperluanpasir,
-      jumlahkeperluansemen,
+      Jumlahkeperluansemen,
       jumlahdalamsak,
       jumlahkeperluannat,
       metode,
@@ -274,14 +274,14 @@ exports.actionUpdate = async function (req, res) {
     panjanglan,
     lebarlan,
     luas_lantai,
-    toleransi,
     nama_keramik,
     nama_semen,
     nama_pasir,
     nama_semennat,
     jumlahkeperluankeramik,
+    jumlahkeperluankeramikdus,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     jumlahkeperluannat,
     metode,
@@ -308,7 +308,6 @@ exports.actionUpdate = async function (req, res) {
       perhitunganlantai.jenis_pengerjaan = jenis_pengerjaan
       perhitunganlantai.panjanglan = panjanglan
       perhitunganlantai.lebarlan = lebarlan
-      perhitunganlantai.toleransi = toleransi
       perhitunganlantai.luas_lantai = luas_lantai
       perhitunganlantai.nama_keramik = nama_keramik
       perhitunganlantai.nama_semen = nama_semen
@@ -316,7 +315,8 @@ exports.actionUpdate = async function (req, res) {
       perhitunganlantai.nama_semennat = nama_semennat
       perhitunganlantai.jumlahkeperluanpasir = jumlahkeperluanpasir
       perhitunganlantai.jumlahkeperluankeramik = jumlahkeperluankeramik
-      perhitunganlantai.jumlahkeperluansemen = jumlahkeperluansemen
+      perhitunganlantai.jumlahkeperluankeramikdus = jumlahkeperluankeramikdus
+      perhitunganlantai.Jumlahkeperluansemen = Jumlahkeperluansemen
       perhitunganlantai.jumlahkeperluannat = jumlahkeperluannat
       perhitunganlantai.jumlahdalamsak = jumlahdalamsak
       perhitunganlantai.metode = metode

@@ -57,7 +57,7 @@ async function validate(req) {
     volume,
     volumejadi,
     nama_pasir,
-    jumlahkeperluanpasir,
+    Jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
     hargapasirtotal,
@@ -83,7 +83,7 @@ exports.actionCreate = async (req, res) => {
     volume,
     volumejadi,
     nama_pasir,
-    jumlahkeperluanpasir,
+    Jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
     hargapasirtotal,
@@ -104,7 +104,7 @@ exports.actionCreate = async (req, res) => {
       volume,
       volumejadi,
       nama_pasir,
-      jumlahkeperluanpasir,
+      Jumlahkeperluanpasir,
       jumlahdalamtruk,
       hargapasir,
       hargapasirtotal,
@@ -153,7 +153,7 @@ exports.actionUpdate = async function (req, res) {
     volume,
     volumejadi,
     nama_pasir,
-    jumlahkeperluanpasir,
+    Jumlahkeperluanpasir,
     jumlahdalamtruk,
     hargapasir,
     hargapasirtotal,
@@ -176,7 +176,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganurugan.volume = volume
       perhitunganurugan.volumejadi = volumejadi
       perhitunganurugan.nama_pasir = nama_pasir
-      perhitunganurugan.jumlahkeperluanpasir = jumlahkeperluanpasir
+      perhitunganurugan.Jumlahkeperluanpasir = Jumlahkeperluanpasir
       perhitunganurugan.jumlahdalamtruk = jumlahdalamtruk
       perhitunganurugan.hargapasir = hargapasir
       perhitunganurugan.hargapasirtotal = hargapasirtotal

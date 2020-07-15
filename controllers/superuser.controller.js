@@ -82,3 +82,36 @@ exports.actionAdminCreate = async (req, res) => {
     console.log(error)
   }
 }
+
+exports.actionUpdateStatus = async (req, res) => {
+  let { id } = req.params
+  let admin = await User.findOne({
+    where: {
+      id: { [Op.eq]: id }
+    }
+  })
+  if (admin.status === 1) {
+    const user = await User.findOne({
+      where: {
+        id: { [Op.eq]: admin.id }
+      }
+    })
+    if (user) {
+      user.status = 2
+      await user.save()
+    }
+    res.redirect("/admin/superuser")
+  } else {
+    const user = await User.findOne({
+      where: {
+        id: { [Op.eq]: admin.id }
+      }
+    })
+    if (user) {
+      user.status = 1
+      await user.save()
+
+    }
+    res.redirect("/admin/superuser")
+  }
+}

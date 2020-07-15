@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-
 module.exports = function (req, res, next) {
   const apiKey = req.get('apiKey') ? req.get('apiKey') : req.query.apiKey
   const accessToken = req.get('accessToken') ? req.get('accessToken') : req.query.accessToken

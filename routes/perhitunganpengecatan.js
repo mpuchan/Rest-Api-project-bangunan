@@ -11,7 +11,7 @@ router.use("/perhitunganpengecatan", auth)
 router.post("/perhitunganpengecatan", actionCreate)
 
 router.get("/perhitunganpengecatan/:ProyekId", actionReadAllSingleData)
-router.put("/perhitunganpengecatan/:ProyekId", actionUpdate)
+router.put("/perhitunganpengecatan/:id", actionUpdate)
 router.delete("/perhitunganpengecatan/:id", actionDelete)
 
 module.exports = router

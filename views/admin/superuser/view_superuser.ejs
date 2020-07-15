@@ -9,7 +9,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li class="active">Superuser</li>
+      <li class="active">Admin</li>
     </ol>
     <% if(alert.message != '') { %>
     <br>
@@ -28,7 +28,7 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <th style="width: 50%;">Data SuperUser</th>
+            <th style="width: 50%;">Data Admin User</th>
             <th class="box-title" style="margin-left: 80%;">
               <!-- <button class="btn btn-success">Tambah</button> -->
               <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#add-modal">
@@ -53,9 +53,13 @@
             </div>
             <div class="table-body-wrapper" style="position: relative; overflow: visible;">
               <tbody>
+
                 <% for (let i = 0; i < user.length; i++ ) { %>
+                <% let j = i-1;%>
+                <% if (user[i].role == 1) { %>
+                <% }else{ %>
                 <tr>
-                  <td><%= i + 1 %></td>
+                  <td><%= j + 1 %></td>
                   <td>
                     <% if (user[i].image) { %>
                     <img src="/images/adminprofile/<%= user[i].image %>" height="40" width="40" alt="foto" />
@@ -67,7 +71,33 @@
                   <td><%= user[i].email %></td>
                   <td>
                     <%= user[i].notelp %></td>
+                  <td>
+                    <span class="pull-right-container">
+                      <% if(user[i].status === 1) { %>
+                      <small class="label pull-center bg-green">"Aktif"</small>
+                      <% } else { %>
+                      <small class="label pull-center bg-yellow">"Non Aktif</small>
+                      <% }  %>
+                    </span>
+                  </td>
+                  <td>
+
+                    <% if(user[i].status === 1) { %>
+                    <button class="btn btn-primary btn-sm" onclick="update_status(`<%= user[i].id %>`)"
+                      data-id="<%= user[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Nonactive User
+                    </button>
+                    <% } else { %>
+                    <button class="btn btn-warning btn-sm" onclick="update_status(`<%= user[i].id %>`)"
+                      data-id="<%= user[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Active User
+                    </button>
+                    <% } %>
+                  </td>
                 </tr>
+                <% } %>
                 <% } %>
               </tbody>
             </div>
@@ -102,6 +132,28 @@
       window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/superuser')
     }
   })
+  // Change Status 
+  function update_status(id) {
+    let idUser = id
+    swal({
+      title: "Yakin Ingin Ubah Status?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          text: "Success Ubah Status",
+          icon: "success",
+          buttons: false,
+          timer: 2000
+        }).then(suksesChange => {
+          window.location.assign(`/admin/superuser/status/${idUser}`);
+        })
+      }
+    })
+  }
 
 
 </script>

@@ -32,9 +32,6 @@ module.exports = {
       luas_lantai: {
         type: Sequelize.FLOAT
       },
-      toleransi: {
-        type: Sequelize.FLOAT
-      },
       nama_keramik: {
         type: Sequelize.STRING
       },
@@ -60,7 +57,10 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       jumlahkeperluankeramik: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
+      },
+      jumlahkeperluankeramikdus: {
+        type: Sequelize.FLOAT
       },
       jumlahkeperluanpasir: {
         type: Sequelize.FLOAT

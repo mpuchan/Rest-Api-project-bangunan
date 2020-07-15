@@ -1,9 +1,15 @@
 const { Pengembang } = require('../models')
 const apiConfig = require("../config/api.json")
 const jwt = require("jsonwebtoken")
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
+const apis = '28b64d174d64444db04db9f4b3c6e376-a83a87a9-bc62c8de'
+const mg = mailgun({ apiKey: apis, domain: DOMAIN });
+
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
-const sha1 = require("sha1")
+const sha1 = require("sha1");
+const { token } = require('morgan');
 
 /**
  * Validation collection that will be used before create data pengembang
@@ -117,10 +123,23 @@ exports.actionRegisterMobile = async function (req, res) {
     password
   } = req.body
   let salt = sha1(uniqid())
-
   let errors = await validateRegister(req)
   if (errors.length > 0) return res.status(422).json({ errors })
-
+  // const jwtapi = "yourtokenactivate"
+  // const tokensign = jwt.sign({ email }, jwtapi, { expiresIn: '30y' })
+  const data = {
+    from: 'noreply@gmail.com',
+    to: email,
+    subject: 'Hello',
+    html: `
+    <p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
+    <h1 align="center">Aplikasi Bangunan Kita</h1>
+    <h2>To verified your account please click the button below !</h2>
+    <button color="red"><a href="http://192.168.43.163:3000/activate/activate/status/${email}">Click to verify</a></button>`
+  };
+  mg.messages().send(data, function (error, body) {
+    console.log(data);
+  });
   password = sha1(password + salt)
 
   let pengembangCreate = await Pengembang.create({
@@ -130,7 +149,7 @@ exports.actionRegisterMobile = async function (req, res) {
     username,
     password,
     salt,
-    status: 1
+    status: 2
   })
 
   if (pengembangCreate) {
@@ -140,8 +159,8 @@ exports.actionRegisterMobile = async function (req, res) {
 
     let pengembang = await Pengembang.findOne({
       where: {
-        username: { [Op.eq]: username },
-        status: 1
+        username: { [Op.eq]: username }
+        // status: 1
       }
     })
 
@@ -157,6 +176,58 @@ exports.actionRegisterMobile = async function (req, res) {
     } catch (error) {
       return res.status(422).json([{ field: "jwt", message: error.message }])
     }
+  }
+}
+// exports.activateAccount = async function (req, res) {
+//   const { email } = req.params;
+//   // if (tokensign) {
+//   //   jwt.verify(token, tokensign, function (err, decodedToken) {
+//   //     if (err) {
+//   //       return res.status(400).json({ error: "expired token" })
+//   //     }
+//   //     const { email } = decodedToken
+//   const pengembang = Pengembang.findOne({
+//     where: { email: { [Op.eq]: email }, }
+//   })
+//   if (pengembang.status === 2) {
+//     pengembang.status = 1
+//     pengembang.save((err, success) => {
+//       if (err) {
+//         console.log("error", err)
+//         return res.status(400), json({ error: 'errorx' })
+//       }
+//       return res.status(201).json({
+//         message: "Success Update Status Active",
+//         pengembang
+//       })
+//     })
+//   }
+// }
+
+
+
+exports.activateAccount1 = async (req, res) => {
+
+  const { email } = req.params
+  const alertMessage = req.flash('alertMessage');
+  const alertStatus = req.flash('alertStatus');
+  const alert = { message: alertMessage, status: alertStatus }
+  const updatestatus = await Pengembang.findOne({
+    where: {
+      email: { [Op.eq]: email }
+    }
+  })
+  if (updatestatus.status === 2) {
+    const user = await Pengembang.findOne({
+      where: {
+        email: { [Op.eq]: updatestatus.email }
+      }
+    })
+    if (user) {
+      user.status = 1
+      await user.save()
+    }
+    res.render("activate/activate", { alert: alert })
   }
 }
 
@@ -188,8 +259,8 @@ async function validateLogin(req) {
   if (username && password) {
     const peng = await Pengembang.findOne({
       where: {
-        username: { [Op.eq]: username },
-        status: 1
+        username: { [Op.eq]: username }
+        // status: 1
       }
     })
 
@@ -223,8 +294,8 @@ exports.actionLogin = async function (req, res) {
 
   let pengembang = await Pengembang.findOne({
     where: {
-      username: { [Op.eq]: username },
-      status: 1
+      username: { [Op.eq]: username }
+      // status: 1
     }
   })
 
@@ -239,6 +310,7 @@ exports.actionLogin = async function (req, res) {
       email: pengembang.email,
       notelp: pengembang.notelp,
       picture: pengembang.picture,
+      status: pengembang.status,
       accessToken
     }
     res.send(JSON.stringify(Objsed))

@@ -11,7 +11,7 @@ router.use("/perhitunganplesteran", auth)
 router.post("/perhitunganplesteran", actionCreate)
 
 router.get("/perhitunganplesteran/:ProyekId", actionReadAllSingleData)
-router.put("/perhitunganplesteran/:ProyekId", actionUpdate)
+router.put("/perhitunganplesteran/:id", actionUpdate)
 router.delete("/perhitunganplesteran/:id", actionDelete)
 // router.delete("/proyek/pengembang/:PengembangId", actionDelete)
 // router.delete("/proyek/:id", actionDelete)

@@ -58,7 +58,7 @@ async function validate(req) {
     nama_semen,
     nama_pasir,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargapasir,
@@ -71,39 +71,39 @@ async function validate(req) {
   let errors = []
 
 
-  if (!volume) {
-    errors.push({
-      field: 'volume',
-      message: 'volume is required',
-    })
-  }
+  // if (!volume) {
+  //   errors.push({
+  //     field: 'volume',
+  //     message: 'volume is required',
+  //   })
+  // }
 
-  if (!jumlahkeperluanpasir) {
-    errors.push({
-      field: 'jumlahkeperluanpasir',
-      message: 'jumlahkeperluanpasir is required',
-    })
-  }
+  // if (!jumlahkeperluanpasir) {
+  //   errors.push({
+  //     field: 'jumlahkeperluanpasir',
+  //     message: 'jumlahkeperluanpasir is required',
+  //   })
+  // }
 
-  if (!metode) {
-    errors.push({
-      field: 'metode',
-      message: 'metode is required',
-    })
-  }
+  // if (!metode) {
+  //   errors.push({
+  //     field: 'metode',
+  //     message: 'metode is required',
+  //   })
+  // }
 
-  if (!hargapasir) {
-    errors.push({
-      field: 'hargapasir',
-      message: 'hargapasir is required',
-    })
-  }
-  if (!hargasemen) {
-    errors.push({
-      field: 'hargasemen',
-      message: 'hargasemen is required',
-    })
-  }
+  // if (!hargapasir) {
+  //   errors.push({
+  //     field: 'hargapasir',
+  //     message: 'hargapasir is required',
+  //   })
+  // }
+  // if (!hargasemen) {
+  //   errors.push({
+  //     field: 'hargasemen',
+  //     message: 'hargasemen is required',
+  //   })
+  // }
 
 
   return errors
@@ -123,7 +123,7 @@ exports.actionCreate = async (req, res) => {
     nama_semen,
     nama_pasir,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargapasir,
@@ -152,7 +152,7 @@ exports.actionCreate = async (req, res) => {
       nama_semen,
       nama_pasir,
       jumlahkeperluanpasir,
-      jumlahkeperluansemen,
+      Jumlahkeperluansemen,
       jumlahdalamsak,
       metode,
       hargapasir,
@@ -207,7 +207,7 @@ exports.actionUpdate = async function (req, res) {
     nama_semen,
     nama_pasir,
     jumlahkeperluanpasir,
-    jumlahkeperluansemen,
+    Jumlahkeperluansemen,
     jumlahdalamsak,
     metode,
     hargapasir,
@@ -236,7 +236,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganplesteran.nama_semen = nama_semen
       perhitunganplesteran.nama_pasir = nama_pasir
       perhitunganplesteran.jumlahkeperluanpasir = jumlahkeperluanpasir
-      perhitunganplesteran.jumlahkeperluansemen = jumlahkeperluansemen
+      perhitunganplesteran.Jumlahkeperluansemen = Jumlahkeperluansemen
       perhitunganplesteran.jumlahdalamsak = jumlahdalamsak
       perhitunganplesteran.metode = metode
       perhitunganplesteran.hargapasir = hargapasir

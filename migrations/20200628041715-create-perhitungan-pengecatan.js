@@ -44,7 +44,13 @@ module.exports = {
       jumlahkeperluancat: {
         type: Sequelize.FLOAT
       },
+      jumlahkeperluancatkaleng: {
+        type: Sequelize.FLOAT
+      },
       jumlahkeperluanplamur: {
+        type: Sequelize.FLOAT
+      },
+      jumlahkeperluanplamursak: {
         type: Sequelize.FLOAT
       },
       hargacat: {

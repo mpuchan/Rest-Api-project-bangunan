@@ -30,6 +30,9 @@ const perhitunganplesteranRouter = require("./routes/perhitunganplesteran");
 const perhitunganlantaiRouter = require("./routes/perhitunganlantai");
 const perhitunganuruganRouter = require("./routes/perhitunganurugan");
 const perhitunganpengecatanRouter = require("./routes/perhitunganpengecatan");
+const perhitunganpondasiRouter = require("./routes/perhitunganpondasi");
+const perhitunganbetonRouter = require("./routes/perhitunganbeton");
+const activateRouter = require("./routes/activateuser");
 
 
 var app = express()
@@ -91,13 +94,16 @@ app.get("/api/v1", (req, res) => {
 app.use('/api/v1', usersRouter)
 app.use('/api/v1', pengembangRouter)
 app.use('/api/v1', proyekRouter)
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1", perhitunganbidangRouter);
-app.use("/api/v1", perhitunganlantaiRouter);
-app.use("/api/v1", perhitunganacianRouter);
-app.use("/api/v1", perhitunganplesteranRouter);
-app.use("/api/v1", perhitunganuruganRouter);
-app.use("/api/v1", perhitunganpengecatanRouter);
+app.use("/api/v1/auth", authRouter)
+app.use("/api/v1", perhitunganbidangRouter)
+app.use("/api/v1", perhitunganlantaiRouter)
+app.use("/api/v1", perhitunganacianRouter)
+app.use("/api/v1", perhitunganplesteranRouter)
+app.use("/api/v1", perhitunganuruganRouter)
+app.use("/api/v1", perhitunganpengecatanRouter)
+app.use('/api/v1', materialRouter)
+app.use('/api/v1', perhitunganpondasiRouter)
+app.use('/api/v1', perhitunganbetonRouter)
 
 
 // cek url active
@@ -116,6 +122,7 @@ app.use('/', satuanRouter)
 app.use('/', jenisRouter)
 app.use('/', superuserRouter)
 app.use('/', materialRouter)
+app.use('/', activateRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

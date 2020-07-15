@@ -58,6 +58,8 @@ async function validate(req) {
     nama_plamur,
     jumlahkeperluancat,
     jumlahkeperluanplamur,
+    jumlahkeperluancatkaleng,
+    jumlahkeperluanplamursak,
     hargacat,
     hargaplamur,
     hargacattotal,
@@ -67,19 +69,19 @@ async function validate(req) {
 
   let errors = []
 
-  if (!luas) {
-    errors.push({
-      field: 'luas_pengecatan',
-      message: 'luas_pengecatan is required',
-    })
-  }
+  // if (!luas) {
+  //   errors.push({
+  //     field: 'luas_pengecatan',
+  //     message: 'luas_pengecatan is required',
+  //   })
+  // }
 
-  if (!hargacat) {
-    errors.push({
-      field: 'hargacat',
-      message: 'hargacat is required',
-    })
-  }
+  // if (!hargacat) {
+  //   errors.push({
+  //     field: 'hargacat',
+  //     message: 'hargacat is required',
+  //   })
+  // }
 
   return errors
 }
@@ -98,6 +100,8 @@ exports.actionCreate = async (req, res) => {
     nama_plamur,
     jumlahkeperluancat,
     jumlahkeperluanplamur,
+    jumlahkeperluancatkaleng,
+    jumlahkeperluanplamursak,
     hargacat,
     hargaplamur,
     hargacattotal,
@@ -122,6 +126,8 @@ exports.actionCreate = async (req, res) => {
       nama_plamur,
       jumlahkeperluancat,
       jumlahkeperluanplamur,
+      jumlahkeperluancatkaleng,
+      jumlahkeperluanplamursak,
       hargacat,
       hargaplamur,
       hargacattotal,
@@ -173,6 +179,8 @@ exports.actionUpdate = async function (req, res) {
     nama_plamur,
     jumlahkeperluancat,
     jumlahkeperluanplamur,
+    jumlahkeperluancatkaleng,
+    jumlahkeperluanplamursak,
     hargacat,
     hargaplamur,
     hargacattotal,
@@ -198,6 +206,8 @@ exports.actionUpdate = async function (req, res) {
       perhitunganpengecatan.nama_plamur = nama_plamur
       perhitunganpengecatan.jumlahkeperluancat = jumlahkeperluancat
       perhitunganpengecatan.jumlahkeperluanplamur = jumlahkeperluanplamur
+      perhitunganpengecatan.jumlahkeperluancatkaleng = jumlahkeperluancatkaleng
+      perhitunganpengecatan.jumlahkeperluanplamursak = jumlahkeperluanplamursak
       perhitunganpengecatan.hargacat = hargacat
       perhitunganpengecatan.hargaplamur = hargaplamur
       perhitunganpengecatan.hargacattotal = hargacattotal
@@ -205,7 +215,6 @@ exports.actionUpdate = async function (req, res) {
       perhitunganpengecatan.hargatotal = hargatotal
       await perhitunganacian.save()
     }
-
     return res.status(201).json({
       message: "Success Update perhitunganpengecatan",
       perhitunganpengecatan

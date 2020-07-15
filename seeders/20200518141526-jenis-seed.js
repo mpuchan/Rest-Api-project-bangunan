@@ -69,7 +69,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        nama_jenis: 'Baut/mur',
+        nama_jenis: 'batuuruugan',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -88,6 +88,11 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        nama_jenis: 'Plamur',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
 
 
     ])
