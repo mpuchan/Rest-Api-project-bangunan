@@ -2,7 +2,7 @@
 <form action="/admin/material/create" method="POST">
   <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-md" role="document">
       <div class="modal-content" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
         <div class="modal-header"
           style="background-color:#00c851 ; border-top-left-radius: 10px; border-top-right-radius: 10px; color: #ffffff;">
@@ -12,65 +12,100 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label>Jenis</label>
-            <select required id="SatuanId" name="SatuanId" class="form-control">
-              <option value="">--- Pilih Jenis Barang ---</option>
-              <% for (let i = 0; i < jenis.length; i++ ) { %>
-              <option value="<%= jenis[i].id %>"><%= jenis[i].nama_jenis %></option>
-              <% } %>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Nama :</label>
-            <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama Material" required>
-          </div>
-          <div class="form-group">
-            <label>Panjang :</label>
-            <input type="number" id="panjang" name="panjang" class="form-control" placeholder="Masukan Panjang Material"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Lebar :</label>
-            <input type="number" id="lebar" name="lebar" class="form-control" placeholder="Masukan Lebar Material"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Tinggi :</label>
-            <input type="number" id="tinggi" name="tinggi" class="form-control" placeholder="Masukan Tinggi Material"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Satuan</label>
-            <select required id="SatuanId" name="SatuanId" class="form-control">
-              <option value="">--- Pilih Satuan Barang ---</option>
-              <% for (let i = 0; i < satuan.length; i++ ) { %>
-              <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
-              <% } %>
-            </select>
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Jenis</label>
+                <select required id="JenisId" name="JenisId" class="form-control">
+                  <option value="">--- Pilih Jenis Barang ---</option>
+                  <% for (let i = 0; i < jenis.length; i++ ) { %>
+                  <option value="<%= jenis[i].id %>"><%= jenis[i].nama_jenis %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Nama :</label>
+                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Panjang :</label>
+                <input type="number" id="panjang" name="panjang" class="form-control" placeholder="Masukan Panjang">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Lebar :</label>
+                <input type="number,float" id="lebar" name="lebar" class="form-control" placeholder="Masukan Lebar ">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Tinggi :</label>
+                <input type="number" id="tinggi" name="tinggi" class="form-control" placeholder="Masukan Tinggi ">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Tebal :</label>
+                <input type="number" id="tebal" name="tebal" class="form-control" placeholder="Masukan Tebal ">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Berat :</label>
+                <input type="number" id="berat" name="berat" class="form-control" placeholder="Masukan Berat">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>jumlah :</label>
+                <input type="number" id="jumlah" name="jumlah" class="form-control" placeholder="Masukan Jumlah">
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Satuan</label>
+                <select required id="SatuanId" name="SatuanId" class="form-control">
+                  <option value="">--- Pilih Satuan Barang ---</option>
+                  <% for (let i = 0; i < satuan.length; i++ ) { %>
+                  <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Harga :</label>
+                <input type="number" id="harga" name="harga" class="form-control" placeholder="Masukan Harga Material">
+              </div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Harga :</label>
-            <input type="number" id="harga" name="harga" class="form-control" placeholder="Masukan Harga Material"
-              required>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
           </div>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-        </div>
       </div>
-
     </div>
-  </div>
   </div>
 </form>
 <script>
   $(document).ready(function () {
     // datatable
     $('#satuan').DataTable()
+  })
+
+</script>
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#jenis').DataTable()
   })
 
 </script>

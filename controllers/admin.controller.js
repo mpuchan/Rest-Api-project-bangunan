@@ -1,4 +1,4 @@
-const { User, Satuan } = require("../models")
+const { User, Satuan, Pengembang, Material } = require("../models")
 const bcrypt = require("bcryptjs")
 const Op = require("sequelize").Op
 
@@ -15,6 +15,61 @@ exports.viewSignin = (req, res) => {
     res.redirect('/admin')
   }
 }
+exports.viewDashboard = async (req, res) => {
+  try {
+    const userLogin = req.session.user
+
+    console.log(userLogin)
+    if (userLogin) {
+      const status = 2;
+      const material = await Material.count()
+      const pengembang = await Pengembang.count({
+        where: { status: { [Op.eq]: 1 } }
+      })
+      const confirmpengembang = await Pengembang.count({
+        where: { status: { [Op.eq]: status } }
+      })
+      const pengembangs = await Pengembang.findAll({
+        where: { status: { [Op.eq]: status }, }
+      })
+      res.render('admin/dashboard/dashboard', {
+        title: "Dashboard",
+        user: userLogin,
+        material: material,
+        pengembang: pengembang,
+        pengembang1: pengembangs,
+        pengembang2: confirmpengembang
+      })
+    } else {
+      req.session.destroy()
+      res.redirect('/signin')
+    }
+  } catch (err) {
+    throw err
+  }
+}
+
+exports.actionKonfirmasi = async (req, res) => {
+  let { id } = req.params
+  let pengembang = await Pengembang.findOne({
+    where: {
+      id: { [Op.eq]: id }
+    }
+  })
+  if (pengembang.status === 2) {
+    const pengembangconfirm = await Pengembang.findOne({
+      where: {
+        id: { [Op.eq]: pengembang.id }
+      }
+    })
+    if (pengembangconfirm) {
+      pengembangconfirm.status = 1
+      await pengembangconfirm.save()
+    }
+    res.redirect("/admin")
+  }
+}
+
 
 // /* method Login admin */
 exports.actionLogin = async (req, res) => {
@@ -30,6 +85,8 @@ exports.actionLogin = async (req, res) => {
         id: user.id,
         username: user.username,
         name: user.name,
+        email: user.email,
+        notelp: user.notelp,
         image: user.image,
         status: user.status,
         role: user.role,

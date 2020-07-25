@@ -1,6 +1,7 @@
 const { User } = require("../models")
 const bcrypt = require("bcryptjs")
 const Op = require("sequelize").Op
+const nodemailer = require('nodemailer')
 
 // /* method view daftar admin */
 exports.viewdaftaradmin = async (req, res) => {
@@ -18,7 +19,7 @@ exports.viewdaftaradmin = async (req, res) => {
 
         title: "Data Super User",
         user: userLogin,
-        user: users,
+        user1: users,
         alert: alert
       })
     } else {
@@ -31,18 +32,27 @@ exports.viewdaftaradmin = async (req, res) => {
 }
 // /* method create daftar admin */
 exports.actionAdminCreate = async (req, res) => {
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
   const {
     name,
     email,
     notelp,
     username,
-    password,
     role,
     status
   } = req.body
   console.log(name)
   try {
-    const passwordenkrip = bcrypt.hashSync(password, 10)
+    const passwordrand = makeid(8)
+    const passwordenkrip = bcrypt.hashSync(passwordrand, 10)
     const files = req.files;
     // console.log(files);
     if (!files) {
@@ -72,7 +82,44 @@ exports.actionAdminCreate = async (req, res) => {
     }).then(() => {
       req.flash('alertMessage', `Sukses Menambahkan Data Super User Baru dengan nama : ${name}`)
       req.flash('alertStatus', 'success')
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
+        }
+      });
+
+      let mailOptions = {
+        from: 'noreplybangunankita@gmail.com',
+        to: email,
+        subject: 'Hello Your Account Admin Has been created!! ',
+        html: `<p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
+        <h1 align="center">Aplikasi Bangunan Kita</h1>
+        <h2>Hai, ${name} akun anda sudah berhasil dibuat berikut detail akun anda !</h2>
+        <table>
+            <tbody>
+                <tr>
+                <h4><td><strong>username : </strong></td></h4>
+                <h4><td>${username}</td></h4>
+                </tr>
+                <tr>
+                <h4><td><strong>password : </strong></td></h4>
+                <h4><td>${passwordrand}</td></h4>
+                </tr>
+            </tbody
+        </table>`
+      };
+
+      transporter.sendMail(mailOptions, (err, data) => {
+        if (err) {
+          return log('Error occurs', err);
+        }
+        return log('Email sent!!!');
+      });
+      console.log('Email sent!!!');
       res.redirect("/admin/superuser")
+
     }).catch((err) => {
       // tambah notifi error
       res.redirect("/admin/superuser")

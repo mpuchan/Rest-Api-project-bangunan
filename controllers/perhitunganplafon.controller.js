@@ -58,6 +58,10 @@ async function validate(req) {
         hargatriplek,
         hargapaku,
         hargareng,
+        jumlahtriplek,
+        jumlahtripleklembar,
+        jumlahreng,
+        jumlahrengbatang,
         hargatotaltriplek,
         hargatotalpaku,
         hargatotalreng,
@@ -66,19 +70,19 @@ async function validate(req) {
 
     let errors = []
 
-    if (!luas) {
-        errors.push({
-            field: 'luas_pengecatan',
-            message: 'luas_pengecatan is required',
-        })
-    }
+    // if (!luas) {
+    //     errors.push({
+    //         field: 'luas_pengecatan',
+    //         message: 'luas_pengecatan is required',
+    //     })
+    // }
 
-    if (!hargacat) {
-        errors.push({
-            field: 'hargacat',
-            message: 'hargacat is required',
-        })
-    }
+    // if (!hargacat) {
+    //     errors.push({
+    //         field: 'hargacat',
+    //         message: 'hargacat is required',
+    //     })
+    // }
 
     return errors
 }
@@ -97,40 +101,46 @@ exports.actionCreate = async (req, res) => {
         hargatriplek,
         hargapaku,
         hargareng,
+        jumlahtriplek,
+        jumlahtripleklembar,
+        jumlahreng,
+        jumlahrengbatang,
         hargatotaltriplek,
         hargatotalpaku,
-        hargatotalreng,
-        hargatotal
+        hargatotalreng
     } = req.body
-    var total = parseFloat(hargaplamurtotal) + parseFloat(hargacattotal)
+    var total = parseFloat(hargatotaltriplek) + parseFloat(hargatotalpaku) + parseFloat(hargatotalreng)
     const hargatotal = total
 
     let errors = await validate(req)
     if (errors.length > 0) return res.status(422).json({ errors })
 
     try {
-        const perhitunganpengecatan = await PerhitunganPengecatan.create({
+        const perhitunganplafon = await PerhitunganPlafon.create({
             ProyekId,
             nama,
-            jenis_pengerjaan,
-            panjangdin,
-            tinggidin,
-            sisi,
-            luas_pengecatan,
-            nama_cat,
-            nama_plamur,
-            jumlahkeperluancat,
-            jumlahkeperluanplamur,
-            hargacat,
-            hargaplamur,
-            hargacattotal,
-            hargaplamurtotal,
+            panjang,
+            lebar,
+            luas,
+            namatriplek,
+            namapaku,
+            namareng,
+            hargatriplek,
+            hargapaku,
+            hargareng,
+            jumlahtriplek,
+            jumlahtripleklembar,
+            jumlahreng,
+            jumlahrengbatang,
+            hargatotaltriplek,
+            hargatotalpaku,
+            hargatotalreng,
             hargatotal
         })
 
         return res.status(200).json({
-            message: "Success Create perhitunganpengecatan",
-            perhitunganpengecatan
+            message: "Success Create perhitunganplafond",
+            perhitunganplafon
         })
 
     } catch (err) {
@@ -142,12 +152,12 @@ async function validateRead(req) {
     let errors = []
     if (id) {
         try {
-            const perhitunganpengecatan = await PerhitunganPengecatan.findOne({
+            const perhitunganplafon = await PerhitunganPlafon.findOne({
                 where: {
                     id: { [Op.eq]: id },
                 }
             })
-            if (perhitunganpengecatan === null || perhitunganpengecatan === "") {
+            if (perhitunganplafon === null || perhitunganplafon === "") {
                 errors.push({
                     field: 'id',
                     message: 'Id Not Found',
@@ -162,52 +172,59 @@ async function validateRead(req) {
 exports.actionUpdate = async function (req, res) {
     const { id } = req.params
     let {
+        ProyekId,
         nama,
-        jenis_pengerjaan,
-        panjangdin,
-        tinggidin,
-        sisi,
-        luas_pengecatan,
-        nama_cat,
-        nama_plamur,
-        jumlahkeperluancat,
-        jumlahkeperluanplamur,
-        hargacat,
-        hargaplamur,
-        hargacattotal,
-        hargaplamurtotal,
+        panjang,
+        lebar,
+        luas,
+        namatriplek,
+        namapaku,
+        namareng,
+        hargatriplek,
+        hargapaku,
+        hargareng,
+        jumlahtriplek,
+        jumlahtripleklembar,
+        jumlahreng,
+        jumlahrengbatang,
+        hargatotaltriplek,
+        hargatotalpaku,
+        hargatotalreng,
         hargatotal
     } = req.body
     let errors = await validate(req)
     if (errors.length > 0) return res.status(422).json({ errors });
 
     try {
-        const perhitunganpengecatan = await PerhitunganPengecatan.findOne({
+        const perhitunganplafon = await PerhitunganPlafon.findOne({
             where: { id: { [Op.eq]: id } }
         })
 
-        if (perhitunganpengecatan) {
-            perhitunganpengecatan.nama = nama
-            perhitunganpengecatan.jenis_pengerjaan = jenis_pengerjaan
-            perhitunganpengecatan.panjangdin = panjangdin
-            perhitunganpengecatan.tinggidin = tinggidin
-            perhitunganpengecatan.sisi = sisi
-            perhitunganpengecatan.luas_pengecatan = luas_pengecatan
-            perhitunganpengecatan.nama_cat = nama_cat
-            perhitunganpengecatan.nama_plamur = nama_plamur
-            perhitunganpengecatan.jumlahkeperluancat = jumlahkeperluancat
-            perhitunganpengecatan.jumlahkeperluanplamur = jumlahkeperluanplamur
-            perhitunganpengecatan.hargacat = hargacat
-            perhitunganpengecatan.hargaplamur = hargaplamur
-            perhitunganpengecatan.hargacattotal = hargacattotal
-            perhitunganpengecatan.hargaplamurtotal = hargaplamurtotal
-            perhitunganpengecatan.hargatotal = hargatotal
+        if (perhitunganplafon) {
+            perhitunganplafon.nama = nama
+            perhitunganplafon.panjang = panjang
+            perhitunganplafon.lebar = lebar
+            perhitunganplafon.luas = luas
+            perhitunganplafon.namatriplek = namatriplek
+            perhitunganplafon.namapaku = namapaku
+            perhitunganplafon.namareng = namareng
+            perhitunganplafon.hargatriplek = hargatriplek
+            perhitunganplafon.hargapaku = hargapaku
+            perhitunganplafon.hargareng = hargareng
+            perhitunganplafon.jumlahtripleklembar = jumlahtriplek
+            perhitunganplafon.jumlahtripleklembar = jumlahtripleklembar
+            perhitunganplafon.jumlahreng = jumlahreng
+            perhitunganplafon.jumlahrengbatang = jumlahrengbatang
+            perhitunganplafon.hargatotaltriplek = hargatotaltriplek
+            perhitunganplafon.hargatotalpaku = hargatotalpaku
+            perhitunganplafon.hargatotalreng = hargatotalreng
+            perhitunganplafon.hargatotal = hargatotal
             await perhitunganacian.save()
         }
 
         return res.status(201).json({
-            message: "Success Update perhitunganpengecatan",
-            perhitunganpengecatan
+            message: "Success Update perhitunganplafon",
+            perhitunganplafon
         })
     } catch (err) {
         console.log(err)
@@ -219,12 +236,12 @@ exports.actionDelete = async function (req, res) {
     let error = await validateRead(req)
     if (error.length > 0) return res.status(422).json({ error })
 
-    PerhitunganPengecatan.findOne({ where: { id: { [Op.eq]: id } } })
-        .then((PerhitunganPengecatan) => {
-            return PerhitunganPengecatan.destroy()
+    PerhitunganPlafon.findOne({ where: { id: { [Op.eq]: id } } })
+        .then((PerhitunganPlafon) => {
+            return PerhitunganPlafon.destroy()
         })
-        .then((PerhitunganPengecatan) => {
-            res.status(200).json({ message: "Success Delete", PerhitunganPengecatan })
+        .then((PerhitunganPlafon) => {
+            res.status(200).json({ message: "Success Delete", PerhitunganPlafon })
         })
         .catch((err) => {
             res.status(500).json({ message: "Internal server error" })

@@ -9,8 +9,8 @@ exports.viewJenis = async (req, res) => {
     const alert = { message: alertMessage, status: alertStatus }
     const userLogin = req.session.user
 
-    console.log(userLogin.role)
-    if (userLogin.role === 1) {
+    console.log(userLogin.status)
+    if (userLogin.status === 1) {
       const jeniss = await Jenis.findAll()
       res.render("admin/jenis/view_jenis", {
 

@@ -5,7 +5,7 @@ let {
     actionMaterialCreate,
     actionMaterialUpdate,
     actionMaterialDelete, viewPasir, viewSemen, viewBatako,
-    viewSemennat, viewKeramik, viewCat, viewPlamur, viewBatu
+    viewSemennat, viewKayu, viewTriplek, viewKeramik, viewCat, viewPlamur, viewBatu, viewBesi, viewLispapan, viewPengikat, viewPaku
 } = require("../controllers/material.controller")
 
 const auth = require('../middlewares/auth_admin')
@@ -22,6 +22,10 @@ router.get("/viewKeramik", viewKeramik)
 router.get("/viewSemennat", viewSemennat)
 router.get("/viewCat", viewCat)
 router.get("/viewPlamur", viewPlamur)
-
-
+router.get("/viewBesi", viewBesi)
+router.get("/viewLispapan", viewLispapan)
+router.get("/viewPengikat", viewPengikat)
+router.get("/viewPaku", viewPaku)
+router.get("/viewKayu", viewKayu)
+router.get("/viewTriplek", viewTriplek)
 module.exports = router

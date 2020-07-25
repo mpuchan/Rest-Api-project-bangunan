@@ -8,7 +8,17 @@
     <div class="callout callout-info">
       <h3>Selamat datang di Aplikasi Bangunan Kita</h3>
     </div>
+    <div class="row">
+      <%- include countdatamaterial.ejs %>
+      <%- include countdatapengguna.ejs %>
+      <%- include countdatakonfirmasi.ejs %>
+    </div>
+    <div class="row">
+      <%- include tabelkonfirmasi %>
+
+    </div>
   </section>
+
 </div>
 
 <%- include ../../partials/admin_layout/footer.ejs %>

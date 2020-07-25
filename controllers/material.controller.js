@@ -9,14 +9,16 @@ exports.viewMaterial = async (req, res) => {
     const alert = { message: alertMessage, status: alertStatus }
     const userLogin = req.session.user
 
-    console.log(userLogin.role)
+    console.log(userLogin.status)
 
-    if (userLogin.role === 1) {
+    if (userLogin.status === 1) {
       const satuans = await Satuan.findAll()
       const jeniss = await Jenis.findAll()
       const materials = await Material.findAll({
         include: [{
           model: Satuan
+        }, {
+          model: Jenis
         }]
       })
       res.render("admin/material/view_material", {
@@ -37,13 +39,14 @@ exports.viewMaterial = async (req, res) => {
   }
 }
 
-exports.viewPasir = async (req, res) => {
+
+exports.viewKeramik = async (req, res) => {
   try {
     const materials = await Material.findAll(
-      { where: { JenisId: 12 } }
+      { where: { JenisId: 1 } }
     )
     return res.status(200).json({
-      message: "Success Read Pasir",
+      message: "Success Read keramik",
       materials
     })
   } catch (err) {
@@ -79,13 +82,13 @@ exports.viewSemen = async (req, res) => {
     throw err
   }
 }
-exports.viewKeramik = async (req, res) => {
+exports.viewPengikat = async (req, res) => {
   try {
     const materials = await Material.findAll(
-      { where: { JenisId: 1 } }
+      { where: { JenisId: 4 } }
     )
     return res.status(200).json({
-      message: "Success Read keramik",
+      message: "Success Read Pengikat",
       materials
     })
   } catch (err) {
@@ -93,6 +96,49 @@ exports.viewKeramik = async (req, res) => {
     throw err
   }
 }
+exports.viewKayu = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 5 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Kayu/hollow",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewLispapan = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 6 } }
+    )
+    return res.status(200).json({
+      message: "Success Read List/Papan",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewBesi = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 7 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Pasir",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
 exports.viewCat = async (req, res) => {
   try {
     const materials = await Material.findAll(
@@ -107,13 +153,55 @@ exports.viewCat = async (req, res) => {
     throw err
   }
 }
-exports.viewPlamur = async (req, res) => {
+exports.viewTriplek = async (req, res) => {
   try {
     const materials = await Material.findAll(
-      { where: { JenisId: 18 } }
+      { where: { JenisId: 11 } }
     )
     return res.status(200).json({
-      message: "Success Read Plamur",
+      message: "Success Read Triplek",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewPasir = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 12 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Pasir",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewPaku = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 13 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Pasir",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewBatu = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 14 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Batuurugan",
       materials
     })
   } catch (err) {
@@ -136,21 +224,6 @@ exports.viewSemennat = async (req, res) => {
   }
 }
 
-exports.viewBatu = async (req, res) => {
-  try {
-    const materials = await Material.findAll(
-      { where: { JenisId: 14 } }
-    )
-    return res.status(200).json({
-      message: "Success Read Batuurugan",
-      materials
-    })
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
-}
-
 exports.viewGenteng = async (req, res) => {
   try {
     const materials = await Material.findAll(
@@ -165,6 +238,21 @@ exports.viewGenteng = async (req, res) => {
     throw err
   }
 }
+exports.viewPlamur = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 18 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Plamur",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
 // /* action create material */
 exports.actionMaterialCreate = async (req, res) => {
   const {

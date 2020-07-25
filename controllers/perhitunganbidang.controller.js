@@ -1,7 +1,7 @@
 const {
-  PerhitunganBidangBangunan,
-  Material,
+  PerhitunganBidangBangunan, Proyek
 } = require("../models")
+const excel = require('exceljs');
 
 const Op = require("sequelize").Op
 
@@ -83,6 +83,109 @@ exports.actionReadAllSingleData = async (req, res) => {
   }
 }
 
+exports.actionExportSingleData = async (req, res) => {
+  const { ProyekId } = req.params
+  try {
+    const perhitunganbidang = await PerhitunganBidangBangunan.findAll({
+      where: {
+        ProyekId: { [Op.eq]: ProyekId }
+      }
+    })
+    const jsonperhitunganbidangbangunans = JSON.parse(JSON.stringify(perhitunganbidang));
+    console.log(jsonperhitunganbidangbangunans)
+    let workbook = new excel.Workbook(); //creating workbook
+    let worksheet = workbook.addWorksheet('perhitunganbidangbangunans'); //creating worksheet
+    worksheet.views = [
+      { state: 'frozen', ySplit: 1 }
+    ];
+    //  WorkSheet Header
+    worksheet.columns = [
+      { header: 'Nama Pengerjaan', key: 'nama', width: 30 },
+      { header: 'Panjang', key: 'panjangbid', width: 30 },
+      { header: 'Tinggi', key: 'tinggibid', width: 30 },
+      { header: 'Panjang Pintu', key: 'panjangpin', width: 30 },
+      { header: 'Tinggi Pintu', key: 'tinggipin', width: 30 },
+      { header: 'Panjang Jendela', key: 'panjangjen', width: 30 },
+      { header: 'Tinggi Jendela', key: 'tinggijen', width: 30 },
+      { header: 'Luas Bidang', key: 'luas_bidang', width: 30 },
+      { header: 'Nama Batako', key: 'nama_batako', width: 30 },
+      { header: 'Harga Batako', key: 'hargabatako', width: 30 },
+      { header: 'Nama Semen ', key: 'nama_semen', width: 30 },
+      { header: 'Harga Semen', key: 'hargasemen', width: 30 },
+      { header: 'Nama Pasir', key: 'nama_pasir', width: 30 },
+      { header: 'Harga Pasir ', key: 'hargapasir', width: 30 },
+      { header: 'Koefisien Campuran', key: 'metode', width: 30 },
+      { header: 'Keperluan Batako', key: 'jumlahkeperluanbatako', width: 10 },
+      { header: 'Harga Batako Total', key: 'hargabatakototal', width: 12 },
+      { header: 'Keperluan Pasir', key: 'jumlahkeperluanpasir', width: 10 },
+      { header: 'Harga Pasir Total', key: 'hargapasirtotal', width: 12 },
+      { header: 'Keperluan Semen', key: 'Jumlahkeperluansemen', width: 10 },
+      { header: 'Keperluan Semen (/sak)', key: 'jumlahdalamsak', width: 8 },
+      { header: 'Harga Semen Total', key: 'hargasementotal', width: 12 },
+      { header: 'Harga Total', key: 'hargatotal', width: 12 },
+    ];
+
+    // Add Array Rows
+    worksheet.addRows(jsonperhitunganbidangbangunans);
+    worksheet.getRow(1).font = { bold: true }
+    const totalNumberOfRows = worksheet.rowCount
+    worksheet.addRows([''], [''])
+    // Add the total Rows
+    worksheet.addRows(['Total'])
+    worksheet.addRow([
+      'Luas Dinding Total',
+      {
+        formula: `=sum(H2:H${totalNumberOfRows})`
+      }
+    ])
+    worksheet.addRow([
+      'Keperluan Batako Total',
+      {
+        formula: `=sum(P2:P${totalNumberOfRows})`
+      }, {
+        formula: `=sum(P2:P${totalNumberOfRows})`
+      }
+    ])
+    worksheet.addRow([
+      'Keperluan Pasir Total',
+      {
+        formula: `=sum(R2:R${totalNumberOfRows})`
+      },
+      {
+        formula: `=sum(S2:S${totalNumberOfRows})`
+      }
+    ])
+    worksheet.addRow([
+      'Keperluan Semen Total',
+      {
+        formula: `=sum(U2:U${totalNumberOfRows})`
+      },
+      {
+        formula: `=sum(V2:V${totalNumberOfRows})`
+      }
+    ])
+    worksheet.addRow([
+      'Total Biaya Keseluruhan',
+      {
+
+      },
+      {
+        formula: `=sum(W2:W${totalNumberOfRows})`
+      }
+    ])
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=' + 'Perhitungan Bidang Bangunan.xlsx');
+
+    return workbook.xlsx.write(res)
+      .then(function () {
+        res.status(200).end();
+      });
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
 async function validate(req) {
   let {
     ProyekId,
@@ -115,55 +218,55 @@ async function validate(req) {
   let errors = []
 
 
-  // if (!luas_bidang) {
-  //   errors.push({
-  //     field: 'luas_bidang',
-  //     message: 'luas_bidang is required',
-  //   })
-  // }
+  if (!luas_bidang) {
+    errors.push({
+      field: 'luas_bidang',
+      message: 'luas_bidang is required',
+    })
+  }
 
-  // if (!jumlahkeperluanbatako) {
-  //   errors.push({
-  //     field: 'jumlahkeperluanbatako',
-  //     message: 'jumlahkeperluanbatako is required',
-  //   })
-  // }
-  // if (!jumlahkeperluanpasir) {
-  //   errors.push({
-  //     field: 'jumlahkeperluanpasir',
-  //     message: 'jumlahkeperluanpasir is required',
-  //   })
-  // }
-  // if (!jumlahkeperluansemen) {
-  //   errors.push({
-  //     field: 'jumlahkeperluansemen',
-  //     message: 'jumlahkeperluansemen is required',
-  //   })
-  // }
-  // if (!metode) {
-  //   errors.push({
-  //     field: 'metode',
-  //     message: 'metode is required',
-  //   })
-  // }
-  // if (!hargabatako) {
-  //   errors.push({
-  //     field: 'hargabatako',
-  //     message: 'hargabatako is required',
-  //   })
-  // }
-  // if (!hargapasir) {
-  //   errors.push({
-  //     field: 'hargapasir',
-  //     message: 'hargapasir is required',
-  //   })
-  // }
-  // if (!hargasemen) {
-  //   errors.push({
-  //     field: 'hargasemen',
-  //     message: 'hargasemen is required',
-  //   })
-  // }
+  if (!jumlahkeperluanbatako) {
+    errors.push({
+      field: 'jumlahkeperluanbatako',
+      message: 'jumlahkeperluanbatako is required',
+    })
+  }
+  if (!jumlahkeperluanpasir) {
+    errors.push({
+      field: 'jumlahkeperluanpasir',
+      message: 'jumlahkeperluanpasir is required',
+    })
+  }
+  if (!Jumlahkeperluansemen) {
+    errors.push({
+      field: 'Jumlahkeperluansemen',
+      message: 'jumlahkeperluansemen is required',
+    })
+  }
+  if (!metode) {
+    errors.push({
+      field: 'metode',
+      message: 'metode is required',
+    })
+  }
+  if (!hargabatako) {
+    errors.push({
+      field: 'hargabatako',
+      message: 'hargabatako is required',
+    })
+  }
+  if (!hargapasir) {
+    errors.push({
+      field: 'hargapasir',
+      message: 'hargapasir is required',
+    })
+  }
+  if (!hargasemen) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
+  }
 
 
   return errors

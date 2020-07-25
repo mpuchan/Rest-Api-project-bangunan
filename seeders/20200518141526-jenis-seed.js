@@ -19,12 +19,12 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        nama_jenis: 'bambu',
+        nama_jenis: 'pengikat',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        nama_jenis: 'kayu',
+        nama_jenis: 'kayu/hollow',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

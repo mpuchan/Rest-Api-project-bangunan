@@ -41,7 +41,13 @@ module.exports = {
       jumlahtriplek: {
         type: Sequelize.FLOAT
       },
+      jumlahtripleklembar: {
+        type: Sequelize.FLOAT
+      },
       jumlahreng: {
+        type: Sequelize.FLOAT
+      },
+      jumlahrengbatang: {
         type: Sequelize.FLOAT
       },
       namareng: {

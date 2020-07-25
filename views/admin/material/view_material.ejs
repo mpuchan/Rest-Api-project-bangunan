@@ -63,7 +63,9 @@
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
                       data-id="<%= material[i].id %>" data-nama="<%= material[i].nama %>"
                       data-panjang="<%= material[i].panjang %>" data-lebar="<%= material[i].lebar %>"
-                      data-tinggi="<%= material[i].tinggi %>" data-SatuanId="<%= material[i].SatuanId %>"
+                      data-tinggi="<%= material[i].tinggi %>" data-berat="<%= material[i].berat %>"
+                      data-jumlah="<%= material[i].jumlah %>" data-tebal="<%= material[i].tebal %>"
+                      data-SatuanId="<%= material[i].SatuanId %>" data-JenisId="<%= material[i].JenisId %>"
                       data-harga="<%= material[i].harga %>"> <span class="glyphicon glyphicon-pencil"></span>
                       Edit</a>
 
@@ -117,7 +119,11 @@
     var panjang = $(this).data('panjang');
     var lebar = $(this).data('lebar');
     var tinggi = $(this).data('tinggi');
+    var tebal = $(this).data('tebal');
+    var berat = $(this).data('berat');
+    var jumlah = $(this).data('jumlah');
     var SatuanId = $(this).data('SatuanId');
+    var JenisId = $(this).data('JenisId');
     var harga = $(this).data('harga');
 
     $('#edit-modal').modal('show');
@@ -126,7 +132,11 @@
     $('.panjang').val(panjang);
     $('.lebar').val(lebar);
     $('.tinggi').val(tinggi);
+    $('.tebal').val(tebal);
+    $('.berat').val(berat);
+    $('.jumlah').val(jumlah);
     $('.SatuanId').val(SatuanId);
+    $('.JenisId').val(JenisId);
     $('.harga').val(harga);
   });
 

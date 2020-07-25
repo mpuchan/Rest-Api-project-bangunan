@@ -110,6 +110,8 @@ exports.actionCreate = async (req, res) => {
   let {
     PengembangId,
     nama_proyek,
+    luas_tanah,
+    luas_bangunan,
     lokasi,
     tanggal
   } = req.body
@@ -121,6 +123,8 @@ exports.actionCreate = async (req, res) => {
     const proyek = await Proyek.create({
       PengembangId,
       nama_proyek,
+      luas_tanah,
+      luas_bangunan,
       lokasi,
       tanggal
     })
@@ -185,6 +189,8 @@ exports.actionUpdate = async function (req, res) {
   let {
     nama_proyek,
     lokasi,
+    luas_bangunan,
+    luas_tanah,
     tanggal
   } = req.body
 
@@ -199,6 +205,8 @@ exports.actionUpdate = async function (req, res) {
     if (proyek) {
       proyek.nama_proyek = nama_proyek
       proyek.lokasi = lokasi
+      proyek.luas_bangunan = luas_bangunan
+      proyek.luas_tanah = luas_tanah
       proyek.tanggal = tanggal
       await proyek.save()
     }

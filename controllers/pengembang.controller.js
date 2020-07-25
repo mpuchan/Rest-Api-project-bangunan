@@ -1,14 +1,13 @@
 const { Pengembang } = require('../models')
 const apiConfig = require("../config/api.json")
+require('dotenv/config')
 const jwt = require("jsonwebtoken")
-const mailgun = require("mailgun-js");
-const DOMAIN = 'sandbox771662bbda274860a11ba8f9d396e53d.mailgun.org';
-const mg = mailgun({ apiKey: process.env.MAIL_API, domain: DOMAIN });
-
+const nodemailer = require('nodemailer')
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
 const sha1 = require("sha1");
 const { token } = require('morgan');
+const { gmail_callback } = require('./google.controller')
 
 /**
  * Validation collection that will be used before create data pengembang
@@ -109,7 +108,35 @@ async function validateRegister(req) {
   }
   return errors
 }
+async function validateEmail(req) {
+  /* form validasi mobile  login or signin */
+  let email = req.body.email
+  let errors = []
+  console.log(Pengembang)
+  console.log(email)
+  if (!email) {
+    errors.push({
+      field: "email",
+      message: "Email required"
+    })
+  }
+  if (email) {
+    const pengembang = await Pengembang.findOne({
+      where: {
+        email: { [Op.eq]: email }
+      }
+    })
 
+    if (!pengembang) {
+      errors.push({
+        field: "email",
+        message: "Email not found"
+      })
+    }
+  }
+
+  return errors
+}
 /**
  * Create new data pengembang
  */
@@ -124,21 +151,30 @@ exports.actionRegisterMobile = async function (req, res) {
   let salt = sha1(uniqid())
   let errors = await validateRegister(req)
   if (errors.length > 0) return res.status(422).json({ errors })
-  // const jwtapi = "yourtokenactivate"
-  // const tokensign = jwt.sign({ email }, jwtapi, { expiresIn: '30y' })
-  // const data = {
-  //   from: 'noreply@gmail.com',
-  //   to: email,
-  //   subject: 'Hello',
-  //   html: `
-  //   <p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
-  //   <h1 align="center">Aplikasi Bangunan Kita</h1>
-  //   <h2>To verified your account please click the button below !</h2>
-  //   <button color="red"><a href="http://192.168.43.163:3000/activate/activate/status/${email}">Click to verify</a></button>`
-  // };
-  // mg.messages().send(data, function (error, body) {
-  //   console.log(data);
-  // });
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
+    }
+  });
+
+  let mailOptions = {
+    from: 'noreplybangunankita@gmail.com',
+    to: email,
+    subject: 'Verifikasi Akun',
+    html: `<p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
+    <h1 align="center">Aplikasi Bangunan Kita</h1>
+    <h2>Hai ${username}, to verified your account please click the button below !</h2>
+    <h3 align="center"><button align="center" style="background-color:#e63b2b ; border-top-left-radius: 10px; border-top-right-radius: 10px; color: #ffffff;"><a href="http://192.168.43.163:3000/activate/activate/status/${email}"style="color:white;"><h5>Click to verify</h5></a></button><h3>`
+  };
+
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      return log('Error occurs', err);
+    }
+    return log('Email sent!!!');
+  });
   password = sha1(password + salt)
 
   let pengembangCreate = await Pengembang.create({
@@ -177,33 +213,6 @@ exports.actionRegisterMobile = async function (req, res) {
     }
   }
 }
-// exports.activateAccount = async function (req, res) {
-//   const { email } = req.params;
-//   // if (tokensign) {
-//   //   jwt.verify(token, tokensign, function (err, decodedToken) {
-//   //     if (err) {
-//   //       return res.status(400).json({ error: "expired token" })
-//   //     }
-//   //     const { email } = decodedToken
-//   const pengembang = Pengembang.findOne({
-//     where: { email: { [Op.eq]: email }, }
-//   })
-//   if (pengembang.status === 2) {
-//     pengembang.status = 1
-//     pengembang.save((err, success) => {
-//       if (err) {
-//         console.log("error", err)
-//         return res.status(400), json({ error: 'errorx' })
-//       }
-//       return res.status(201).json({
-//         message: "Success Update Status Active",
-//         pengembang
-//       })
-//     })
-//   }
-// }
-
-
 
 exports.activateAccount1 = async (req, res) => {
 
@@ -228,6 +237,68 @@ exports.activateAccount1 = async (req, res) => {
     }
     res.render("activate/activate", { alert: alert })
   }
+}
+
+exports.Forgotpassword = async (req, res) => {
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+  const { email } = req.params
+  const resetpassword = makeid(8)
+  // console.log(makeid(8));
+  let salt = sha1(uniqid())
+  // let errors = await validateEmail(req)
+  // if (errors.length > 0) return res.status(422).json({ errors })
+  password = sha1(resetpassword + salt)
+  const forgotpass = await Pengembang.findOne({
+    where: {
+      email: { [Op.eq]: email }
+    }
+  })
+  try {
+    if (forgotpass) {
+      forgotpass.password = password
+      forgotpass.salt = salt
+      await forgotpass.save()
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
+        }
+      });
+
+      let mailOptions = {
+        from: 'noreplybangunankita@gmail.com',
+        to: email,
+        subject: 'Reset Password Successfuly',
+        html: `<p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
+        <h1 align="center">Aplikasi Bangunan Kita</h1>
+        <h2>Hai, to verified your account please click the button below !</h2>
+        <h3 align="center">your new password : ${resetpassword}<h3>`
+      };
+
+      transporter.sendMail(mailOptions, (err, data) => {
+        if (err) {
+          return log('Error occurs', err);
+        }
+        return log('Email sent!!!');
+      });
+    }
+    return res.status(201).json({
+      message: "Success Update password",
+      forgotpass
+    })
+  } catch (err) {
+    console.log(err)
+  }
+
 }
 
 /**
@@ -281,6 +352,37 @@ async function validateLogin(req) {
 
   return errors
 }
+
+exports.actionchangePassword = async function (req, res) {
+  const { id } = req.params
+  let {
+    newpassword
+  } = req.body
+  let salt = sha1(uniqid())
+  let errors = await validateLogin(req)
+  if (errors.length > 0) return res.status(422).json({ errors })
+  newpassword = sha1(newpassword + salt)
+  let pengembang = await Pengembang.findOne({
+    where: {
+      id: { [Op.eq]: id }
+    }
+  })
+
+  try {
+    if (pengembang) {
+      pengembang.password = newpassword
+      pengembang.salt = salt
+      await pengembang.save()
+    }
+    return res.status(201).json({
+      message: "Success Update password",
+      pengembang
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 
 /**
  * Verify data user to login
@@ -383,34 +485,35 @@ exports.actionReadSinglePengembang = async (req, res) => {
 
 }
 
-// exports.actionUpdateProfile = async function (req, res) {
-//   const { id } = req.params
-//   let {
-//     nama_proyek,
-//     lokasi,
-//     tanggal
-//   } = req.body
+exports.actionUpdateProfile = async function (req, res) {
+  const { id } = req.params
+  let {
+    nama,
+    email,
+    notelp,
+    username
+  } = req.body
+  // let errors = await validateRegister(req)
+  // if (errors.length > 0) return res.status(422).json({ errors })
+  try {
+    const pengembang = await Pengembang.findOne({
+      where: { id: { [Op.eq]: id } }
+    })
 
-//   let errors = await validateRegister(req)
-//   if (errors.length > 0) return res.status(422).json({ errors })
+    if (pengembang) {
+      pengembang.nama = nama
+      pengembang.email = email
+      pengembang.notelp = notelp
+      pengembang.username = username
+      await pengembang.save()
+    }
 
-//   try {
-//     const proyek = await Proyek.findOne({
-//       where: { id: { [Op.eq]: id } }
-//     })
+    return res.status(201).json({
+      message: "Success Update Pengembang",
+      pengembang
+    })
 
-//     if (proyek) {
-//       proyek.nama_proyek = nama_proyek
-//       proyek.lokasi = lokasi
-//       proyek.tanggal = tanggal
-//       await proyek.save()
-//     }
-
-//     return res.status(201).json({
-//       message: "Success Update Proyek",
-//       proyek
-//     })
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+  } catch (err) {
+    console.log(err)
+  }
+}

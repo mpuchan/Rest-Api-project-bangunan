@@ -30,9 +30,11 @@ const perhitunganplesteranRouter = require("./routes/perhitunganplesteran");
 const perhitunganlantaiRouter = require("./routes/perhitunganlantai");
 const perhitunganuruganRouter = require("./routes/perhitunganurugan");
 const perhitunganpengecatanRouter = require("./routes/perhitunganpengecatan");
+const perhitunganplafonRouter = require("./routes/perhitunganplafon");
 const perhitunganpondasiRouter = require("./routes/perhitunganpondasi");
 const perhitunganbetonRouter = require("./routes/perhitunganbeton");
 const activateRouter = require("./routes/activateuser");
+const profileRouter = require("./routes/profile");
 
 
 var app = express()
@@ -91,7 +93,7 @@ app.get("/api/v1", (req, res) => {
     });
 });
 /* API Router */
-app.use('/api/v1', usersRouter)
+
 app.use('/api/v1', pengembangRouter)
 app.use('/api/v1', proyekRouter)
 app.use("/api/v1/auth", authRouter)
@@ -104,6 +106,8 @@ app.use("/api/v1", perhitunganpengecatanRouter)
 app.use('/api/v1', materialRouter)
 app.use('/api/v1', perhitunganpondasiRouter)
 app.use('/api/v1', perhitunganbetonRouter)
+app.use('/api/v1', perhitunganplafonRouter)
+
 
 
 // cek url active
@@ -123,6 +127,8 @@ app.use('/', jenisRouter)
 app.use('/', superuserRouter)
 app.use('/', materialRouter)
 app.use('/', activateRouter)
+app.use('/', profileRouter)
+app.use('/', usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

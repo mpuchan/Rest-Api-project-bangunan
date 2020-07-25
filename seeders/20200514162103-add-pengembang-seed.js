@@ -10,14 +10,15 @@ module.exports = {
     let password = sha1("melonlord" + salt);
     return queryInterface.bulkInsert('Pengembangs', [
       {
-        nama: 'Emii Chan',
-        email: 'emii@gmail.com',
+        nama: 'MpuChan',
+        email: 'mpuchanchan@gmail.com',
         notelp: '082377954008',
         username: 'emii',
         password: password,
         picture: '',
         status: '1',
         salt: salt,
+        picture: '-vb_7f7XsAnE/XxqALearZBI/AAAAAAAAAoM/JE7E8xa9AHkQHgfV-NLXDEn1C51mbhkGgCLcBGAsYHQ/s1600/Toph_ep26.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },

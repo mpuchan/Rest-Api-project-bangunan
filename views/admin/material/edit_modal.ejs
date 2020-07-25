@@ -2,7 +2,7 @@
 <form action="/admin/material/edit" method="post">
   <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-md" role="document">
       <div class="modal-content" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
         <div class="modal-header"
           style="background-color:#e08e0b; border-top-left-radius: 10px; border-top-right-radius: 10px; color: #ffffff;">
@@ -12,39 +12,85 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="hidden" class="id" required name="id">
-          <div class="form-group">
-            <label>Nama :</label>
-            <input type="text" id="nama" name="nama" class="form-control nama" placeholder="Masukan Nama" required>
-          </div>
-          <div class="form-group">
-            <label>Panjang :</label>
-            <input type="number" id="panjang" name="panjang" class="form-control panjang" placeholder="Masukan Panjang"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Lebar :</label>
-            <input type="number" id="panjang" name="panjang" class="form-control lebar" placeholder="Masukan Lebar"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Tinggi :</label>
-            <input type="number" id="tinggi" name="tinggi" class="form-control tinggi" placeholder="Masukan Tinggi"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Satuan</label>
-            <select required id="SatuanId" name="SatuanId" class="form-control SatuanId">
-              <option value="">--- Pilih Satuan Barang ---</option>
-              <% for (let i = 0; i < satuan.length; i++ ) { %>
-              <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
-              <% } %>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Harga :</label>
-            <input type="number" id="harga" name="harga" class="form-control harga" placeholder="Masukan Harga"
-              required>
+          <div class="row">
+            <input type="hidden" class="id" required name="id">
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Jenis</label>
+                <select required id="SatuanId" name="SatuanId" class="form-control">
+                  <option value="">--- Pilih Jenis Barang ---</option>
+                  <% for (let i = 0; i < jenis.length; i++ ) { %>
+                  <option value="<%= jenis[i].id %>"><%= jenis[i].nama_jenis %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Nama :</label>
+                <input type="text" id="nama" name="nama" class="form-control nama" placeholder="Masukan Nama" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Panjang :</label>
+                <input type="number" id="panjang" name="panjang" class="form-control panjang"
+                  placeholder="Masukan Panjang" required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Lebar :</label>
+                <input type="number" id="panjang" name="panjang" class="form-control lebar" placeholder="Masukan Lebar"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Tinggi :</label>
+                <input type="number" id="tinggi" name="tinggi" class="form-control tinggi" placeholder="Masukan Tinggi"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Tebal:</label>
+                <input type="number" id="tebal" name="tebal" class="form-control tebal" placeholder="Masukan Tebal"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Jumlah :</label>
+                <input type="number" id="jumlah" name="jumlah" class="form-control jumlah" placeholder="Masukan jumlah"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Berat :</label>
+                <input type="number" id="berat" name="berat" class="form-control berat" placeholder="Masukan Berat"
+                  required>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Satuan</label>
+                <select required id="SatuanId" name="SatuanId" class="form-control SatuanId">
+                  <option value="">--- Pilih Satuan Barang ---</option>
+                  <% for (let i = 0; i < satuan.length; i++ ) { %>
+                  <option value="<%= satuan[i].id %>"><%= satuan[i].nama_satuan %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <div class="form-group">
+                <label>Harga :</label>
+                <input type="number" id="harga" name="harga" class="form-control harga" placeholder="Masukan Harga"
+                  required>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

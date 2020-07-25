@@ -23,6 +23,12 @@ module.exports = {
       lokasi: {
         type: Sequelize.STRING(200)
       },
+      luas_tanah: {
+        type: Sequelize.FLOAT
+      },
+      luas_bangunan: {
+        type: Sequelize.FLOAT
+      },
       tanggal: {
         type: Sequelize.DATE
       },

@@ -6,7 +6,7 @@ const {
     actionLogin,
     actionRead,
     actionUpdateStatus,
-    actionReadSinglePengembang
+    actionReadSinglePengembang, actionchangePassword, Forgotpassword, actionUpdateProfile
 } = require("../controllers/pengembang.controller")
 const auth = require("../middlewares/auth")
 
@@ -16,7 +16,10 @@ router.post("/pengembang/signin", actionLogin)
 
 router.use("/pengembang", auth)
 router.get("/pengembang", actionRead)
+router.put("/pengembang/:id", actionchangePassword)
 router.get("/pengembang/:id", actionReadSinglePengembang)
+router.put("/pengembang/updateprofile/:id", actionUpdateProfile)
 router.put("/pengembang/status/:id", actionUpdateStatus)
+router.put("/forgotpass/:email", Forgotpassword)
 
 module.exports = router
