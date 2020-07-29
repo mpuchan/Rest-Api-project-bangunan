@@ -75,92 +75,29 @@ async function validate(req) {
   let errors = []
 
 
-  // if (!KeramikId) {
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!a) {
+    errors.push({
+      field: 'a',
+      message: 'a is required',
+    })
+  } if (!jumlahsemen) {
+    errors.push({
+      field: 'jumlahsemen',
+      message: 'jumlahsemen is required',
+    })
+  }
+  // if (!hargatotal) {
   //   errors.push({
-  //     field: 'KeramikId',
-  //     message: 'KeramikId is required',
+  //     field: 'hargatotal',
+  //     message: 'hargatotal is required',
   //   })
   // }
-  // if (!SemenId) {
-  //   errors.push({
-  //     field: 'SemenId',
-  //     message: 'SemenId is required',
-  //   })
-  // }
-  // if (!PasirId) {
-  //   errors.push({
-  //     field: 'PasirId',
-  //     message: 'PasirId is required',
-  //   })
-  // }
-  // if (!SemeNatId) {
-  //   errors.push({
-  //     field: 'SemeNatId',
-  //     message: 'SemeNatId is required',
-  //   })
-  // }
-  // if (!luas_lantai) {
-  //   errors.push({
-  //     field: 'luas_lantai',
-  //     message: 'luas_lantai is required',
-  //   })
-  // }
-
-  // if (!jumlahkeperluankeramik) {
-  //   errors.push({
-  //     field: 'jumlahkeperluankeramik',
-  //     message: 'jumlahkeperluankeramik is required',
-  //   })
-  // }
-  // if (!jumlahkeperluanpasir) {
-  //   errors.push({
-  //     field: 'jumlahkeperluanpasir',
-  //     message: 'jumlahkeperluanpasir is required',
-  //   })
-  // }
-  // if (!jumlahkeperluansemen) {
-  //   errors.push({
-  //     field: 'jumlahkeperluansemen',
-  //     message: 'jumlahkeperluansemen is required',
-  //   })
-  // }
-  // if (!jumlahkeperluannat) {
-  //   errors.push({
-  //     field: 'jumlahkeperluannat',
-  //     message: 'jumlahkeperluannat is required',
-  //   })
-  // }
-  // if (!metode) {
-  //   errors.push({
-  //     field: 'metode',
-  //     message: 'metode is required',
-  //   })
-  // }
-  // if (!hargakeramik) {
-  //   errors.push({
-  //     field: 'hargakeramik',
-  //     message: 'hargakeramik is required',
-  //   })
-  // }
-  // if (!hargapasir) {
-  //   errors.push({
-  //     field: 'hargapasir',
-  //     message: 'hargapasir is required',
-  //   })
-  // }
-  // if (!hargasemen) {
-  //   errors.push({
-  //     field: 'hargasemen',
-  //     message: 'hargasemen is required',
-  //   })
-  // }
-  // if (!harganat) {
-  //   errors.push({
-  //     field: 'harganat',
-  //     message: 'harganat is required',
-  //   })
-  // }
-
 
   return errors
 }
@@ -283,8 +220,8 @@ exports.actionUpdate = async function (req, res) {
     hargabatutotal,
     hargatotal
   } = req.body
-  let errors = await validate(req)
-  if (errors.length > 0) return res.status(422).json({ errors });
+  // let errors = await validate(req)
+  // if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
     const perhitunganpondasi = await PerhitunganPondasi.findOne({

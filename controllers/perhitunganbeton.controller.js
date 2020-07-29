@@ -215,9 +215,9 @@ exports.actionCreate = async (req, res) => {
     jumlahbegel,
     jumlahkawat,
     jumlahpasir,
-    jumlahpasirdalamtruk,
+    jumlahpasirtruk,
     jumlahbatu,
-    jumlahbatutruk,
+    jumlahbatudalamtruk,
     hargatotalpapan,
     hargatotalpaku,
     hargatotalbesi,
@@ -267,9 +267,9 @@ exports.actionCreate = async (req, res) => {
       jumlahbegel,
       jumlahkawat,
       jumlahpasir,
-      jumlahpasirdalamtruk,
+      jumlahpasirtruk,
       jumlahbatu,
-      jumlahbatutruk,
+      jumlahbatudalamtruk,
       hargatotalpapan,
       hargatotalpaku,
       hargatotalbesi,
@@ -382,8 +382,9 @@ exports.actionUpdate = async function (req, res) {
       perhitunganpondasi.jumlahsemen = jumlahsemen
       perhitunganpondasi.jumlahsemendalamsak = jumlahsemendalamsak
       perhitunganpondasi.jumlahpasir = jumlahpasir
+      perhitunganpondasi.jumlahpasirtruk = jumlahpasirtruk
       perhitunganpondasi.jumlahbatu = jumlahbatu
-      perhitunganpondasi.jumlahbatutruk = jumlahbatutruk
+      perhitunganpondasi.jumlahbatudalamtruk = jumlahbatudalamtruk
       perhitunganpondasi.hargasementotal = hargasementotal
       perhitunganpondasi.hargapasirtotal = hargapasirtotal
       perhitunganpondasi.hargabatutotal = hargabatutotal

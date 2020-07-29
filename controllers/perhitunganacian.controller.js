@@ -65,25 +65,38 @@ async function validate(req) {
 
   let errors = []
 
-  // if (!luas) {
-  //   errors.push({
-  //     field: 'luas_lantai',
-  //     message: 'luas_lantai is required',
-  //   })
-  // }
+  if (!luas) {
+    errors.push({
+      field: 'luas',
+      message: 'luas is required',
+    })
+  }
 
-  // if (!metode) {
-  //   errors.push({
-  //     field: 'metode',
-  //     message: 'metode is required',
-  //   })
-  // }
-  // if (!hargasemen) {
-  //   errors.push({
-  //     field: 'hargasemen',
-  //     message: 'hargasemen is required',
-  //   })
-  // }
+  if (!metode) {
+    errors.push({
+      field: 'metode',
+      message: 'metode is required',
+    })
+  }
+  if (!hargasemen) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
+  }
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!Jumlahkeperluansemen) {
+    errors.push({
+      field: 'Jumlahkeperluansemen',
+      message: 'Jumlahkeperluansemen is required',
+    })
+
+  }
 
   return errors
 }

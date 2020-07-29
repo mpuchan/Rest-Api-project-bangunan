@@ -35,6 +35,7 @@ const perhitunganpondasiRouter = require("./routes/perhitunganpondasi");
 const perhitunganbetonRouter = require("./routes/perhitunganbeton");
 const activateRouter = require("./routes/activateuser");
 const profileRouter = require("./routes/profile");
+const reportRouter = require("./routes/report");
 
 
 var app = express()
@@ -107,6 +108,7 @@ app.use('/api/v1', materialRouter)
 app.use('/api/v1', perhitunganpondasiRouter)
 app.use('/api/v1', perhitunganbetonRouter)
 app.use('/api/v1', perhitunganplafonRouter)
+app.use('/api/v1', reportRouter)
 
 
 

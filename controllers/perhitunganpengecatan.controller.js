@@ -69,19 +69,36 @@ async function validate(req) {
 
   let errors = []
 
-  // if (!luas) {
-  //   errors.push({
-  //     field: 'luas_pengecatan',
-  //     message: 'luas_pengecatan is required',
-  //   })
-  // }
-
-  // if (!hargacat) {
-  //   errors.push({
-  //     field: 'hargacat',
-  //     message: 'hargacat is required',
-  //   })
-  // }
+  if (!luas_pengecatan) {
+    errors.push({
+      field: 'luas_pengecatan',
+      message: 'luas_pengecatan is required',
+    })
+  }
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!hargacat) {
+    errors.push({
+      field: 'hargacat',
+      message: 'hargacat is required',
+    })
+  }
+  if (!hargaplamur) {
+    errors.push({
+      field: 'hargaplamur',
+      message: 'hargaplamur is required',
+    })
+  }
+  if (!jumlahkeperluancat) {
+    errors.push({
+      field: ' jumlahkeperluancat',
+      message: ' jumlahkeperluancat is required',
+    })
+  }
 
   return errors
 }
@@ -213,7 +230,7 @@ exports.actionUpdate = async function (req, res) {
       perhitunganpengecatan.hargacattotal = hargacattotal
       perhitunganpengecatan.hargaplamurtotal = hargaplamurtotal
       perhitunganpengecatan.hargatotal = hargatotal
-      await perhitunganacian.save()
+      await perhitunganpengecatan.save()
     }
     return res.status(201).json({
       message: "Success Update perhitunganpengecatan",

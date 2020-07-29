@@ -1,5 +1,5 @@
 const {
-  PerhitunganBidangBangunan, Proyek
+  PerhitunganBidangBangunan, PerhitunganAcian, Proyek
 } = require("../models")
 const excel = require('exceljs');
 
@@ -83,108 +83,177 @@ exports.actionReadAllSingleData = async (req, res) => {
   }
 }
 
-exports.actionExportSingleData = async (req, res) => {
-  const { ProyekId } = req.params
-  try {
-    const perhitunganbidang = await PerhitunganBidangBangunan.findAll({
-      where: {
-        ProyekId: { [Op.eq]: ProyekId }
-      }
-    })
-    const jsonperhitunganbidangbangunans = JSON.parse(JSON.stringify(perhitunganbidang));
-    console.log(jsonperhitunganbidangbangunans)
-    let workbook = new excel.Workbook(); //creating workbook
-    let worksheet = workbook.addWorksheet('perhitunganbidangbangunans'); //creating worksheet
-    worksheet.views = [
-      { state: 'frozen', ySplit: 1 }
-    ];
-    //  WorkSheet Header
-    worksheet.columns = [
-      { header: 'Nama Pengerjaan', key: 'nama', width: 30 },
-      { header: 'Panjang', key: 'panjangbid', width: 30 },
-      { header: 'Tinggi', key: 'tinggibid', width: 30 },
-      { header: 'Panjang Pintu', key: 'panjangpin', width: 30 },
-      { header: 'Tinggi Pintu', key: 'tinggipin', width: 30 },
-      { header: 'Panjang Jendela', key: 'panjangjen', width: 30 },
-      { header: 'Tinggi Jendela', key: 'tinggijen', width: 30 },
-      { header: 'Luas Bidang', key: 'luas_bidang', width: 30 },
-      { header: 'Nama Batako', key: 'nama_batako', width: 30 },
-      { header: 'Harga Batako', key: 'hargabatako', width: 30 },
-      { header: 'Nama Semen ', key: 'nama_semen', width: 30 },
-      { header: 'Harga Semen', key: 'hargasemen', width: 30 },
-      { header: 'Nama Pasir', key: 'nama_pasir', width: 30 },
-      { header: 'Harga Pasir ', key: 'hargapasir', width: 30 },
-      { header: 'Koefisien Campuran', key: 'metode', width: 30 },
-      { header: 'Keperluan Batako', key: 'jumlahkeperluanbatako', width: 10 },
-      { header: 'Harga Batako Total', key: 'hargabatakototal', width: 12 },
-      { header: 'Keperluan Pasir', key: 'jumlahkeperluanpasir', width: 10 },
-      { header: 'Harga Pasir Total', key: 'hargapasirtotal', width: 12 },
-      { header: 'Keperluan Semen', key: 'Jumlahkeperluansemen', width: 10 },
-      { header: 'Keperluan Semen (/sak)', key: 'jumlahdalamsak', width: 8 },
-      { header: 'Harga Semen Total', key: 'hargasementotal', width: 12 },
-      { header: 'Harga Total', key: 'hargatotal', width: 12 },
-    ];
+// exports.actionExportSingleData = async (req, res) => {
+//   const { ProyekId } = req.params
+//   try {
+//     const perhitunganbidang = await PerhitunganBidangBangunan.findAll({
+//       where: {
+//         ProyekId: { [Op.eq]: ProyekId }
+//       }
+//     })
+//     const perhitunganacian = await PerhitunganAcian.findAll({
+//       where: {
+//         ProyekId: { [Op.eq]: ProyekId }
+//       }
+//     })
+//     const jsonperhitunganbidangbangunans = JSON.parse(JSON.stringify(perhitunganbidang));
+//     const jsonperhitunganacians = JSON.parse(JSON.stringify(perhitunganacian));
+//     console.log(jsonperhitunganbidangbangunans)
+//     console.log(jsonperhitunganacians)
+//     let workbook = new excel.Workbook(); //creating workbook
+//     let worksheet = workbook.addWorksheet('PerhitunganPondasi'); //creating worksheet
+//     let worksheet1 = workbook.addWorksheet('PerhitunganUrugan');
+//     let worksheet2 = workbook.addWorksheet('PerhitunganBidang');
+//     let worksheet3 = workbook.addWorksheet('PerhitunganBeton');
+//     let worksheet4 = workbook.addWorksheet('PerhitunganAtap');
+//     let worksheet5 = workbook.addWorksheet('PerhitunganPlesteran');
+//     let worksheet6 = workbook.addWorksheet('PerhitunganAcian');
+//     let worksheet7 = workbook.addWorksheet('PerhitunganPengecetan');
+//     let worksheet8 = workbook.addWorksheet('PerhitunganLantai');
+//     let worksheet9 = workbook.addWorksheet('PerhitunganPlafon');
+//     let worksheet10 = workbook.addWorksheet('RekapitulasiKeseluruhan');
+//     worksheet2.views = [
+//       { state: 'frozen', ySplit: 1 }
+//     ];
+//     worksheet6.views = [
+//       { state: 'frozen', ySplit: 1 }
+//     ];
+//     worksheet10.views = [
+//       { state: 'frozen', ySplit: 1 }
+//     ];
 
-    // Add Array Rows
-    worksheet.addRows(jsonperhitunganbidangbangunans);
-    worksheet.getRow(1).font = { bold: true }
-    const totalNumberOfRows = worksheet.rowCount
-    worksheet.addRows([''], [''])
-    // Add the total Rows
-    worksheet.addRows(['Total'])
-    worksheet.addRow([
-      'Luas Dinding Total',
-      {
-        formula: `=sum(H2:H${totalNumberOfRows})`
-      }
-    ])
-    worksheet.addRow([
-      'Keperluan Batako Total',
-      {
-        formula: `=sum(P2:P${totalNumberOfRows})`
-      }, {
-        formula: `=sum(P2:P${totalNumberOfRows})`
-      }
-    ])
-    worksheet.addRow([
-      'Keperluan Pasir Total',
-      {
-        formula: `=sum(R2:R${totalNumberOfRows})`
-      },
-      {
-        formula: `=sum(S2:S${totalNumberOfRows})`
-      }
-    ])
-    worksheet.addRow([
-      'Keperluan Semen Total',
-      {
-        formula: `=sum(U2:U${totalNumberOfRows})`
-      },
-      {
-        formula: `=sum(V2:V${totalNumberOfRows})`
-      }
-    ])
-    worksheet.addRow([
-      'Total Biaya Keseluruhan',
-      {
+//     //  WorkSheet Header bidang
+//     worksheet2.columns = [
+//       { header: 'Nama Pengerjaan', key: 'nama', width: 30 },
+//       { header: 'Panjang', key: 'panjangbid', width: 30 },
+//       { header: 'Tinggi', key: 'tinggibid', width: 30 },
+//       { header: 'Panjang Pintu', key: 'panjangpin', width: 30 },
+//       { header: 'Tinggi Pintu', key: 'tinggipin', width: 30 },
+//       { header: 'Panjang Jendela', key: 'panjangjen', width: 30 },
+//       { header: 'Tinggi Jendela', key: 'tinggijen', width: 30 },
+//       { header: 'Luas Bidang', key: 'luas_bidang', width: 30 },
+//       { header: 'Nama Batako', key: 'nama_batako', width: 30 },
+//       { header: 'Harga Batako', key: 'hargabatako', width: 30 },
+//       { header: 'Nama Semen ', key: 'nama_semen', width: 30 },
+//       { header: 'Harga Semen', key: 'hargasemen', width: 30 },
+//       { header: 'Nama Pasir', key: 'nama_pasir', width: 30 },
+//       { header: 'Harga Pasir ', key: 'hargapasir', width: 30 },
+//       { header: 'Koefisien Campuran', key: 'metode', width: 30 },
+//       { header: 'Keperluan Batako', key: 'jumlahkeperluanbatako', width: 10 },
+//       { header: 'Harga Batako Total', key: 'hargabatakototal', width: 12 },
+//       { header: 'Keperluan Pasir', key: 'jumlahkeperluanpasir', width: 10 },
+//       { header: 'Harga Pasir Total', key: 'hargapasirtotal', width: 12 },
+//       { header: 'Keperluan Semen', key: 'Jumlahkeperluansemen', width: 10 },
+//       { header: 'Keperluan Semen (/sak)', key: 'jumlahdalamsak', width: 8 },
+//       { header: 'Harga Semen Total', key: 'hargasementotal', width: 12 },
+//       { header: 'Harga Total', key: 'hargatotal', width: 12 }
+//     ];
+//     //  WorkSheet Header Acian
+//     worksheet6.columns = [
+//       { header: 'Nama Pengerjaan', key: 'nama', width: 30 },
+//       { header: 'Panjang', key: 'panjangdin', width: 30 },
+//       { header: 'Tinggi', key: 'tinggidin', width: 30 },
+//       { header: 'Sisi', key: 'sisi', width: 30 },
+//       { header: 'Luas', key: 'luas', width: 30 },
+//       { header: 'Campuran', key: 'metode', width: 30 },
+//       { header: 'Nama Semen', key: 'nama_semen', width: 30 },
+//       { header: 'Harga Semen', key: 'hargasemen', width: 30 },
+//       { header: 'Jumlah Keperluan Semen', key: 'Jumlahkeperluansemen', width: 30 },
+//       { header: 'Jumlah dalam Sak', key: 'jumlahdalamsak', width: 30 },
+//       { header: 'Harga Total Semen', key: 'hargasementotal', width: 30 },
+//       { header: 'Harga Total', key: 'hargatotal', width: 30 }
 
-      },
-      {
-        formula: `=sum(W2:W${totalNumberOfRows})`
-      }
-    ])
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.setHeader('Content-Disposition', 'attachment; filename=' + 'Perhitungan Bidang Bangunan.xlsx');
+//     ];
+//     //  WorkSheet Header Rekapitulasi
+//     worksheet10.mergeCells('A1:E1');
+//     worksheet10.getCell('A1').value = 'Rekapitulasi Data Keperluan Material';
+//     worksheet10.getCell('A1').alignment = { horizontal: 'center' };
 
-    return workbook.xlsx.write(res)
-      .then(function () {
-        res.status(200).end();
-      });
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
-}
+//     // worksheet10.columns = [
+//     //   { header: 'No',key:'nama',width:30},
+//     //   { header: 'Data Material', key: 'nama', width: 60 },
+//     //   { header: 'Jumlah Harga', key: 'nama', width: 60 }
+//     // ];
+//     // Add Array Rows Bidang
+//     worksheet2.addRows(jsonperhitunganbidangbangunans);
+//     worksheet2.getRow(1).font = { bold: true }
+//     const totalNumberOfRows = worksheet2.rowCount
+//     worksheet2.addRows([''], [''])
+//     // Add the total Rows Bidang
+//     worksheet2.addRows(['Total'])
+//     worksheet2.addRow([
+//       'Luas Dinding Total',
+//       {
+//         formula: `=sum(H2:H${totalNumberOfRows})`
+//       }
+//     ])
+//     worksheet2.addRow([
+//       'Keperluan Batako Total',
+//       {
+//         formula: `=sum(P2:P${totalNumberOfRows})`
+//       }, {
+//         formula: `=sum(P2:P${totalNumberOfRows})`
+//       }
+//     ])
+//     worksheet2.addRow([
+//       'Keperluan Pasir Total',
+//       {
+//         formula: `=sum(R2:R${totalNumberOfRows})`
+//       },
+//       {
+//         formula: `=sum(S2:S${totalNumberOfRows})`
+//       }
+//     ])
+//     worksheet2.addRow([
+//       'Keperluan Semen Total',
+//       {
+//         formula: `=sum(U2:U${totalNumberOfRows})`
+//       },
+//       {
+//         formula: `=sum(V2:V${totalNumberOfRows})`
+//       }
+//     ])
+//     worksheet2.addRow([
+//       'Total Biaya Keseluruhan',
+//       {
+
+//       },
+//       {
+//         formula: `=sum(W2:W${totalNumberOfRows})`
+//       }
+//     ])
+//     //Acians
+//     worksheet6.addRows(jsonperhitunganacians);
+//     worksheet6.getRow(1).font = { bold: true }
+//     //Rekapitulasi
+//     worksheet10.getRow(1).font = { bold: true }
+//     const totalNumberOfRows2 = worksheet2.rowCount
+//     const totalNumberOfRows6 = worksheet6.rowCount
+//     worksheet10.getCell('A2').value = 'Nama Proyek : ';
+//     worksheet10.mergeCells('B2:C2');
+//     worksheet10.getCell('B2').value = ProyekId;
+//     // Add the total Rows Rekapitulasi
+//     worksheet10.addRow([
+//       'Total Biaya',
+//       {
+//         formula: `=sum(PerhitunganBidang!W2:W${totalNumberOfRows2})+sum(PerhitunganAcian!L2:L${totalNumberOfRows6})`
+//       }
+//     ])
+
+//     // const totalNumberOfRows1 = worksheet1.rowCount
+//     // worksheet1.addRows([''], [''])
+//     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+//     res.setHeader('Content-Disposition', 'attachment; filename=' + 'Perhitungan Bidang Bangunan.xlsx');
+
+//     return workbook.xlsx.write(res)
+//       .then(function () {
+//         res.status(200).end();
+//       });
+//   } catch (err) {
+//     console.log(err)
+//     throw err
+//   }
+// }
 
 async function validate(req) {
   let {
@@ -419,8 +488,8 @@ exports.actionUpdate = async function (req, res) {
     hargasementotal,
     hargatotal
   } = req.body
-  let errors = await validate(req)
-  if (errors.length > 0) return res.status(422).json({ errors });
+  // let errors = await validate(req)
+  // if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
     const perhitunganbidang = await PerhitunganBidangBangunan.findOne({

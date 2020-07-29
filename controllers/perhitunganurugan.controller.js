@@ -67,6 +67,37 @@ async function validate(req) {
   let errors = []
 
 
+  if (!volume) {
+    errors.push({
+      field: 'volume',
+      message: 'volume is required',
+    })
+  }
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!Jumlahkeperluanpasir) {
+    errors.push({
+      field: 'Jumlahkeperluanpasir',
+      message: 'Jumlahkeperluanpasir is required',
+    })
+  }
+
+  if (!hargapasir) {
+    errors.push({
+      field: 'hargapasir',
+      message: 'hargapasir is required',
+    })
+  }
+  if (!hargapasirtotal) {
+    errors.push({
+      field: 'hargapasirtotal',
+      message: 'hargapasirtotal is required',
+    })
+  }
 
   return errors
 }

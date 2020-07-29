@@ -174,6 +174,7 @@ exports.actionRegisterMobile = async function (req, res) {
       return log('Error occurs', err);
     }
     return log('Email sent!!!');
+    console.log(mailOptions)
   });
   password = sha1(password + salt)
 
@@ -280,7 +281,7 @@ exports.Forgotpassword = async (req, res) => {
         subject: 'Reset Password Successfuly',
         html: `<p align="center"><a href="https://techedusite.blogspot.com" target="_blank" rel="noopener noreferrer"><img width="50" src="https://1.bp.blogspot.com/-HqWPBkUAHWY/XuEG6D4qnyI/AAAAAAAAAkY/zBVNdXiUn5kO5ijFoZkiUWyLgQp3kpmHQCLcBGAsYHQ/s1600/iconapl.png" alt="Bangunan Kita logo"></a></p>
         <h1 align="center">Aplikasi Bangunan Kita</h1>
-        <h2>Hai, to verified your account please click the button below !</h2>
+        <h2>Hai,your password has been reset!</h2>
         <h3 align="center">your new password : ${resetpassword}<h3>`
       };
 

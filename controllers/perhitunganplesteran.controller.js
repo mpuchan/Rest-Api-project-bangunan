@@ -71,39 +71,44 @@ async function validate(req) {
   let errors = []
 
 
-  // if (!volume) {
-  //   errors.push({
-  //     field: 'volume',
-  //     message: 'volume is required',
-  //   })
-  // }
+  if (!volume) {
+    errors.push({
+      field: 'volume',
+      message: 'volume is required',
+    })
+  }
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!jumlahkeperluanpasir) {
+    errors.push({
+      field: 'jumlahkeperluanpasir',
+      message: 'jumlahkeperluanpasir is required',
+    })
+  }
 
-  // if (!jumlahkeperluanpasir) {
-  //   errors.push({
-  //     field: 'jumlahkeperluanpasir',
-  //     message: 'jumlahkeperluanpasir is required',
-  //   })
-  // }
+  if (!metode) {
+    errors.push({
+      field: 'metode',
+      message: 'metode is required',
+    })
+  }
 
-  // if (!metode) {
-  //   errors.push({
-  //     field: 'metode',
-  //     message: 'metode is required',
-  //   })
-  // }
-
-  // if (!hargapasir) {
-  //   errors.push({
-  //     field: 'hargapasir',
-  //     message: 'hargapasir is required',
-  //   })
-  // }
-  // if (!hargasemen) {
-  //   errors.push({
-  //     field: 'hargasemen',
-  //     message: 'hargasemen is required',
-  //   })
-  // }
+  if (!hargapasir) {
+    errors.push({
+      field: 'hargapasir',
+      message: 'hargapasir is required',
+    })
+  }
+  if (!hargasemen) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
+  }
 
 
   return errors

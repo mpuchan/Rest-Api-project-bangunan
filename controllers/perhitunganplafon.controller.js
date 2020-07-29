@@ -101,6 +101,7 @@ exports.actionCreate = async (req, res) => {
         hargatriplek,
         hargapaku,
         hargareng,
+        jumlahpaku,
         jumlahtriplek,
         jumlahtripleklembar,
         jumlahreng,
@@ -128,6 +129,7 @@ exports.actionCreate = async (req, res) => {
             hargatriplek,
             hargapaku,
             hargareng,
+            jumlahpaku,
             jumlahtriplek,
             jumlahtripleklembar,
             jumlahreng,
@@ -172,7 +174,6 @@ async function validateRead(req) {
 exports.actionUpdate = async function (req, res) {
     const { id } = req.params
     let {
-        ProyekId,
         nama,
         panjang,
         lebar,
@@ -187,6 +188,7 @@ exports.actionUpdate = async function (req, res) {
         jumlahtripleklembar,
         jumlahreng,
         jumlahrengbatang,
+        jumlahpaku,
         hargatotaltriplek,
         hargatotalpaku,
         hargatotalreng,
@@ -211,15 +213,16 @@ exports.actionUpdate = async function (req, res) {
             perhitunganplafon.hargatriplek = hargatriplek
             perhitunganplafon.hargapaku = hargapaku
             perhitunganplafon.hargareng = hargareng
-            perhitunganplafon.jumlahtripleklembar = jumlahtriplek
+            perhitunganplafon.jumlahtriplek = jumlahtriplek
             perhitunganplafon.jumlahtripleklembar = jumlahtripleklembar
+            perhitunganplafon.jumlahpaku = jumlahpaku
             perhitunganplafon.jumlahreng = jumlahreng
             perhitunganplafon.jumlahrengbatang = jumlahrengbatang
             perhitunganplafon.hargatotaltriplek = hargatotaltriplek
             perhitunganplafon.hargatotalpaku = hargatotalpaku
             perhitunganplafon.hargatotalreng = hargatotalreng
             perhitunganplafon.hargatotal = hargatotal
-            await perhitunganacian.save()
+            await perhitunganplafon.save()
         }
 
         return res.status(201).json({
