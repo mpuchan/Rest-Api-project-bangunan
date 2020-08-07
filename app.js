@@ -33,6 +33,7 @@ const perhitunganpengecatanRouter = require("./routes/perhitunganpengecatan");
 const perhitunganplafonRouter = require("./routes/perhitunganplafon");
 const perhitunganpondasiRouter = require("./routes/perhitunganpondasi");
 const perhitunganbetonRouter = require("./routes/perhitunganbeton");
+const perhitunganatapRouter = require("./routes/perhitunganatap");
 const activateRouter = require("./routes/activateuser");
 const profileRouter = require("./routes/profile");
 const reportRouter = require("./routes/report");
@@ -108,6 +109,7 @@ app.use('/api/v1', materialRouter)
 app.use('/api/v1', perhitunganpondasiRouter)
 app.use('/api/v1', perhitunganbetonRouter)
 app.use('/api/v1', perhitunganplafonRouter)
+app.use('/api/v1', perhitunganatapRouter)
 app.use('/api/v1', reportRouter)
 
 
@@ -131,7 +133,6 @@ app.use('/', materialRouter)
 app.use('/', activateRouter)
 app.use('/', profileRouter)
 app.use('/', usersRouter)
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

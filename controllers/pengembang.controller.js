@@ -6,12 +6,38 @@ const nodemailer = require('nodemailer')
 const Op = require("sequelize").Op
 const uniqid = require("uniqid")
 const sha1 = require("sha1");
-const { token } = require('morgan');
-const { gmail_callback } = require('./google.controller')
+// const { token } = require('morgan');
+// const { gmail_callback } = require('./google.controller')
 
 /**
  * Validation collection that will be used before create data pengembang
  */
+async function changepass(req) {
+  /* form validasi mobile  login or signin */
+  let oldpassword, newpassword, repeatpassword
+  let errors = []
+  console.log(Pengembang)
+  if (!oldpassword) {
+    errors.push({
+      field: "oldpass",
+      message: "oldpass required"
+    })
+  }
+  if (!newpassword) {
+    errors.push({
+      field: "newpass",
+      message: "newpass required"
+    })
+  }
+  if (!repeatpassword) {
+    errors.push({
+      field: "repeatpass",
+      message: "repeatpass required"
+    })
+  }
+
+  return errors
+}
 
 async function validateRegister(req) {
   let {
@@ -357,10 +383,13 @@ async function validateLogin(req) {
 exports.actionchangePassword = async function (req, res) {
   const { id } = req.params
   let {
-    newpassword
+    oldpassword,
+    newpassword,
+    repeatpassword
   } = req.body
   let salt = sha1(uniqid())
-  let errors = await validateLogin(req)
+
+  let errors = await changepass(req)
   if (errors.length > 0) return res.status(422).json({ errors })
   newpassword = sha1(newpassword + salt)
   let pengembang = await Pengembang.findOne({
@@ -371,16 +400,27 @@ exports.actionchangePassword = async function (req, res) {
 
   try {
     if (pengembang) {
-      pengembang.password = newpassword
-      pengembang.salt = salt
-      await pengembang.save()
+      oldpassword = sha1(oldpassword + pengembang.salt);
+      if (oldpassword != pengembang.password) {
+        errors.push({
+          field: "password",
+          message: "Invalid Password"
+        })
+      }
+      if (newpassword != repeatpassword) {
+        console.error('password tidak sesuai')
+      } else {
+        pengembang.password = newpassword
+        pengembang.salt = salt
+        await pengembang.save()
+      }
     }
     return res.status(201).json({
       message: "Success Update password",
       pengembang
     })
   } catch (err) {
-    console.log(err)
+    return res.status(422).json([{ field: "jwt", message: err.message }])
   }
 }
 
@@ -518,3 +558,5 @@ exports.actionUpdateProfile = async function (req, res) {
     console.log(err)
   }
 }
+
+

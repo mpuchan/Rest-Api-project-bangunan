@@ -1,0 +1,230 @@
+<%- include ../../partials/admin_layout/header.ejs %>
+<%- include ../../partials/admin_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Data User
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">Data User</li>
+    </ol>
+    <% if(alert.message != '') { %>
+    <br>
+    <div class="alert alert-<%= alert.status %>" style="text-align: center;">
+      <strong><%= alert.message %></strong>
+    </div>
+    <% } %>
+  </section>
+
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <th style="width: 50%;">Data User</th>
+            <th class="box-title" style="margin-left: 80%;">
+              <!-- <button class="btn btn-success">Tambah</button> -->
+              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#add-modal">
+                Tambah
+              </button>
+            </th>
+          </div>
+
+          <div class="box-body" style="height: 370px; overflow-y: scroll; overflow-x: scroll;">
+
+            <div class="table-wrapper content">
+              <table id="pengembangs" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>email</th>
+                    <th>notelp</th>
+                    <th>status</th>
+                    <th>Confirmation</th>
+                    <th>Reset Pass</th>
+                    <th>Edit</th>
+                    <th>Hapus</th>
+                  </tr>
+                </thead>
+            </div>
+            <div class="table-body-wrapper" style="position: relative; overflow: visible;">
+              <tbody>
+
+                <% for (let i = 0; i < pengembangs.length; i++ ) { %>
+
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= pengembangs[i].nama %></td>
+                  <td><%= pengembangs[i].email %></td>
+                  <td>
+                    <%= pengembangs[i].notelp %></td>
+                  <td>
+                    <span class="pull-right-container">
+                      <% if(pengembangs[i].status === 1) { %>
+                      <small class="label pull-center bg-green">"Aktif"</small>
+                      <% } else { %>
+                      <small class="label pull-center bg-yellow">"Non Aktif</small>
+                      <% }  %>
+                    </span>
+                  </td>
+                  <td>
+                    <% if(pengembangs[i].status === 1) { %>
+                    <button class="btn btn-primary btn-sm" onclick="update_status(`<%= pengembangs[i].id %>`)"
+                      data-id="<%= pengembangs[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Nonactive User
+                    </button>
+                    <% } else { %>
+                    <button class="btn btn-warning btn-sm" onclick="update_status(`<%= pengembangs[i].id %>`)"
+                      data-id="<%= pengembangs[i].id %>">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Active User
+                    </button>
+                    <% } %>
+                  </td>
+                  <td>
+                    <button class="btn btn-yellow btn-sm" onclick="reset_pass(`<%= pengembangs[i].id %>`)"
+                      data-id="<%= pengembangs[i].id %>">
+                      <span class="glyphicon glyphicon-lock"></span>
+                      resetpass
+                    </button>
+                  </td>
+                  <td>
+                    <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
+                      data-id="<%= pengembangs[i].id %>" data-nama="<%= pengembangs[i].nama %>"
+                      data-email="<%= pengembangs[i].email %>" data-notelp="<%= pengembangs[i].notelp %>"
+                      data-username="<%= pengembangs[i].username %>">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                      Edit
+                    </a>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" onclick="delete_user(`<%= pengembangs[i].id %>`)"
+                      data-id="<%= pengembangs[i].id %>">
+                      <span class="glyphicon glyphicon-remove"></span>
+                      Hapus
+                    </button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </div>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<%- include ../../partials/admin_layout/footer.ejs %>
+<%- include add_modal.ejs %>
+<%- include edit_modal.ejs %>
+
+<!-- page script -->
+<script>
+
+  $(document).ready(function () {
+    // datatable
+    $('#pengembangs').DataTable()
+    $(document).ready(function () { setTimeout(function () { $(".alert").fadeIn('slow'); }, 1500); });
+    // angka 3000 dibawah ini artinya pesan akan hilang dalam 3 detik setelah muncul
+    setTimeout(function () { $(".alert").fadeOut('slow'); }, 4000);
+
+    // redirect halaman catalogs
+    function successTambah() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/user')
+    }
+  })
+
+  //showing data to e edit modal user
+  $('#pengembangs').on('click', '.edit', function () {
+    var id = $(this).data('id');
+    var nama = $(this).data('nama');
+    var email = $(this).data('email');
+    var notelp = $(this).data('notelp');
+    var username = $(this).data('username');
+
+    $('#edit-modal').modal('show');
+    $('.id').val(id);
+    $('.nama').val(nama);
+    $('.email').val(email);
+    $('.notelp').val(notelp);
+    $('.username').val(username);
+  });
+
+
+  // Change Status User 
+  function update_status(id) {
+    let idPengembang = id
+    swal({
+      title: "Konfirmasi User ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          icon: "success",
+          buttons: false,
+          timer: 2000
+        }).then(suksesChange => {
+          window.location.assign(`/admin/user/status/${idPengembang}`);
+        })
+      }
+    })
+  }
+  //Reset Pass User
+  function reset_pass(id) {
+    let idPengembang = id
+    swal({
+      title: "Yakin Ingin mereset Password?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          text: "Success Reset Password",
+          icon: "success",
+          buttons: false,
+          timer: 2000
+        }).then(suksesChange => {
+          window.location.assign(`/admin/user/reset/${idPengembang}`);
+        })
+      }
+    })
+  }
+  // Delete User
+  function delete_user(id) {
+    let idPengembang = id
+    swal({
+      title: "Yakin Ingin Menghapus Data User ini?",
+      text: "Data yang dihapus, tidak bisa kembali lagi.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        window.location.assign(`/admin/user/delete/${idPengembang}`);
+      }
+    });
+  }
+
+
+
+</script>

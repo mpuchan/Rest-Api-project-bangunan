@@ -346,7 +346,7 @@ exports.actionUpdate = async function (req, res) {
     jumlahpasir,
     jumlahpasirdalamtruk,
     jumlahbatu,
-    jumlahbatutruk,
+    jumlahbatudalamtruk,
     hargatotalpapan,
     hargatotalpaku,
     hargatotalbesi,
@@ -366,30 +366,47 @@ exports.actionUpdate = async function (req, res) {
     })
 
     if (perhitunganbeton) {
-      perhitunganpondasi.nama = nama
-      perhitunganpondasi.a = a
-      perhitunganpondasi.b = b
-      perhitunganpondasi.t = t
-      perhitunganpondasi.p = p
-      perhitunganpondasi.luas = luas
-      perhitunganpondasi.metode = metode
-      perhitunganpondasi.namasemen = namasemen
-      perhitunganpondasi.namapasir = namapasir
-      perhitunganpondasi.namabatu = namabatu
-      perhitunganpondasi.hargasemen = hargasemen
-      perhitunganpondasi.hargapasir = hargapasir
-      perhitunganpondasi.hargabatukali = hargabatukali
-      perhitunganpondasi.jumlahsemen = jumlahsemen
-      perhitunganpondasi.jumlahsemendalamsak = jumlahsemendalamsak
-      perhitunganpondasi.jumlahpasir = jumlahpasir
-      perhitunganpondasi.jumlahpasirtruk = jumlahpasirtruk
-      perhitunganpondasi.jumlahbatu = jumlahbatu
-      perhitunganpondasi.jumlahbatudalamtruk = jumlahbatudalamtruk
-      perhitunganpondasi.hargasementotal = hargasementotal
-      perhitunganpondasi.hargapasirtotal = hargapasirtotal
-      perhitunganpondasi.hargabatutotal = hargabatutotal
-      perhitunganpondasi.hargatotal = hargatotal
-      await perhitunganpondasi.save()
+      perhitunganbeton.nama = nama
+      perhitunganbeton.panjangbeton = panjangbeton
+      perhitunganbeton.pilihanbeton = pilihanbeton
+      perhitunganbeton.namapapan = namapapan
+      perhitunganbeton.namapaku = namapaku
+      perhitunganbeton.namakawat = namakawat
+      perhitunganbeton.namabesi = namabesi
+      perhitunganbeton.namasemen = namasemen
+      perhitunganbeton.namapasir = namapasir
+      perhitunganbeton.namabatu = namabatu
+      perhitunganbeton.namabegel = namabegel
+      perhitunganbeton.hargapapan = hargapapan
+      perhitunganbeton.hargapaku = hargapaku
+      perhitunganbeton.hargakawat = hargakawat
+      perhitunganbeton.hargabesi = hargabesi
+      perhitunganbeton.hargasemen = hargasemen
+      perhitunganbeton.hargapasir = hargapasir
+      perhitunganbeton.hargabatu = hargabatu
+      perhitunganbeton.hargabegel = hargabegel
+      perhitunganbeton.jumlahpapan = jumlahpapan
+      perhitunganbeton.jumlahpaku = jumlahpaku
+      perhitunganbeton.jumlahkawat = jumlahkawat
+      perhitunganbeton.jumlahbesi = jumlahbesi
+      perhitunganbeton.jumlahsemen = jumlahsemen
+      perhitunganbeton.jumlahpasir = jumlahpasir
+      perhitunganbeton.jumlahbatu = jumlahbatu
+      perhitunganbeton.jumlahbegel = jumlahbegel
+      perhitunganbeton.hargatotalpapan = hargatotalpapan
+      perhitunganbeton.hargatotalpaku = hargatotalpaku
+      perhitunganbeton.hargatotalkawat = hargatotalkawat
+      perhitunganbeton.hargatotalbesi = hargatotalbesi
+      perhitunganbeton.hargatotalsemen = hargatotalsemen
+      perhitunganbeton.hargatotalpasir = hargatotalpasir
+      perhitunganbeton.hargatotalbatu = hargatotalbatu
+      perhitunganbeton.hargatotalbegel = hargatotalbegel
+      perhitunganbeton.hargatotal = hargatotal
+      perhitunganbeton.jumlahsemendalamsak = jumlahsemendalamsak
+      perhitunganbeton.jumlahpasirdalamtruk = jumlahpasirdalamtruk
+      perhitunganbeton.jumlahbatudalamtruk = jumlahbatudalamtruk
+
+      await perhitunganbeton.save()
     }
 
     return res.status(201).json({

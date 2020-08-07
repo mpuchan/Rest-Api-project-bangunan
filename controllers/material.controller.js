@@ -230,7 +230,7 @@ exports.viewGenteng = async (req, res) => {
       { where: { JenisId: 16 } }
     )
     return res.status(200).json({
-      message: "Success Read Semen-Nat",
+      message: "Success Read Genteng",
       materials
     })
   } catch (err) {
@@ -245,6 +245,20 @@ exports.viewPlamur = async (req, res) => {
     )
     return res.status(200).json({
       message: "Success Read Plamur",
+      materials
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+exports.viewBubungan = async (req, res) => {
+  try {
+    const materials = await Material.findAll(
+      { where: { JenisId: 21 } }
+    )
+    return res.status(200).json({
+      message: "Success Read Bubungan",
       materials
     })
   } catch (err) {

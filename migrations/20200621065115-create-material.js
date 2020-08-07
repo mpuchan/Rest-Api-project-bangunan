@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nama: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       panjang: {
         type: Sequelize.INTEGER

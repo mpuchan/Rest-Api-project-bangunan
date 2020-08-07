@@ -5,7 +5,7 @@ let {
     actionMaterialCreate,
     actionMaterialUpdate,
     actionMaterialDelete, viewPasir, viewSemen, viewBatako,
-    viewSemennat, viewKayu, viewTriplek, viewKeramik, viewCat, viewPlamur, viewBatu, viewBesi, viewLispapan, viewPengikat, viewPaku
+    viewSemennat, viewKayu, viewTriplek, viewKeramik, viewCat, viewPlamur, viewBatu, viewBesi, viewLispapan, viewPengikat, viewPaku, viewBubungan, viewGenteng
 } = require("../controllers/material.controller")
 
 const auth = require('../middlewares/auth_admin')
@@ -28,4 +28,6 @@ router.get("/viewPengikat", viewPengikat)
 router.get("/viewPaku", viewPaku)
 router.get("/viewKayu", viewKayu)
 router.get("/viewTriplek", viewTriplek)
+router.get("/viewbubungan", viewBubungan)
+router.get("/viewgenteng", viewGenteng)
 module.exports = router

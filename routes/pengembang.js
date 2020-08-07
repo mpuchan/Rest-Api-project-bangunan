@@ -16,7 +16,7 @@ router.post("/pengembang/signin", actionLogin)
 
 router.use("/pengembang", auth)
 router.get("/pengembang", actionRead)
-router.put("/pengembang/:id", actionchangePassword)
+router.put("/pengembang/changepw/:id", actionchangePassword)
 router.get("/pengembang/:id", actionReadSinglePengembang)
 router.put("/pengembang/updateprofile/:id", actionUpdateProfile)
 router.put("/pengembang/status/:id", actionUpdateStatus)

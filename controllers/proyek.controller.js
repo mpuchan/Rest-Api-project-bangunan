@@ -74,6 +74,38 @@ exports.actionReadAllSinglePengembang = async (req, res) => {
   }
 }
 
+exports.actionSearchNamaproyek = async (req, res) => {
+  const { PengembangId } = req.params
+  const { nama_proyek1 } = req.body
+
+  try {
+    const proyek = await Proyek.findAll({
+      where: {
+        PengembangId: { [Op.eq]: PengembangId }
+        , nama_proyek: { [Op.like]: '%' + nama_proyek1 + '%' }
+      }
+    })
+
+
+    // const Obj = {
+    //   id: proyek.id,
+    //   PengembangId: proyek.PengembangId,
+    //   nama_proyek: proyek.nama_proyek,
+    //   lokasi: proyek.lokasi,
+    //   tanggal: proyek.tanggal
+    // }
+    // res.send(JSON.stringify(Obj))
+
+    return res.status(200).json({
+      message: "Success Read Proyek with key",
+      proyek
+    })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
 async function validate(req) {
   let {
     nama_proyek,
@@ -183,6 +215,8 @@ exports.actionReadSingleproyek = async (req, res) => {
     throw err
   }
 }
+
+
 
 exports.actionUpdate = async function (req, res) {
   const { id } = req.params

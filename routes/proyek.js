@@ -6,7 +6,7 @@ const {
     // actionDelete,
     actionUpdate,
     actionCreate,
-    actionDelete
+    actionDelete, actionSearchNamaproyek
 } = require("../controllers/proyek.controller")
 
 const auth = require("../middlewares/auth")
@@ -14,6 +14,8 @@ const auth = require("../middlewares/auth")
 router.use("/proyek", auth)
 router.post("/proyek", actionCreate)
 router.get("/proyek/:PengembangId", actionReadAllSinglePengembang)
+router.post("/proyek/:PengembangId", actionSearchNamaproyek)
+
 router.put("/proyek/:id", actionUpdate)
 router.delete("/proyek/pengembang/:PengembangId", actionDelete)
 router.delete("/proyek/:id", actionDelete)

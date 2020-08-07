@@ -42,14 +42,14 @@
         </a>
         <ul class="treeview-menu">
           <% if (user.role == 1) { %>
-          <li class="<% if ( stuff.url == "/admin/superuser" ) { %> active <% } %>">
-            <a href="/admin/superuser"><i class="fa fa-user"></i> <span>Super User</span></a>
-          </li>
+          <!-- <li class="<% if ( stuff.url == "/admin/superuser" ) { %> active <% } %>">
+            <a href="/admin/superuser"><i class="fa fa-user"></i> <span>Pembantu Admin</span></a>
+          </li> -->
           <% }else if (user.role == 2) { %>
           <% }else{ %>
-          <li class="<% if ( stuff.url == "/admin/superuser" ) { %> active <% } %>">
-            <a href="/admin/superuser"><i class="fa fa-user"></i> <span>Super User</span></a>
-          </li>
+          <!-- <li class="<% if ( stuff.url == "/admin/superuser" ) { %> active <% } %>">
+            <a href="/admin/superuser"><i class="fa fa-user"></i> <span>Pembantu Admin</span></a>
+          </li> -->
           <% } %>
           <li class="<% if ( stuff.url == "/admin/user" ) { %> active <% } %>">
             <a href="/admin/user"><i class="fa fa-users"></i> <span>User</span></a>

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     ProyekId: DataTypes.INTEGER,
     nama: DataTypes.STRING,
     panjangbeton: DataTypes.FLOAT,
-    pilihanbeton: DataTypes.FLOAT,
+    pilihanbeton: DataTypes.STRING,
     namapapan: DataTypes.STRING,
     namapaku: DataTypes.STRING,
     namabesi: DataTypes.STRING,
