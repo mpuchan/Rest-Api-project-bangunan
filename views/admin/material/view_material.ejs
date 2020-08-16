@@ -59,15 +59,13 @@
                   <td>
                     <%= material[i].Satuan.nama_satuan %></td>
                   <td><%= material[i].harga %></td>
-                  <td><%= material[i].Jeni.id %></td>
-
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
                       data-id="<%= material[i].id %>" data-nama="<%= material[i].nama %>"
                       data-panjang="<%= material[i].panjang %>" data-lebar="<%= material[i].lebar %>"
                       data-tinggi="<%= material[i].tinggi %>" data-berat="<%= material[i].berat %>"
                       data-jumlah="<%= material[i].jumlah %>" data-tebal="<%= material[i].tebal %>"
-                      data-SatuanId="<%= material[i].Satuan.id %>" data-jenisid="<%= material[i].Jeni.id %>"
+                      data-SatuanId="<%= material[i].SatuanId %>" data-jenisid="<%= material[i].JenisId %>"
                       data-harga="<%= material[i].harga %>"> <span class="glyphicon glyphicon-pencil"></span>
                       Edit</a>
 
