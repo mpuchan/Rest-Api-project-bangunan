@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       pilihanbeton: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(60)
       },
       namapapan: {
         type: Sequelize.STRING(100)

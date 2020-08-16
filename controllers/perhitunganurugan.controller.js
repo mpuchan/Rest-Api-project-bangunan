@@ -73,6 +73,24 @@ async function validate(req) {
       message: 'volume is required',
     })
   }
+  if (!panjang) {
+    errors.push({
+      field: 'panjang',
+      message: 'panjang is required',
+    })
+  }
+  if (!lebar) {
+    errors.push({
+      field: 'lebar',
+      message: 'lebar is required',
+    })
+  }
+  if (!tinggi) {
+    errors.push({
+      field: 'tinggi',
+      message: 'tinggi is required',
+    })
+  }
   if (!nama) {
     errors.push({
       field: 'nama',

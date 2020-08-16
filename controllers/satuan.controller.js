@@ -9,8 +9,8 @@ exports.viewSatuan = async (req, res) => {
     const alert = { message: alertMessage, status: alertStatus }
     const userLogin = req.session.user
 
-    console.log(userLogin.status)
-    if (userLogin.status === 1) {
+    console.log(userLogin)
+    if (userLogin) {
       const satuans = await Satuan.findAll()
       res.render("admin/satuan/view_satuan", {
 

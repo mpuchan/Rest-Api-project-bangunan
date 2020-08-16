@@ -70,19 +70,19 @@ async function validate(req) {
 
     let errors = []
 
-    // if (!luas) {
-    //     errors.push({
-    //         field: 'luas_pengecatan',
-    //         message: 'luas_pengecatan is required',
-    //     })
-    // }
+    if (!panjang) {
+        errors.push({
+            field: 'luas',
+            message: 'luas is required',
+        })
+    }
 
-    // if (!hargacat) {
-    //     errors.push({
-    //         field: 'hargacat',
-    //         message: 'hargacat is required',
-    //     })
-    // }
+    if (!hargatriplek) {
+        errors.push({
+            field: 'hargatriplek',
+            message: 'hargatriplek is required',
+        })
+    }
 
     return errors
 }

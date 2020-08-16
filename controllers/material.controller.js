@@ -9,18 +9,21 @@ exports.viewMaterial = async (req, res) => {
     const alert = { message: alertMessage, status: alertStatus }
     const userLogin = req.session.user
 
-    console.log(userLogin.status)
+    console.log(userLogin)
 
-    if (userLogin.status === 1) {
+    if (userLogin) {
+      const { SatuanId } = req.body
       const satuans = await Satuan.findAll()
       const jeniss = await Jenis.findAll()
+      // const jeni1 = await Jenis.findOne({ where: { id: JenisId } })
       const materials = await Material.findAll({
         include: [{
-          model: Satuan
-        }, {
           model: Jenis
+        }, {
+          model: Satuan
         }]
       })
+      console.log(materials[0].Jeni.id)
       res.render("admin/material/view_material", {
 
         title: "Data Material",
@@ -28,6 +31,7 @@ exports.viewMaterial = async (req, res) => {
         material: materials,
         satuan: satuans,
         jenis: jeniss,
+        // jenis1: jeni1,
         alert: alert
       })
     } else {

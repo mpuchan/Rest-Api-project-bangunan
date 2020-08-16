@@ -13,7 +13,7 @@ module.exports = {
         nama: 'MpuChan',
         email: 'mpuchanchan@gmail.com',
         notelp: '082377954008',
-        username: 'emii',
+        username: 'mpu1',
         password: password,
         picture: '',
         status: '1',

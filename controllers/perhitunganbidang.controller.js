@@ -285,8 +285,24 @@ async function validate(req) {
   } = req.body
 
   let errors = []
-
-
+  if (!nama) {
+    errors.push({
+      field: 'nama',
+      message: 'nama is required',
+    })
+  }
+  if (!panjangbid) {
+    errors.push({
+      field: 'panjangbid',
+      message: 'nama is required',
+    })
+  }
+  if (!tinggibid) {
+    errors.push({
+      field: 'tinggibid',
+      message: 'nama is required',
+    })
+  }
   if (!luas_bidang) {
     errors.push({
       field: 'luas_bidang',
@@ -488,8 +504,8 @@ exports.actionUpdate = async function (req, res) {
     hargasementotal,
     hargatotal
   } = req.body
-  // let errors = await validate(req)
-  // if (errors.length > 0) return res.status(422).json({ errors });
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
     const perhitunganbidang = await PerhitunganBidangBangunan.findOne({

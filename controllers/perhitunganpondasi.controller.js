@@ -86,18 +86,51 @@ async function validate(req) {
       field: 'a',
       message: 'a is required',
     })
+  }
+  if (!b) {
+    errors.push({
+      field: 'b',
+      message: 'b is required',
+    })
+  }
+  if (!t) {
+    errors.push({
+      field: 't',
+      message: 't is required',
+    })
+  }
+  if (!p) {
+    errors.push({
+      field: 'p',
+      message: 'p is required',
+    })
   } if (!jumlahsemen) {
     errors.push({
       field: 'jumlahsemen',
       message: 'jumlahsemen is required',
     })
+  } if (!hargasemen) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
+  } if (!hargapasir) {
+    errors.push({
+      field: 'hargapasir',
+      message: 'hargapasir is required',
+    })
+  } if (!hargabatukali) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
+  } if (!luas) {
+    errors.push({
+      field: 'hargasemen',
+      message: 'hargasemen is required',
+    })
   }
-  // if (!hargatotal) {
-  //   errors.push({
-  //     field: 'hargatotal',
-  //     message: 'hargatotal is required',
-  //   })
-  // }
+
 
   return errors
 }
@@ -220,8 +253,8 @@ exports.actionUpdate = async function (req, res) {
     hargabatutotal,
     hargatotal
   } = req.body
-  // let errors = await validate(req)
-  // if (errors.length > 0) return res.status(422).json({ errors });
+  let errors = await validate(req)
+  if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
     const perhitunganpondasi = await PerhitunganPondasi.findOne({

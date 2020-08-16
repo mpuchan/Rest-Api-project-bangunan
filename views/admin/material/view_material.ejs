@@ -59,13 +59,15 @@
                   <td>
                     <%= material[i].Satuan.nama_satuan %></td>
                   <td><%= material[i].harga %></td>
+                  <td><%= material[i].Jeni.id %></td>
+
                   <td style="width: 150px;">
                     <a href="javascript:void(0);" type="button" class="btn btn-warning btn-sm edit"
                       data-id="<%= material[i].id %>" data-nama="<%= material[i].nama %>"
                       data-panjang="<%= material[i].panjang %>" data-lebar="<%= material[i].lebar %>"
                       data-tinggi="<%= material[i].tinggi %>" data-berat="<%= material[i].berat %>"
                       data-jumlah="<%= material[i].jumlah %>" data-tebal="<%= material[i].tebal %>"
-                      data-SatuanId="<%= material[i].SatuanId %>" data-JenisId="<%= material[i].JenisId %>"
+                      data-SatuanId="<%= material[i].Satuan.id %>" data-jenisid="<%= material[i].Jeni.id %>"
                       data-harga="<%= material[i].harga %>"> <span class="glyphicon glyphicon-pencil"></span>
                       Edit</a>
 
@@ -110,6 +112,7 @@
     function successTambah() {
       window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/material')
     }
+
   })
 
   //showing data to e edit modal 
@@ -123,8 +126,11 @@
     var berat = $(this).data('berat');
     var jumlah = $(this).data('jumlah');
     var SatuanId = $(this).data('SatuanId');
-    var JenisId = $(this).data('JenisId');
+    var JenisId = $(this).data('jenisid');
     var harga = $(this).data('harga');
+    console.log("ini id jenis" + JenisId)
+    console.log("ini id satuan" + SatuanId)
+    console.log("ini id jeni bawah" + $(this).data('jenisid'))
 
     $('#edit-modal').modal('show');
     $('.id').val(id);
@@ -135,10 +141,11 @@
     $('.tebal').val(tebal);
     $('.berat').val(berat);
     $('.jumlah').val(jumlah);
-    $('.SatuanId').val(SatuanId);
-    $('.JenisId').val(JenisId);
+    $(".jenisid").val(JenisId);
+    $("select").val(JenisId);
     $('.harga').val(harga);
   });
+
 
   function delete_material(id) {
     let MaterialId = id;

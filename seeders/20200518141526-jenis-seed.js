@@ -69,7 +69,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        nama_jenis: 'batuuruugan',
+        nama_jenis: 'batu uruugan',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
